@@ -1,6 +1,6 @@
 # RISA: design options
 
-A static review site for the RISA (Rapid Infrastructure and Service Assessment) brand identity. It compares several design directions across a website, a style guide, the three-page RISA product and collateral, and lets the consortium rank favourites by link. It is modelled on the HDA review site (`~/Desktop/work/repos/hda-website`) and reuses its review bar, rank-by-link results page and token system.
+A static review site for the RISA (Rapid Infrastructure and Service Assessment) brand identity, live at **https://risa.kobolabs.dev**. It compares several design directions across a website, a style guide, the three-page RISA product and collateral, and lets the consortium rank favourites by link. It is modelled on the HDA review site (`~/Desktop/work/repos/hda-website`) and reuses its review bar, rank-by-link results page and token system.
 
 The plan, decisions and open questions are in [`plans/risa-design-site.md`](plans/risa-design-site.md).
 
@@ -84,7 +84,9 @@ done
 
 ## Deployment
 
-Planned: DigitalOcean App Platform static site (output directory `site`, no build command) at `risa.kobolabs.dev`, like HDA. Not set up yet.
+The site is hosted on DigitalOcean App Platform as a static site (app `risa-website`, region `fra`, source directory `site`, no build command), the same setup as HDA. It is live at **https://risa.kobolabs.dev**. The DNS record lives in the `kobolabs.dev` zone on DigitalOcean.
+
+**Every push to `main` deploys automatically.**
 
 Pages carry `<meta name="robots" content="noindex">`. Keep that while the site is a review site.
 
