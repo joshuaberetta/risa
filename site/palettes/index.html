@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RISA · Colour</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700;800&family=Sora:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/base.css">
+  <link rel="stylesheet" href="../themes/briefing/tokens.css">
+  <link rel="stylesheet" href="../assets/hub.css">
+  <link rel="icon" href="../assets/favicon.svg">
+  <style>
+    .members-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .member-card { background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; padding: 1.2rem; }
+    .member-card h3 { font-size: 1.15rem; margin-bottom: .2rem; }
+    .member-card > p { font-size: 13px; margin-bottom: 1rem; }
+    .chip-row { display: grid; gap: .45rem; }
+    .chip { display: grid; grid-template-columns: 36px 1fr auto; gap: .7rem; align-items: center; font-size: 13px; }
+    .chip i { height: 28px; border-radius: 6px; border: 1px solid rgb(0 0 0 / .08); }
+    .chip span { color: var(--h-ink); }
+    .chip code { font-size: 12px; color: var(--h-ink-2); }
+    .overlaps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .overlap { background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; overflow: hidden; }
+    .overlap .bars { display: flex; height: 70px; }
+    .overlap .bars i { flex: 1; position: relative; }
+    .overlap .bars i b { position: absolute; left: .6rem; bottom: .45rem; font: 600 11px Inter, sans-serif; color: #fff; text-shadow: 0 1px 2px rgb(0 0 0 / .3); }
+    .overlap .body { padding: 1rem 1.2rem 1.2rem; font-size: 14px; }
+    .overlap h3 { font-size: 1.05rem; margin-bottom: .3rem; }
+    .overlap .becomes { display: flex; gap: .4rem; margin-top: .8rem; align-items: center; flex-wrap: wrap; font-size: 12px; }
+    .overlap .becomes i { width: 20px; height: 20px; border-radius: 5px; display: inline-block; vertical-align: middle; }
+    .pal { background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 14px; padding: 1.6rem; margin-bottom: 1.2rem; }
+    .pal-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+    .pal-head h3 { font-size: 1.4rem; }
+    .pal-head p { font-size: 14px; max-width: 42rem; }
+    .pal-swatches { display: grid; grid-template-columns: repeat(8, 1fr); gap: .6rem; }
+    .pal-sw i { display: block; height: 74px; border-radius: 8px; border: 1px solid rgb(0 0 0 / .08); }
+    .pal-sw b { display: block; color: var(--h-ink); font-size: 13px; margin-top: .45rem; line-height: 1.25; }
+    .pal-sw code { display: block; font-size: 11.5px; }
+    .pal-sw .ct { display: block; font-size: 11px; margin-top: .2rem; }
+    .pal-sw .ct.bad { opacity: .6; }
+    .pal-demo { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: 1.2rem; }
+    .pal-demo > div { border-radius: 10px; padding: 1.1rem 1.3rem; background: var(--c-bg); color: var(--c-ink-2); display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; font-family: var(--font-body); }
+    .pal-demo strong { color: var(--c-ink); font: 600 1.25rem/1.1 var(--font-head); }
+    .pal-demo .btn-demo { background: var(--c-accent); color: var(--c-accent-ink, #fff); padding: .5rem .9rem; border-radius: var(--radius, 6px); font-size: 13px; font-weight: 600; margin-left: auto; }
+    .status-grid { display: grid; grid-template-columns: 11rem repeat(5, 1fr); gap: .5rem 1rem; align-items: center; background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 14px; padding: 1.4rem 1.6rem; }
+    .status-grid .h { font: 600 11px 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--h-ink-2); }
+    .status-grid .row { color: var(--h-ink); font-weight: 600; font-size: 14px; }
+    .status-grid .row small { display: block; font-weight: 400; color: var(--h-ink-2); font-size: 12px; }
+    .status-grid .sw { display: grid; grid-template-columns: 34px 1fr; gap: .6rem; align-items: center; font-size: 12px; }
+    .status-grid .sw i { height: 34px; border-radius: 6px; border: 1px solid rgb(0 0 0 / .08); }
+    .status-grid .sw code { font-size: 11.5px; color: var(--h-ink); }
+    .status-grid .sw span { display: block; color: var(--h-ink-2); }
+    .status-notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+    .status-notes div { border-top: 2px solid var(--h-ink); padding-top: .8rem; font-size: 14px; }
+    .status-notes b { color: var(--h-ink); display: block; margin-bottom: .2rem; }
+    .member-card.is-todo { border-style: dashed; }
+    .member-card.is-todo .chip i { background: repeating-linear-gradient(135deg, #F3F2EE 0 6px, #E6E4DE 6px 12px); }
+    .source { font-size: 13px; margin-top: 1rem; }
+    @media (max-width: 980px) { .status-grid { grid-template-columns: 1fr 1fr; } .status-notes { grid-template-columns: 1fr; } .members-grid, .overlaps { grid-template-columns: 1fr 1fr; } .pal-swatches { grid-template-columns: repeat(4, 1fr); } .pal-demo { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="hub">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hub-top"><div class="container">
+  <a class="hub-brand" href="../index.html">RISA <span>Design review</span></a>
+  <nav aria-label="Review pages"><a href="../index.html">Overview</a><a href="../logos/index.html">Logos</a><a href="index.html" aria-current="page">Colour</a></nav>
+</div></header>
+
+<main id="main">
+  <section class="hub-hero"><div class="container">
+    <p class="hub-kicker">Colour</p>
+    <h1>Status first, brand second.</h1>
+    <p class="lede">On a RISA map, colour carries operational meaning: a red road is closed, an amber water point is partly working. So the status set is fixed and shared by every theme, and each theme’s brand colours stay out of its way, living in the frame around the map rather than on it.</p>
+  </div></section>
+
+  <section class="hub-section"><div class="container">
+    <h2>The reserved status set</h2>
+    <p class="sub">The same in every theme. Each colour is shown as printed, in greyscale and under three simulated colour-vision deficiencies (Machado et al., 2009). Status is always shown twice, by colour and by line style or symbol shape, so it holds up even where two colours get close.</p>
+    <div class="status-grid" id="status"></div>
+    <div class="status-notes">
+      <div><b>Greyscale</b>Closed, open and partly sit at clearly different grey values (L* in the greyscale column), so a photocopy keeps the order dark–mid–light.</div>
+      <div><b>Red-green deficiencies</b>Open and closed move towards each other for protan and deutan readers. Solid and dotted lines, and filled and crossed-out symbols, keep them apart.</div>
+      <div><b>Hazards</b>Flood blue and debris brown are only used as hatched fills, never as lines or symbols, so they can’t be mistaken for status.</div>
+    </div>
+  </div></section>
+
+  <section class="hub-section hub-rule"><div class="container">
+    <h2>Partner colours, as observed</h2>
+    <p class="sub">For reference only: RISA is a method brand, so no theme is built from partner colours. Kobo values come from its site’s <code>colors.scss</code>. HI/Atlas Logistique and MapAction still need sampling from their sites and map products, and each partner should confirm.</p>
+    <div class="members-grid" id="members"></div>
+  </div></section>
+
+  <section class="hub-section hub-rule"><div class="container">
+    <h2>Theme palettes</h2>
+    <p class="sub">Values are read live from each theme’s <code>tokens.css</code>. Contrast is against the theme’s page background, where 4.5:1 is needed for body text (AA) and 3:1 for large text and UI elements. Only built themes are shown.</p>
+    <div id="palettes"></div>
+  </div></section>
+</main>
+
+<footer class="hub-foot"><div class="container">Colour values are drafts. Final values would be checked in print (CMYK), in QGIS layouts and on a real photocopier before sign-off.</div></footer>
+
+<script src="../assets/themes.js"></script>
+<script>
+  const MEMBERS = [
+    { name: 'HI/Atlas Logistique', note: 'To sample from the HI and Atlas Logistique sites and field kit.', todo: true, chips: [['Primary', ''], ['Secondary', ''], ['Accent', '']] },
+    { name: 'MapAction', note: 'To sample from the MapAction site and its map product templates.', todo: true, chips: [['Primary', ''], ['Secondary', ''], ['Accent', '']] },
+    { name: 'Kobo', note: 'Blues and teal from the product UI, Lora headings.', chips: [['Yale blue', '#003870'], ['Dark blue', '#00599D'], ['Kobo blue', '#2095F3'], ['Dark teal', '#1C6D74'], ['Gray 24', '#333847']] },
+  ];
+  document.getElementById('members').innerHTML = MEMBERS.map((m) => `
+    <div class="member-card${m.todo ? ' is-todo' : ''}"><h3>${m.name}</h3><p>${m.note}</p><div class="chip-row">
+      ${m.chips.map(([n, h]) => `<div class="chip"><i${h ? ` style="background:${h}"` : ''}></i><span>${n}</span><code>${h || 'TBC'}</code></div>`).join('')}
+    </div></div>`).join('');
+
+  // Colour maths
+  const hexToRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const hex = (rgb) => '#' + rgb.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('').toUpperCase();
+  const toLin = (v) => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+  const toSrgb = (v) => 255 * (v <= 0.0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - 0.055);
+  const lum = (rgb) => { const [r, g, b] = rgb.map(toLin); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+  const contrast = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+  const grade = (c) => (c >= 7 ? 'AAA' : c >= 4.5 ? 'AA' : c >= 3 ? 'AA large' : 'decorative');
+  const Lstar = (rgb) => { const y = lum(rgb); return y > 0.008856 ? 116 * Math.cbrt(y) - 16 : 903.3 * y; };
+  const CVD = {
+    protan: [[0.152286, 1.052583, -0.204868], [0.114503, 0.786281, 0.099216], [-0.003882, -0.048116, 1.051998]],
+    deutan: [[0.367322, 0.860646, -0.227968], [0.280085, 0.672501, 0.047413], [-0.01182, 0.04294, 0.968881]],
+    tritan: [[1.255528, -0.076749, -0.178779], [-0.078411, 0.930809, 0.147602], [0.004733, 0.691367, 0.3039]],
+  };
+  const simulate = (rgb, M) => { const v = rgb.map(toLin); return M.map((row) => toSrgb(Math.min(1, Math.max(0, row[0] * v[0] + row[1] * v[1] + row[2] * v[2])))); };
+  const grey = (rgb) => { const g = toSrgb(lum(rgb)); return [g, g, g]; };
+
+  const root = getComputedStyle(document.documentElement);
+  const STATUS = [['--st-ok', 'Open / working', 'Solid · filled'], ['--st-partial', 'Restricted / partly', 'Dashed · half-filled'], ['--st-no', 'Closed / not working', 'Dotted · crossed out'], ['--st-unknown', 'Not assessed', 'Grey outline']];
+  const cell = (rgb, note) => `<div class="sw"><i style="background:${hex(rgb)}"></i><div><code>${hex(rgb)}</code><span>${note}</span></div></div>`;
+  document.getElementById('status').innerHTML = '<span class="h">Status</span><span class="h">As printed</span><span class="h">Greyscale</span><span class="h">Protan</span><span class="h">Deutan</span><span class="h">Tritan</span>'
+    + STATUS.map(([tok, name, code]) => {
+      const rgb = hexToRgb(root.getPropertyValue(tok).trim());
+      return `<div class="row">${name}<small>${code}</small></div>${cell(rgb, `${contrast(rgb, [255, 255, 255]).toFixed(1)}:1 on white`)}${cell(grey(rgb), `L* ${Lstar(rgb).toFixed(0)}`)}`
+        + ['protan', 'deutan', 'tritan'].map((k) => cell(simulate(rgb, CVD[k]), '')).join('');
+    }).join('');
+
+  // Theme palettes, resolved from tokens.css.
+  const wrap = document.getElementById('palettes');
+  wrap.innerHTML = RISAThemes.ready.map((t) => `
+    <article class="pal" data-theme="${t.id}">
+      <div class="pal-head"><h3>${t.letter} · ${t.name}</h3><p>${t.blend}</p></div>
+      <div class="pal-swatches">${t.swatches.map(([tok, name]) => `<div class="pal-sw" data-tok="${tok}"><i style="background:var(${tok})"></i><b>${name}</b><code></code><span class="ct"></span></div>`).join('')}</div>
+      <div class="pal-demo">
+        <div><strong>Know what’s on the ground</strong><span>Body text sample</span><span class="btn-demo">Get the toolbox</span></div>
+        <div class="inverse"><strong>Know what’s on the ground</strong><span>Body text sample</span><span class="btn-demo">Get the toolbox</span></div>
+      </div>
+    </article>`).join('');
+
+  const probe = document.createElement('i');
+  const resolve = (el, tok) => { probe.style.color = `var(${tok})`; el.appendChild(probe); const v = getComputedStyle(probe).color.match(/[\d.]+/g).slice(0, 3).map(Number); probe.remove(); return v; };
+  wrap.querySelectorAll('.pal').forEach((pal) => {
+    const bg = resolve(pal, '--c-bg');
+    pal.querySelectorAll('.pal-sw').forEach((sw) => {
+      const rgb = resolve(pal, sw.dataset.tok);
+      sw.querySelector('code').textContent = hex(rgb);
+      const same = hex(rgb) === hex(bg);
+      const c = same ? contrast(resolve(pal, '--c-ink'), rgb) : contrast(rgb, bg);
+      const ct = sw.querySelector('.ct');
+      ct.textContent = same ? `Page bg · ink ${c.toFixed(1)}:1` : `${c.toFixed(1)}:1 · ${grade(c)}`;
+      ct.classList.toggle('bad', c < 3 && !same);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+[data-theme="briefing"] {
+  --c-bg: #FFFFFF;
+  --c-surface: #F2F3F1;
+  --c-surface-2: #EAF0F7;
+  --c-ink: #132A45;
+  --c-ink-2: #4A5A6D;
+  --c-line: #D9DEE4;
+  --c-line-soft: #E8EBEF;
+  --c-primary: #132A45;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #2160D8;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #56728F;
+  --c-accent-3: #9DB2C8;
+
+  --logo-a: #2160D8; --logo-b: #132A45; --logo-c: #56728F; --logo-d: #9DB2C8;
+  --logo-ink: #132A45; --logo-bg: #FFFFFF;
+
+  --font-head: 'Public Sans', system-ui, sans-serif;
+  --font-body: 'Public Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 6px;
+  --shadow: 0 1px 2px rgb(19 42 69 / .06), 0 6px 20px rgb(19 42 69 / .06);
+}
+[data-theme="briefing"] .inverse {
+  --c-bg: #132A45; --c-surface: #1A3556; --c-surface-2: #21406A;
+  --c-ink: #FFFFFF; --c-ink-2: #B8C6D6; --c-line: #2E4B70; --c-line-soft: #26446A;
+  --c-primary: #FFFFFF; --c-primary-ink: #132A45; --c-accent: #6B9DF7; --c-accent-ink: #0B1A2C; --c-accent-2: #9DB2C8;
+  --logo-a: #6B9DF7; --logo-b: #FFFFFF; --logo-c: #9DB2C8; --logo-d: #56728F; --logo-ink: #FFFFFF; --logo-bg: #132A45;
+}

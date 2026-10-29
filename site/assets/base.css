@@ -1,0 +1,104 @@
+/* Shared reset and utilities used by every page. Themes layer on top. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+img, svg { max-width: 100%; }
+h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
+ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+a { color: inherit; }
+button, input, textarea, select { font: inherit; color: inherit; }
+
+.container { width: min(100% - 2.5rem, var(--container, 1200px)); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip-link { position: absolute; left: 1rem; top: -3rem; padding: .5rem 1rem; background: #000; color: #fff; z-index: 100; }
+.skip-link:focus { top: 1rem; }
+
+/* Placeholder content marker: visible to reviewers, easy to strip later. */
+.tbc { font-size: .72em; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; opacity: .6; white-space: nowrap; }
+
+/*
+ * Reserved status colours. The same in every theme and never used as brand
+ * colours. Status is always shown twice: by colour and by line style or symbol
+ * shape (solid / dashed / dotted; filled / half / crossed out), so it survives
+ * greyscale printing and colour-vision differences.
+ */
+:root {
+  --st-ok: #1F9A62; --st-partial: #E9A23B; --st-no: #A8281A; --st-unknown: #8C939C; --st-ink: #1D232B;
+  --hz-flood: #2F74B5; --hz-flood-fill: rgb(47 116 181 / .16); --hz-debris: #7B5A3C;
+  --map-paper: #F3F2EE; --map-site: #E4E2DB; --map-water: #A9C6E0; --map-tent: #9AA6B3; --map-ink: #1D232B;
+  --map-street: #FFFFFF; --map-street-case: #C4C6C9; --map-grid: rgb(29 35 43 / .1);
+}
+
+/* Sample site map (assets/sitemap.js). */
+.sitemap { display: block; width: 100%; height: 100%; font-family: var(--font-mono, 'IBM Plex Mono'), ui-monospace, monospace; }
+.sitemap .is-off { display: none; }
+.sm-paper { fill: var(--map-paper); }
+.sm-site { fill: var(--map-site); }
+.sm-river { fill: none; stroke: var(--map-water); stroke-linecap: round; }
+.sm-grid path { stroke: var(--map-grid); stroke-width: 1; }
+.sm-grid-labels { font-size: 11px; fill: var(--map-ink); opacity: .45; }
+.sm-street { stroke: var(--map-street); stroke-width: 9; }
+.sitemap--map .sm-street { stroke: var(--map-street); filter: drop-shadow(0 0 .6px var(--map-street-case)); }
+.sitemap:not(.sitemap--map) .sm-street { stroke: #D9CCAF; stroke-width: 8; opacity: .8; }
+.sm-fence { stroke: var(--map-ink); stroke-width: 1.4; stroke-dasharray: 6 4; opacity: .55; }
+.sitemap:not(.sitemap--map) .sm-fence { stroke: #fff; opacity: .7; }
+.sm-tents { fill: var(--map-tent); }
+.sm-casing { stroke: #fff; stroke-linecap: butt; }
+.sm-cut path { stroke: var(--st-no); stroke-width: 4; stroke-linecap: round; }
+.sm-flood { stroke: var(--hz-flood); stroke-width: 1.5; }
+.sm-debris { stroke: var(--hz-debris); stroke-width: 1.5; }
+.sm-sym text, .sm-lz text, .sm-choke text { font-family: var(--font-head, system-ui), system-ui, sans-serif; }
+.sm-gate rect { fill: var(--map-ink); stroke: #fff; stroke-width: 2; }
+.sm-lz circle { fill: #fff; stroke: var(--map-ink); stroke-width: 2.5; }
+.sm-lz text { font-size: 17px; font-weight: 800; fill: var(--map-ink); }
+.sm-choke path { fill: var(--st-partial); stroke: var(--st-ink); stroke-width: 1.6; stroke-linejoin: round; }
+.sm-choke text { font-size: 14px; font-weight: 800; fill: var(--st-ink); }
+.sm-labels text { paint-order: stroke; stroke: #fff; stroke-width: 3.5px; stroke-linejoin: round; fill: var(--map-ink); }
+.sitemap:not(.sitemap--map) .sm-labels text { stroke: rgb(0 0 0 / .55); fill: #fff; }
+.sm-block-label { font-size: 22px; font-weight: 600; text-anchor: middle; opacity: .8; }
+.sm-road-label { font-size: 13px; font-weight: 600; }
+.sm-place { font-size: 12px; text-anchor: middle; }
+.sm-water { font-size: 13px; font-style: italic; fill: #2F5F8C !important; }
+.sm-hazard-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; fill: var(--hz-flood) !important; }
+.sm-furniture text { font-size: 11px; fill: var(--map-ink); paint-order: stroke; stroke: #fff; stroke-width: 3px; }
+.sm-north { fill: var(--map-ink); stroke: #fff; stroke-width: 1.5; }
+.sm-scale-a { fill: var(--map-ink); stroke: var(--map-ink); }
+.sm-scale-b { fill: #fff; stroke: var(--map-ink); }
+
+/* Map graphics defaults (themes override the custom properties). */
+.worldmap { display: block; width: 100%; height: auto; }
+.worldmap-dots { fill: var(--map-dot, #b8c4d2); }
+.worldmap-arcs path { stroke: var(--map-arc, #d23b3f); stroke-width: var(--map-arc-width, .32); stroke-dasharray: 3 2.2; animation: risa-dash 14s linear infinite; }
+.hub-core { fill: var(--map-hub, #0e2a47); }
+.hub-halo { fill: var(--map-halo, rgb(31 143 229 / .18)); }
+.hub--a .hub-core { fill: var(--map-hub-a, var(--map-hub)); }
+.hub--b .hub-core { fill: var(--map-hub-b, var(--map-hub)); }
+.hub--c .hub-core { fill: var(--map-hub-c, var(--map-hub)); }
+.hub--d .hub-core { fill: var(--map-hub-d, var(--map-hub)); }
+.contours { display: block; width: 100%; height: 100%; }
+.contours path { stroke: var(--contour-line, currentColor); stroke-width: var(--contour-width, 1px); vector-effect: non-scaling-stroke; }
+.contours path.contour-index { stroke-width: var(--contour-index-width, 1.8px); }
+@keyframes risa-dash { to { stroke-dashoffset: -52; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .worldmap-arcs path { animation: none; }
+}
+
+/* Legend keys: shared shapes for lines and symbols */
+.k-line { width: 26px; height: 0; border-top: 4px solid var(--st-ok); }
+.k-line.k-partial { border-top: 4px dashed var(--st-partial); }
+.k-line.k-no { border-top: 5px dotted var(--st-no); }
+.k-sym { width: 13px; height: 13px; border-radius: 50%; background: var(--st-ok); }
+.k-sym.k-partial { background: linear-gradient(transparent 50%, var(--st-partial) 50%); box-shadow: inset 0 0 0 2px var(--st-partial); }
+.k-sym.k-no { background: linear-gradient(135deg, transparent 44%, var(--st-no) 44% 56%, transparent 56%); box-shadow: inset 0 0 0 2px var(--st-no); }
+
+/* Status pill: the one UI component that uses the status colours. */
+.st-pill { display: inline-flex; align-items: center; gap: .45em; padding: .3em .65em .3em .5em; border-radius: 99px; font: 600 .72rem/1 var(--font-mono, ui-monospace, monospace); letter-spacing: .03em; color: var(--st-ink); background: #fff; box-shadow: inset 0 0 0 1.5px currentColor; }
+.st-pill::before { content: ""; width: .7em; height: .7em; border-radius: 50%; background: currentColor; }
+.st-pill--ok { color: #146B44; }
+.st-pill--partial { color: #9A6510; }
+.st-pill--partial::before { background: linear-gradient(transparent 50%, var(--st-partial) 50%); box-shadow: inset 0 0 0 1.5px var(--st-partial); }
+.st-pill--no { color: var(--st-no); }
+.st-pill--no::before { background: linear-gradient(135deg, transparent 40%, currentColor 40% 60%, transparent 60%); box-shadow: inset 0 0 0 1.5px currentColor; }
+.st-pill--unknown { color: #5E656E; }
+.st-pill--unknown::before { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }

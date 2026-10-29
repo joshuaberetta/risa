@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RISA · Design options for review</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700;800&family=Sora:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/base.css">
+  <link rel="stylesheet" href="assets/hub.css">
+  <link rel="icon" href="assets/favicon.svg">
+</head>
+<body class="hub">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hub-top"><div class="container">
+  <a class="hub-brand" href="index.html">RISA <span>Design review</span></a>
+  <nav aria-label="Review pages"><a href="index.html" aria-current="page">Overview</a><a href="logos/index.html">Logos</a><a href="palettes/index.html">Colour</a></nav>
+</div></header>
+
+<main id="main">
+  <section class="hub-hero"><div class="container">
+    <p class="hub-kicker">Rapid Infrastructure and Service Assessment · Design options · Draft for review</p>
+    <h1>An identity for a method, not an organisation.</h1>
+    <p class="lede">RISA is an open assessment method developed by HI/Atlas Logistique, MapAction and Kobo, and meant to be handed over to national emergency management authorities. Its identity has to work on a website and a training deck, but above all on the three-page product a coordinator reads in under a minute, often printed, often next to a national authority’s logo. Here are six directions and eight logo concepts for round one.</p>
+  </div></section>
+
+  <section class="hub-section hub-rule"><div class="container">
+    <h2>How to review</h2>
+    <p class="sub">Every themed page has a small review bar at the bottom. Use it to switch theme, page and logo without losing your place.</p>
+    <ol class="hub-steps" role="list">
+      <li><b>Open a theme</b> below. Each one has a home page, a style guide, the three-page <b>product</b> and a collateral page with the brief, training slides, event pieces and field kit.</li>
+      <li><b>Start with the product.</b> It is where the identity matters most. Then try other logos with the Logo menu in the review bar: every logo works in every theme.</li>
+      <li><b>Pick your top three.</b> For each favourite combination, click “Copy link” in the review bar and paste it into the review doc under your name, best first. Comments are welcome too, e.g. “A’s product frame with logo 4”.</li>
+    </ol>
+  </div></section>
+
+  <section class="hub-section hub-rule" id="themes"><div class="container">
+    <h2>Directions</h2>
+    <p class="sub">All six use the same content, from the RISA SOP v2, RISA in Brief v2 and the consortium notes, and the same fictional sample site. Figures and dates marked “TBC” are placeholders. <b>Theme A is ready to review; B to F are in progress.</b></p>
+    <div class="theme-cards" id="theme-cards"></div>
+  </div></section>
+
+  <section class="hub-section hub-rule" id="logos"><div class="container">
+    <h2>Logo concepts</h2>
+    <p class="sub">Each concept works in one colour, survives a photocopier and reads at 16 px. None uses red, amber or green, which are reserved for status on the map. See the <a href="logos/index.html">logos page</a> for rationale, variants and co-branding with a national authority.</p>
+    <div class="logo-cards" id="logo-cards"></div>
+  </div></section>
+
+  <section class="hub-section hub-rule"><div class="container">
+    <h2>Design principles</h2>
+    <p class="sub">From the RISA SOP, RISA in Brief and the consortium’s capacity-transfer notes, and applied to every option.</p>
+    <div class="hub-principles">
+      <div><h3>Legible in 60 seconds</h3><p>Type, colour and layout serve a coordinator briefing from a printout. The product is a mission-ready document, not a research report.</p></div>
+      <div><h3>Status colours are reserved</h3><p>Open, restricted and closed (and working, partly, not working) use one shared, colour-blind-safe set. No brand uses red, amber or green.</p></div>
+      <div><h3>Survives the photocopier</h3><p>Status is shown by line style and symbol shape as well as colour. Every logo works in one colour and in greyscale.</p></div>
+      <div><h3>Theirs to run</h3><p>RISA is meant to be handed over. On a national team’s product, the authority’s logo leads and RISA is credited as the method.</p></div>
+      <div><h3>Fits the ecosystem</h3><p>Sits next to OCHA, UNDAC, Logistics Cluster and MapAction products without clashing, and follows OCHA icon conventions on maps.</p></div>
+      <div><h3>Low bandwidth, open</h3><p>Static HTML, inline SVG and open-source fonts. Tokens any partner or national team can reuse in QGIS layouts, Kobo forms and slides.</p></div>
+    </div>
+  </div></section>
+
+  <section class="hub-section"><div class="container">
+    <p class="hub-note"><b>Status:</b> design exploration only. Nothing here is final or public, and the site is marked <code>noindex</code>. Partner names are shown as text; official logos would be swapped in once a direction is chosen. HOT is not named in round one while its role is agreed. All maps use a fictional sample site.</p>
+  </div></section>
+</main>
+<footer class="hub-foot"><div class="container">Prepared for the RISA consortium (HI/Atlas Logistique · MapAction · Kobo) · October 2026</div></footer>
+<script src="assets/themes.js"></script>
+<script src="assets/logos.js"></script>
+<script>
+  // Key colours per theme. Built themes copy their tokens.css; the others are draft palettes.
+  const PALETTE = {
+    briefing: ['#132A45', '#2160D8', '#56728F', '#9DB2C8', '#F2F3F1', '#FFFFFF'],
+    groundtruth: ['#16181D', '#E2EC3A', '#5E656E', '#C9CFD3', '#F4F4F0', '#FFFFFF'],
+    overhead: ['#0D1418', '#22C3D6', '#C2338F', '#3A4A52', '#E8EDEF', '#FFFFFF'],
+    streams: ['#1E2A3A', '#7C5CC4', '#2E9BB0', '#B0647A', '#F5F6F8', '#FFFFFF'],
+    sharedground: ['#2B2622', '#8C5A3C', '#C9B79C', '#6B6F8A', '#F4EFE6', '#FFFFFF'],
+    first72: ['#111317', '#5B3FD1', '#9C8CE8', '#E9E6F7', '#F6F6F4', '#FFFFFF'],
+  };
+
+  document.getElementById('theme-cards').innerHTML = RISAThemes.map((t) => {
+    const logo = RISALogos.byId[t.defaultLogo];
+    const chips = (PALETTE[t.id] || []).map((c) => `<i style="background:${c}"></i>`).join('');
+    const thumb = t.ready
+      ? `<a class="thumb" href="themes/${t.id}/index.html"><img src="assets/thumbs/${t.id}.jpg" alt="Theme ${t.letter}: ${t.name} home page" loading="lazy"></a>`
+      : `<div class="thumb thumb--soon"><span data-risa-logo="mark" data-logo-fixed="${t.defaultLogo}"></span><b>In progress</b></div>`;
+    const actions = t.ready
+      ? `<a class="hbtn hbtn--dark" href="themes/${t.id}/product.html?logo=default">Product</a>
+         <a class="hbtn" href="themes/${t.id}/index.html?logo=default">Home page</a>
+         <a class="hbtn" href="themes/${t.id}/style-guide.html?logo=default">Style guide</a>
+         <a class="hbtn" href="themes/${t.id}/collateral.html?logo=default">Collateral</a>`
+      : '<span class="hbtn is-disabled">Pages coming</span>';
+    return `<article class="theme-card${t.ready ? '' : ' is-soon'}">
+      ${thumb}
+      <div class="body">
+        <div class="title"><span class="letter">${t.letter}</span><h3>${t.name}</h3></div>
+        <p class="tagline">${t.tagline}</p>
+        <div class="strip" aria-hidden="true">${chips}</div>
+        <p class="meta"><b>Type:</b> ${t.fonts.head}${t.fonts.body !== t.fonts.head ? ' + ' + t.fonts.body : ''}${t.fonts.mono ? ' + ' + t.fonts.mono : ''} · <b>Paired logo:</b> ${logo.num} ${logo.name}${t.ready ? '' : ' · <b>Palette:</b> draft'}</p>
+        <p class="meta"><b>Best for:</b> ${t.bestFor}</p>
+        <div class="actions">${actions}</div>
+      </div></article>`;
+  }).join('');
+
+  document.getElementById('logo-cards').innerHTML = RISALogos.list.map((l) =>
+    `<a class="logo-card" href="logos/index.html#${l.id}"><div class="stage"><span data-risa-logo="mark" data-logo-fixed="${l.id}"></span></div>
+      <div><b>${l.num} · ${l.name}</b><small>${l.summary}</small></div></a>`).join('');
+  RISALogos.hydrate(document);
+</script>
+</body>
+</html>
