@@ -23,6 +23,9 @@ Any static server works. Pages use relative paths.
 | `site/index.html` | Review hub: brief, how to review, direction cards, logo overview, design principles |
 | `site/themes/<id>/index.html` | Home page: the RISA methodology site, in six directions: `briefing` (A), `groundtruth` (B), `overhead` (C), `streams` (D), `sharedground` (E), `first72` (F) |
 | `site/themes/<id>/style-guide.html` | Logo use (incl. co-branding with a national authority), colour, **reserved status colours**, type, components, **map symbology**, graphics, voice |
+| `site/themes/<id>/toolbox.html` | The toolbox: SOP, annexes A–E, forms, map templates, training material and the brief, with version, status, owner and a download or request link |
+| `site/themes/<id>/deployments.html` | World map of every response, training, workshop and event, with filters and the matching list |
+| `site/themes/<id>/deployment.html?d=<id>` | One profile per deployment: key facts, locator map, story, lessons, products, toolbox items used |
 | `site/themes/<id>/product.html` | The three-page RISA product (map, key findings, hotspot) and a working mock of the interactive viewer |
 | `site/themes/<id>/collateral.html` | RISA in Brief (A4 two-pager), ToT/SIMEX slides, workshop stand, field kit (ADAK case label, ID card, hi-vis tabard, KoboCollect form), badge, social posts, ToT certificate, email signature |
 | `site/logos/index.html` | Eight logo concepts with rationale, greyscale and one-colour tests, imagery, and co-branding |
@@ -31,7 +34,7 @@ Any static server works. Pages use relative paths.
 
 ### Review bar
 
-Every themed page has a toolbar that switches **theme**, **page (Home / Style guide / Product / Collateral)** and **logo (1–8)**. Only themes marked `ready: true` in `assets/themes.js` appear in it.
+Every themed page has a toolbar that switches **theme**, **page (Home / Style guide / Product / Toolbox / Deployments / Collateral)** and **logo (1–8)**. On a deployment profile, **Copy link** keeps `?d=<id>`. Only themes marked `ready: true` in `assets/themes.js` appear in it.
 
 - The logo choice is remembered across pages.
 - Share a combination with `?logo=<id>`. **Copy link** always writes the explicit logo id.
@@ -63,6 +66,8 @@ Then paste the doc into `results/index.html` (`?example` shows the format). It t
 - **Product:** `assets/product.js` and `product.css` render the three pages at A3 landscape proportions, scaled in container units, plus the interactive mock.
 - **Collateral:** `assets/collateral.js` renders every collateral piece from one template; a `FLAVOUR` entry per theme picks the cover style, artwork and texture.
 - **Theme metadata:** `assets/themes.js` holds names, rationale, swatches and the `ready` flag.
+- **Toolbox and deployments content:** `assets/content.js` holds every deployment and resource, the same in all themes. Edit it there; anything unconfirmed carries `tbc: true` or a `note`. `assets/library.js` renders the three pages; `assets/world.js` is the Natural Earth world outline, pre-projected to Equal Earth (copied from the kobo.ngo site), and pins use the same projection.
+- **Generated pages:** `scripts/build-pages.py` writes each theme's `toolbox.html`, `deployments.html` and `deployment.html` from its home page's head, header and footer, points the nav at them and adds links under the home page's toolbox and deployments sections. Re-run it after changing a theme's header or footer.
 
 ### Adding a direction
 

@@ -28,7 +28,7 @@
 
   function toolbar() {
     if (!theme || params.has('shot')) return;
-    const pageFile = { guide: 'style-guide.html', product: 'product.html', collateral: 'collateral.html' }[view] || 'index.html';
+    const pageFile = { guide: 'style-guide.html', product: 'product.html', toolbox: 'toolbox.html', deployments: 'deployments.html', deployment: 'deployments.html', collateral: 'collateral.html' }[view] || 'index.html';
     const themeLinks = window.RISAThemes.ready.map((t) =>
       `<a href="${root}themes/${t.id}/${pageFile}" class="${t.id === themeId ? 'is-active' : ''}" title="${t.name}">${t.letter}<span> ${t.name}</span></a>`
     ).join('');
@@ -45,6 +45,8 @@
         <a href="index.html" class="${view === 'home' ? 'is-active' : ''}">Home</a>
         <a href="style-guide.html" class="${view === 'guide' ? 'is-active' : ''}">Style guide</a>
         <a href="product.html" class="${view === 'product' ? 'is-active' : ''}">Product</a>
+        <a href="toolbox.html" class="${view === 'toolbox' ? 'is-active' : ''}">Toolbox</a>
+        <a href="deployments.html" class="${view === 'deployments' || view === 'deployment' ? 'is-active' : ''}">Deployments</a>
         <a href="collateral.html" class="${view === 'collateral' ? 'is-active' : ''}">Collateral</a></nav></div>
       <label class="rb-group"><span class="rb-label">Logo</span><select class="rb-select">${logoOptions}</select></label>
       <button class="rb-copy" type="button" title="Copy a link to this exact combination">Copy link</button>
@@ -60,6 +62,7 @@
       // explicit logo id (never "default", whose meaning depends on the theme).
       const url = new URL(location.href);
       url.search = ''; url.hash = ''; url.searchParams.set('logo', effective());
+      if (params.get('d')) url.searchParams.set('d', params.get('d'));
       try { await navigator.clipboard.writeText(url.toString()); e.target.textContent = 'Copied'; }
       catch { prompt('Copy this link', url.toString()); }
       setTimeout(() => (e.target.textContent = 'Copy link'), 1600);

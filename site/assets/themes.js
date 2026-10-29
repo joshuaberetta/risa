@@ -42,7 +42,7 @@ window.RISAThemes = [
     ],
   },
   {
-    id: 'overhead', letter: 'C', name: 'Overhead', defaultLogo: 'overlap', ready: true,
+    id: 'overhead', letter: 'C', name: 'Overhead', defaultLogo: 'overlap', ready: true, darkHero: true,
     tagline: 'Aerial-imagery led. A nadir grid, flight lines and crosshairs on a dark imagery-room hero.',
     blend: 'Built around the orthomosaic. Dark imagery tones for the hero, Kobo’s blues (#00599D on light, #2095F3 on dark) as the survey line, MapAction’s sky blue (#92B4EC) for grids, and one magenta marker that can’t be mistaken for any status colour. Space Grotesk and IBM Plex Mono give it an instrument-panel feel.',
     fonts: { head: 'Space Grotesk', body: 'Inter', mono: 'IBM Plex Mono' },
