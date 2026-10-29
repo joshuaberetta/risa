@@ -17,7 +17,8 @@
 
   const params = new URLSearchParams(location.search);
   if (params.has('logo')) localStorage.setItem(KEY, params.get('logo') === 'default' ? '' : params.get('logo'));
-  const chosen = () => localStorage.getItem(KEY) || '';
+  // Ignore ids of logos that have since been removed (e.g. an old ?logo= link).
+  const chosen = () => { const id = localStorage.getItem(KEY) || ''; return window.RISALogos.byId[id] ? id : ''; };
   const effective = () => chosen() || (theme && theme.defaultLogo) || window.RISALogos.list[0].id;
 
   function applyLogo() {

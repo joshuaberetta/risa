@@ -8,7 +8,7 @@
  */
 window.RISAThemes = [
   {
-    id: 'briefing', letter: 'A', name: 'Briefing', defaultLogo: 'reticle', ready: true,
+    id: 'briefing', letter: 'A', name: 'Briefing', defaultLogo: 'footprint', ready: true,
     tagline: 'Calm, institutional and quick to read. Built to sit next to OSOCC and cluster products without fuss.',
     blend: 'A deep navy, the colour family all three owners share (HI #002E43, Kobo #003870, MapAction #19458D), and a single cobalt blue do all the brand work, on white and a cool stone. There are no reds, ambers or greens in the brand, so the status colours on the map always mean status. Public Sans is a plain, open government typeface. IBM Plex Mono carries coordinates, dates and data labels.',
     fonts: { head: 'Public Sans', body: 'Public Sans', mono: 'IBM Plex Mono' },

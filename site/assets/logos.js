@@ -20,11 +20,16 @@
   const BG = 'var(--logo-bg, #FFFFFF)';
   const svg = (inner) => `<svg class="risa-mark" viewBox="0 0 64 64" aria-hidden="true">${inner}</svg>`;
 
-  // --- 1. Reticle: a crosshair over one site block, the nadir view ---------
-  const reticle = () => svg(`
-    <circle cx="32" cy="32" r="20" fill="none" stroke="${B}" stroke-width="5"/>
-    <path d="M32 3v14M32 47v14M3 32h14M47 32h14" stroke="${B}" stroke-width="5"/>
-    <rect x="25" y="25" width="14" height="14" rx="1.5" fill="${A}"/>`);
+  // --- 1. Footprint: a drone and the strip of ground its camera captures ----
+  // The dashed lines are the camera's field of view; the tiles are the
+  // orthomosaic it stitches together.
+  const footprint = () => svg(`
+    <path d="M6 7.5h13M45 7.5h13" stroke="${B}" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M12.5 7.5v4.5h39V7.5" fill="none" stroke="${B}" stroke-width="3"/>
+    <rect x="24" y="9" width="16" height="8" rx="2.5" fill="${B}"/>
+    <path d="M27.5 19L9 47M36.5 19L55 47" stroke="${B}" stroke-width="2.6" stroke-dasharray="3.4 2.6"/>
+    <rect x="6" y="47" width="52" height="12" rx="1.5" fill="${A}"/>
+    <path d="M19 47v12M32 47v12M45 47v12" stroke="${BG}" stroke-width="1.8"/>`);
 
   // --- 2. Confluence: three inputs meet at one point -----------------------
   const confluence = () => svg(`
@@ -92,9 +97,9 @@
 
   const LOGOS = [
     {
-      id: 'reticle', num: 1, name: 'Reticle', draw: reticle, wm: 'wm-public',
-      summary: 'A crosshair over one site block.',
-      rationale: 'The view from the drone, straight down. The crosshair says “we looked at this exact place”, and the block at its centre is the site itself: the shelters, water points and roads RISA describes. It is the plainest of the concepts, reads at 16 px and works in one colour on a photocopied map.',
+      id: 'footprint', num: 1, name: 'Footprint', draw: footprint, wm: 'wm-public',
+      summary: 'A drone and the ground its camera captures.',
+      rationale: 'Aerial assessment in one picture: a mapping drone over the strip of ground it photographs, with the camera’s field of view dashed in and the ground drawn as the orthomosaic tiles it stitches together. It says “we flew this site” before anyone reads the name, and the drone-over-ground silhouette still holds at 16 px and in one colour.',
     },
     {
       id: 'confluence', num: 2, name: 'Confluence', draw: confluence, wm: 'wm-sora',
