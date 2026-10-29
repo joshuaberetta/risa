@@ -135,7 +135,7 @@ Timing: the Lyon workshop (29-30 Oct) is now, so aim to have round one ready for
 
 - **Brand architecture:** standalone methodology brand, with a "developed by HI/Atlas Logistique, MapAction and Kobo" line. A national authority's logo can lead.
 - **HOT:** originally left off round one; now named as a collaborator (see governance below).
-- **Governance (29 Oct):** founding members Kobo, MapAction, HI/Atlas Logistique; collaborators HOT, HeiGIT; partners OCHA, UNDAC, IOM, UNHCR; funded by Luxembourg and ECHO. Shown on an About page.
+- **Governance (29 Oct):** founding members Kobo, MapAction, HI/Atlas Logistique; advisory board (members TBC); collaborators HOT, HeiGIT; humanitarian partners OCHA, UNDAC, IOM, UNHCR; national and local partners (INGD Mozambique, SADC SHOC, Bahamas authority, Flying Labs); funded by Luxembourg and ECHO. Shown on an About page.
 - **Audience first (29 Oct):** “Who it’s for” is a central section straight after each home page’s hero; the owners are secondary and appear lower down.
 - **Method:** follow SOP v2 (see 4).
 - **Hosting:** `risa.kobolabs.dev`, a DigitalOcean App Platform static site like HDA, `noindex`.

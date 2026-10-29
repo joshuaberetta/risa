@@ -262,21 +262,24 @@
   // ---- about ------------------------------------------------------------------
   function about() {
     const G = C.governance;
-    const [core, collab, partners, funders] = G;
-    // Nested rings: founding members at the centre, then collaborators, then partners.
+    const L = Object.fromEntries(G.map((l) => [l.id, l]));
+    // Nested rings, from the founding members outwards to national and local partners.
+    // The advisory board sits above (it advises the core); funders sit underneath.
     const ring = (layer, r, cls, labelY) => `<a href="#${layer.id}" class="gov-ring gov-ring--${cls}" aria-label="${esc(layer.name)}">
-        <circle cx="200" cy="200" r="${r}"/><text x="200" y="${labelY}" text-anchor="middle">${esc(layer.name)}</text></a>`;
-    const diagram = `<figure class="gov-fig"><svg viewBox="0 0 400 470" role="img" aria-label="Layers of RISA governance: founding members at the centre, then collaborators, then partners, with funders underneath">
-        ${ring(partners, 196, 'partners', 30)}${ring(collab, 148, 'collab', 76)}${ring(core, 100, 'core', 156)}
-        <g class="gov-core-names">${core.members.map((m, i) => `<text x="200" y="${192 + i * 21}" text-anchor="middle">${esc(m.name)}</text>`).join('')}</g>
-        <a href="#${funders.id}" class="gov-base"><rect x="20" y="414" width="360" height="44" rx="6"/><text x="200" y="441" text-anchor="middle">${esc(funders.name)} ${esc(funders.members.map((m) => m.name).join(' · '))}</text></a>
+        <circle cx="230" cy="296" r="${r}"/><text x="230" y="${labelY}" text-anchor="middle">${esc(layer.name)}</text></a>`;
+    const band = (layer, y, cls, label) => `<a href="#${layer.id}" class="gov-band gov-band--${cls}"><rect x="20" y="${y}" width="420" height="44" rx="6"/><text x="230" y="${y + 27}" text-anchor="middle">${label}</text></a>`;
+    const diagram = `<figure class="gov-fig"><svg viewBox="0 0 460 600" role="img" aria-label="Layers of RISA governance: founding members at the centre, then collaborators, humanitarian partners and national and local partners, with the advisory board above and funders underneath">
+        ${band(L.advisory, 0, 'advisory', `${esc(L.advisory.name)} · advises the founding members`)}
+        ${ring(L.national, 222, 'national', 98)}${ring(L.partners, 178, 'partners', 142)}${ring(L.collaborators, 136, 'collab', 184)}${ring(L.founding, 94, 'core', 238)}
+        <g class="gov-core-names">${L.founding.members.map((m, i) => `<text x="230" y="${280 + i * 21}" text-anchor="middle">${esc(m.name)}</text>`).join('')}</g>
+        ${band(L.funders, 548, 'funders', `${esc(L.funders.name)} ${esc(L.funders.members.map((m) => m.name).join(' · '))}`)}
       </svg></figure>`;
     const layerCard = (l, i) => `<article class="gov-layer gov-layer--${l.id}" id="${l.id}">
         <header><span class="gov-num">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(l.name)}</h3><p class="gov-short">${esc(l.short)}</p></div></header>
         <p>${esc(l.text)}</p>
         <ul class="gov-members" role="list">${l.members.map((m) => `<li><b>${esc(m.name)}</b>${m.full ? `<small>${esc(m.full)}</small>` : ''}<span>${esc(m.role)}${m.tbc ? ' <em class="tbc">Role TBC</em>' : ''}</span></li>`).join('')}</ul>
       </article>`;
-    return hero('About', 'An open method, owned together', 'RISA was developed by three organisations who jointly own it, with collaborators, humanitarian partners and funders around them. Nothing is patented: the method is meant to be handed over to national authorities and adapted by others.')
+    return hero('About', 'An open method, owned together', 'RISA was developed by three organisations who jointly own it, advised by an independent board, with collaborators, humanitarian partners, national and local partners, and funders around them. Nothing is patented: the method is meant to be handed over to national authorities and adapted by others.')
       + `<section class="lib-section"><div class="container">
         <div class="gov-intro">
           <div><h2>What RISA is</h2><p>A rapid assessment method that turns drone imagery and direct field observation into operational maps of displacement sites, within days. It answers three questions: can we reach people, which services still work, and where do we act first.</p></div>

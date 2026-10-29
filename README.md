@@ -99,7 +99,7 @@ Pages carry `<meta name="robots" content="noindex">`. Keep that while the site i
 ## Content notes
 
 - Copy follows RISA SOP v2 and RISA in Brief v2 (observation-only field data, six steps), from the Notion workstream page.
-- Governance (About page): founding members Kobo, MapAction and HI/Atlas Logistique; collaborators HOT and HeiGIT; partners OCHA, UNDAC, IOM and UNHCR; funded by Luxembourg and ECHO. Roles not described in the consortium documents are marked TBC.
+- Governance (About page): founding members Kobo, MapAction and HI/Atlas Logistique; an advisory board (members to be confirmed); collaborators HOT and HeiGIT; humanitarian partners OCHA, UNDAC, IOM and UNHCR; national and local partners such as INGD (Mozambique), SADC SHOC, the Bahamas disaster management authority and Flying Labs; funded by Luxembourg and ECHO. Roles not described in the consortium documents are marked TBC.
 - All maps and figures use a fictional sample site and are marked as such. Dates and figures marked **TBC** are placeholders.
 - Partner names appear as text; official logos would be swapped in once a direction is chosen.
 - Partner colours were sampled in October 2026: HI/Atlas Logistique from hi.org, MapAction from its site stylesheet and logo, Kobo from its `colors.scss`. Themes use the shared cool families (navy, blue, teal, indigo) and HI sand. HI orange and yellow and MapAction red are held back because they read as status. None of this is an official brand specification.

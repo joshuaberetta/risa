@@ -162,10 +162,14 @@
 .gov-ring--core circle { fill: var(--c-primary); }
 .gov-ring--core text, .gov-core-names text { fill: var(--c-primary-ink); }
 .gov-core-names text { font-size: 14px; font-weight: 600; pointer-events: none; }
-.gov-ring--core text { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; opacity: .85; }
-.gov-ring:hover circle, .gov-base:hover rect { opacity: .85; }
-.gov-base rect { fill: var(--c-bg); stroke: var(--c-ink-2); stroke-width: 1.5; stroke-dasharray: 5 4; }
-.gov-base text { font-size: 14px; font-weight: 600; fill: var(--c-ink); }
+.gov-ring--core text { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; opacity: .85; }
+.gov-ring:hover circle, .gov-band:hover rect { opacity: .85; }
+.gov-ring--national circle { fill: color-mix(in srgb, var(--c-accent) 6%, var(--c-bg)); stroke: color-mix(in srgb, var(--c-accent) 35%, var(--c-bg)); stroke-width: 1.5; stroke-dasharray: 6 4; }
+.gov-band rect { fill: var(--c-bg); stroke: var(--c-ink-2); stroke-width: 1.5; }
+.gov-band--funders rect { stroke-dasharray: 5 4; }
+.gov-band--advisory rect { fill: var(--c-surface-2); stroke: var(--c-primary); }
+.gov-band text { font-size: 14px; font-weight: 600; fill: var(--c-ink); }
+.gov-link { stroke: var(--c-primary); stroke-width: 2; stroke-dasharray: 4 4; fill: none; }
 .gov-layers { display: grid; gap: 1rem; }
 .gov-layer { background: var(--c-bg); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 1.4rem 1.6rem; scroll-margin-top: 6rem; }
 .gov-layer:target { outline: 2px solid var(--c-accent); outline-offset: 2px; }
@@ -173,6 +177,8 @@
 .gov-layer--collaborators { border-left: 5px solid color-mix(in srgb, var(--c-accent) 55%, var(--c-bg)); }
 .gov-layer--partners { border-left: 5px solid color-mix(in srgb, var(--c-accent) 25%, var(--c-bg)); }
 .gov-layer--funders { border-left: 5px dashed var(--c-ink-2); }
+.gov-layer--advisory { border-left: 5px solid var(--c-ink-2); }
+.gov-layer--national { border-left: 5px dashed color-mix(in srgb, var(--c-accent) 45%, var(--c-bg)); }
 .gov-layer header { display: flex; gap: .9rem; align-items: baseline; margin-bottom: .5rem; }
 .gov-num { font: 600 .8rem var(--font-mono, var(--font-body)); color: var(--c-accent); }
 .gov-layer h3 { font-size: 1.25rem; }

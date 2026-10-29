@@ -79,6 +79,13 @@ window.RISAContent = {
       ],
     },
     {
+      id: 'advisory', name: 'Advisory board', short: 'Advises on direction',
+      text: 'Independent advice to the founding members on the method’s direction, standards, data responsibility and handover to national teams.',
+      members: [
+        { name: 'Members to be confirmed', role: 'To be agreed as part of the draft governance.' },
+      ],
+    },
+    {
       id: 'collaborators', name: 'Collaborators', short: 'Contribute tools and data',
       text: 'Contribute open data, tools and expertise to the method, and take part in its development.',
       members: [
@@ -87,13 +94,23 @@ window.RISAContent = {
       ],
     },
     {
-      id: 'partners', name: 'Partners', short: 'Activate and use RISA',
+      id: 'partners', name: 'Humanitarian partners', short: 'Activate and use RISA',
       text: 'Humanitarian organisations that activate RISA, use its products, or help shape them for their own workflows.',
       members: [
         { name: 'OCHA', role: 'Humanitarian coordination. RISA products feed OSOCC briefings and cluster coordination.' },
         { name: 'UNDAC', role: 'Activates RISA in sudden-onset emergencies and is one of the main users of the product.' },
         { name: 'IOM', role: 'Displacement and site management. Could adopt and adapt the method.', tbc: true },
         { name: 'UNHCR', role: 'Refugee and displacement response.', tbc: true },
+      ],
+    },
+    {
+      id: 'national', name: 'National and local partners', short: 'Host, learn and run RISA',
+      text: 'National authorities and local organisations that host deployments, take part in training and will run RISA themselves.',
+      members: [
+        { name: 'INGD', full: 'Instituto Nacional de Gestão e Redução do Risco de Desastres, Mozambique', role: 'Mozambique’s national disaster management institute, where RISA was first tested.' },
+        { name: 'SADC SHOC', full: 'SADC Humanitarian and Emergency Operations Centre', role: 'Regional coordination for Southern Africa. Session with member states planned in Durban.', tbc: true },
+        { name: 'Bahamas disaster management authority', role: 'Possible capacity-strengthening pilot with MapAction and Kobo.', tbc: true },
+        { name: 'Flying Labs', full: 'Network of locally led drone labs', role: 'Local drone operators, already in country, for the aerial input.', tbc: true },
       ],
     },
     {
