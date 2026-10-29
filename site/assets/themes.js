@@ -27,7 +27,7 @@ window.RISAThemes = [
   {
     id: 'groundtruth', letter: 'B', name: 'Ground Truth', defaultLogo: 'route', ready: true,
     tagline: 'Field-manual utility. Carbon and signal yellow, condensed type and labels that look at home on a Pelican case.',
-    blend: 'Takes its cues from the ADAK kit and safety gear rather than from a partner: carbon black, a signal yellow and steel grey. HI’s deep navy (#002E43) is the link colour. The yellow is a greenish hi-vis, well away from the amber that means “restricted”, and it stays in the frame and on kit, never on the map. Barlow Condensed reads at a distance and survives a bad photocopy.',
+    blend: 'Takes its cues from the ADAK kit and safety gear rather than from a partner: carbon black, a signal yellow and steel grey. HI’s deep navy (#002E43) is the link colour. The yellow is a greenish hi-vis, well away from the amber that means “restricted”, and it stays in the frame and on kit, never on the map. On light backgrounds the logo uses a darkened signal yellow (#7A8200), so the mark keeps its accent at 3.8:1. Barlow Condensed reads at a distance and survives a bad photocopy.',
     fonts: { head: 'Barlow Condensed', body: 'Barlow', mono: 'IBM Plex Mono' },
     bestFor: 'Field teams, ToT and SIMEX, kit and equipment.',
     swatches: [
@@ -38,7 +38,7 @@ window.RISAThemes = [
       ['--c-bg', 'Field paper', 'Page background'],
       ['--c-surface', 'Concrete', 'Section backgrounds'],
       ['--c-ink-2', 'Graphite', 'Body copy'],
-      ['--c-line', 'Rule', 'Borders and dividers'],
+      ['--c-hivis-dark', 'Signal yellow, dark', 'Logo accent and rules on light backgrounds'],
     ],
   },
   {

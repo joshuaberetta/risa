@@ -326,7 +326,7 @@
           ${fig(idCard, 'Enumerator ID card · 85.6 × 54 mm')}
         </div>
         <div class="cl-row cl-row--kit2 cl-gap">
-          ${fig(tabard, 'Hi-vis tabard, back · screen print, one colour')}
+          ${fig(tabard, 'Hi-vis tabard, back · one-colour print on fluorescent yellow (EN ISO 20471), the same in every theme')}
           ${fig(phone, 'KoboCollect form · status choices use the reserved colours')}
         </div>
       </div>

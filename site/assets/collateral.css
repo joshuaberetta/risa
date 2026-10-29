@@ -95,10 +95,19 @@
 .cl-cover--full .cl-art--fill[data-graphic="contours"] { --contour-line: color-mix(in srgb, var(--c-ink) 22%, transparent); }
 .cl-collar { position: absolute; inset: .8em; z-index: 1; border: .06em solid color-mix(in srgb, var(--c-ink) 38%, transparent); border-radius: .3em; pointer-events: none; }
 /* type: big words and a band of four colours */
+/* The art runs in a band across the top, clear of roll-up bases and table fronts. */
 .cl-cover--type { --dk: 1.28; }
-.cl-cover--type .cl-cover-vis { position: relative; order: 3; flex: none; height: 12%; }
-.cl-cover--type.cl-cover--port .cl-cover-vis { height: 8%; }
-.cl-cover--type .cl-cover-main { max-width: none; }
+.cl-cover--type .cl-cover-vis { position: relative; order: -1; flex: none; height: 30%; }
+.cl-cover--type.cl-cover--port .cl-cover-vis { height: 28%; }
+.cl-cover--type.cl-cover--land .cl-cover-vis { height: 24%; }
+.cl-doc--backdrop .cl-cover--type .cl-cover-vis { height: 14%; }
+.cl-doc--backdrop .cl-cover--type { --dk: .82; }
+.cl-doc--backdrop .cl-cover--type .cl-cover-main { margin-top: .6em; }
+.cl-cover--type .cl-cover-copy { justify-content: flex-start; }
+.cl-cover--type .cl-cover-main { max-width: none; margin-top: 1.4em; }
+.cl-cover--type .cl-cover-copy .cl-meta { margin-top: auto; }
+.cl-cover--type.cl-cover--land { --dk: 1.05; }
+.cl-cover--type.cl-cover--land .cl-cover-main { margin-top: .8em; }
 
 /* ---- Brochure ----------------------------------------------------------- */
 .cl-fig { margin: 0; min-width: 0; }

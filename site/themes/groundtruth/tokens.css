@@ -14,8 +14,9 @@
   --c-accent-2: #5E656E;
   --c-accent-3: #8A9099;
   --c-hivis: #E2EC3A;
+  --c-hivis-dark: #7A8200; /* signal yellow, darkened to 3.8:1 on paper for marks and rules */
 
-  --logo-a: #16181D; --logo-b: #16181D; --logo-c: #4A4F57; --logo-d: #8A9099;
+  --logo-a: #7A8200; --logo-b: #16181D; --logo-c: #4A4F57; --logo-d: #8A9099;
   --logo-ink: #16181D; --logo-bg: #F4F4F0;
 
   --font-head: 'Barlow Condensed', 'Barlow', system-ui, sans-serif;

@@ -215,14 +215,5 @@ h1, h2, h3, h4 { font-family: var(--font-head); color: var(--c-ink); letter-spac
 .pd-band, .pd-app-top { background: var(--c-night); --logo-bg: var(--c-night); }
 .pd-band-meta b { background: var(--c-accent-2); color: var(--c-night); }
 
-/* Collateral: the 'type' cover puts the map in a band across the top, clear of
-   stand bases and tables, with an hour ruler under it. */
-[data-theme="first72"] .cl-cover--type .cl-cover-vis { order: -1; height: 30%; border-bottom: .35em solid var(--c-accent); }
-[data-theme="first72"] .cl-cover--type.cl-cover--port .cl-cover-vis { height: 28%; }
-[data-theme="first72"] .cl-cover--type .cl-cover-main { margin-top: 1.4em; }
-[data-theme="first72"] .cl-cover--type .cl-cover-copy { justify-content: flex-start; }
-[data-theme="first72"] .cl-cover--type .cl-cover-copy .cl-meta { margin-top: auto; }
-[data-theme="first72"] .cl-cover--type.cl-cover--land .cl-cover-vis { height: 24%; }
-[data-theme="first72"] .cl-doc--backdrop .cl-cover--type .cl-cover-vis { height: 18%; }
-[data-theme="first72"] .cl-cover--type.cl-cover--land { --dk: 1.05; }
-[data-theme="first72"] .cl-cover--type.cl-cover--land .cl-cover-main { margin-top: .8em; }
+/* Collateral: an accent rule under the 'type' cover's map band (layout is shared). */
+[data-theme="first72"] .cl-cover--type .cl-cover-vis { border-bottom: .35em solid var(--c-accent); }
