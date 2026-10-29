@@ -141,3 +141,5 @@
 @media (max-width: 620px) {
   .lib-stats, .lib-grid, .lib-grid--res, .lib-products-vis { grid-template-columns: 1fr; }
 }
+
+.lib-ask { font: 600 .74rem var(--font-mono, var(--font-body)); letter-spacing: .03em; color: var(--c-ink-2); padding: .5em .8em; border: 1.5px dashed var(--c-line); border-radius: var(--radius); }

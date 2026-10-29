@@ -159,11 +159,11 @@
   function deployments() {
     const all = C.deployments;
     const responses = all.filter((d) => d.kind === 'response');
-    const countries = new Set(all.filter((d) => d.status !== 'planned').flatMap((d) => d.countries));
+    const countries = new Set(responses.filter((d) => d.status !== 'planned').flatMap((d) => d.countries));
     const next = ordered().find((d) => d.status === 'planned' && d.locations);
     const stats = `<div class="lib-stats">
         <div><b>${responses.length}</b><span>responses supported</span></div>
-        <div><b>${countries.size}</b><span>countries so far</span></div>
+        <div><b>${countries.size}</b><span>countries with a response</span></div>
         <div><b>${all.filter((d) => d.status === 'planned').length}</b><span>trainings, workshops and events planned</span></div>
         ${next ? `<div><b>Next</b><span>${esc(next.title)}, ${dates(next)}</span></div>` : ''}
       </div>`;
@@ -245,7 +245,8 @@
   function action(r) {
     if (r.build) return `<button class="btn btn--primary btn--sm" type="button" data-build="${r.build}">${icon('i-download')} Download ${r.format}</button>`;
     if (r.status === 'available' && r.preview) return `<a class="btn btn--primary btn--sm" href="${r.preview}">${icon('i-eye')} Open</a>`;
-    const ask = `<a class="btn btn--secondary btn--sm" href="mailto:${C.contact}?subject=${encodeURIComponent(`RISA toolbox: ${r.title}`)}">${r.status === 'planned' ? 'Get notified' : 'Request the draft'}</a>`;
+    // Drafts aren't public yet; the consortium shares them directly for now.
+    const ask = `<span class="lib-ask">${r.status === 'planned' ? 'Planned' : 'Draft, not yet shared'}</span>`;
     return ask + (r.preview ? ` <a class="link-arrow" href="${r.preview}">Preview ${icon('i-arrow')}</a>` : '');
   }
   function resCard(r) {
@@ -273,7 +274,7 @@
         <div class="lib-filters">${seg('cat', 'Category', [['all', 'Everything']].concat(cats))}
           ${seg('avail', 'Availability', [['all', 'Any status'], ['available', 'Ready to use'], ['draft', 'Drafts and in progress']])}</div>
         <div class="lib-grid lib-grid--res" id="lib-res">${C.resources.filter((r) => r.id !== 'sop').map(resCard).join('')}</div>
-        <p class="lib-fine">Drafts are shared with partners and national teams on request while the toolbox is consolidated (Lyon workshop, October 2026). Annex owners: A Kobo, B and C MapAction, D HI/Atlas Logistique.</p>
+        <p class="lib-fine">Drafts are shared directly by the consortium while the toolbox is consolidated (Lyon workshop, October 2026); downloads will appear here once versions are agreed. Annex owners: A Kobo, B and C MapAction, D HI/Atlas Logistique.</p>
       </div></section>`;
   }
   function wireToolbox(el) {
