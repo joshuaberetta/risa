@@ -28,7 +28,7 @@
 
   function toolbar() {
     if (!theme || params.has('shot')) return;
-    const pageFile = { guide: 'style-guide.html', product: 'product.html', toolbox: 'toolbox.html', deployments: 'deployments.html', deployment: 'deployments.html', collateral: 'collateral.html' }[view] || 'index.html';
+    const pageFile = { guide: 'style-guide.html', product: 'product.html', about: 'about.html', toolbox: 'toolbox.html', deployments: 'deployments.html', deployment: 'deployments.html', collateral: 'collateral.html' }[view] || 'index.html';
     const themeLinks = window.RISAThemes.ready.map((t) =>
       `<a href="${root}themes/${t.id}/${pageFile}" class="${t.id === themeId ? 'is-active' : ''}" title="${t.name}">${t.letter}<span> ${t.name}</span></a>`
     ).join('');
@@ -45,6 +45,7 @@
         <a href="index.html" class="${view === 'home' ? 'is-active' : ''}">Home</a>
         <a href="style-guide.html" class="${view === 'guide' ? 'is-active' : ''}">Style guide</a>
         <a href="product.html" class="${view === 'product' ? 'is-active' : ''}">Product</a>
+        <a href="about.html" class="${view === 'about' ? 'is-active' : ''}">About</a>
         <a href="toolbox.html" class="${view === 'toolbox' ? 'is-active' : ''}">Toolbox</a>
         <a href="deployments.html" class="${view === 'deployments' || view === 'deployment' ? 'is-active' : ''}">Deployments</a>
         <a href="collateral.html" class="${view === 'collateral' ? 'is-active' : ''}">Collateral</a></nav></div>

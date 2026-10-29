@@ -23,6 +23,7 @@ Any static server works. Pages use relative paths.
 | `site/index.html` | Review hub: brief, how to review, direction cards, logo overview, design principles |
 | `site/themes/<id>/index.html` | Home page: the RISA methodology site, in six directions: `briefing` (A), `groundtruth` (B), `overhead` (C), `streams` (D), `sharedground` (E), `first72` (F) |
 | `site/themes/<id>/style-guide.html` | Logo use (incl. co-branding with a national authority), colour, **reserved status colours**, type, components, **map symbology**, graphics, voice |
+| `site/themes/<id>/about.html` | What RISA is and its layers of governance: founding members, collaborators, partners and funders |
 | `site/themes/<id>/toolbox.html` | The toolbox: SOP, annexes A–E, forms, map templates, training material and the brief, with version, status, owner and a download or request link |
 | `site/themes/<id>/deployments.html` | World map of every response, training, workshop and event, with filters and the matching list |
 | `site/themes/<id>/deployment.html?d=<id>` | One profile per deployment: key facts, locator map, story, lessons, products, toolbox items used |
@@ -34,7 +35,7 @@ Any static server works. Pages use relative paths.
 
 ### Review bar
 
-Every themed page has a toolbar that switches **theme**, **page (Home / Style guide / Product / Toolbox / Deployments / Collateral)** and **logo (1–8)**. On a deployment profile, **Copy link** keeps `?d=<id>`. Only themes marked `ready: true` in `assets/themes.js` appear in it.
+Every themed page has a toolbar that switches **theme**, **page (Home / Style guide / Product / About / Toolbox / Deployments / Collateral)** and **logo (1–8)**. On a deployment profile, **Copy link** keeps `?d=<id>`. Only themes marked `ready: true` in `assets/themes.js` appear in it.
 
 - The logo choice is remembered across pages.
 - Share a combination with `?logo=<id>`. **Copy link** always writes the explicit logo id.
@@ -67,7 +68,7 @@ Then paste the doc into `results/index.html` (`?example` shows the format). It t
 - **Collateral:** `assets/collateral.js` renders every collateral piece from one template; a `FLAVOUR` entry per theme picks the cover style, artwork and texture.
 - **Theme metadata:** `assets/themes.js` holds names, rationale, swatches and the `ready` flag.
 - **Toolbox and deployments content:** `assets/content.js` holds every deployment and resource, the same in all themes. Edit it there; anything unconfirmed carries `tbc: true` or a `note`. `assets/library.js` renders the three pages; `assets/world.js` is the Natural Earth world outline, pre-projected to Equal Earth (copied from the kobo.ngo site), and pins use the same projection.
-- **Generated pages:** `scripts/build-pages.py` writes each theme's `toolbox.html`, `deployments.html` and `deployment.html` from its home page's head, header and footer, points the nav at them and adds links under the home page's toolbox and deployments sections. Re-run it after changing a theme's header or footer.
+- **Generated pages:** `scripts/build-pages.py` writes each theme's `toolbox.html`, `deployments.html` and `deployment.html` from its home page's head, header and footer, points the nav at them and adds links under the home page's toolbox and deployments sections. It also puts the shared “Who it’s for” section straight after each home page’s hero and moves the owners strip to the bottom, so audiences come first and owners second. Re-run it after changing a theme's header or footer.
 
 ### Adding a direction
 
@@ -98,7 +99,7 @@ Pages carry `<meta name="robots" content="noindex">`. Keep that while the site i
 ## Content notes
 
 - Copy follows RISA SOP v2 and RISA in Brief v2 (observation-only field data, six steps), from the Notion workstream page.
-- HOT is not named in round one while its role is agreed.
+- Governance (About page): founding members Kobo, MapAction and HI/Atlas Logistique; collaborators HOT and HeiGIT; partners OCHA, UNDAC, IOM and UNHCR; funded by Luxembourg and ECHO. Roles not described in the consortium documents are marked TBC.
 - All maps and figures use a fictional sample site and are marked as such. Dates and figures marked **TBC** are placeholders.
 - Partner names appear as text; official logos would be swapped in once a direction is chosen.
 - Partner colours were sampled in October 2026: HI/Atlas Logistique from hi.org, MapAction from its site stylesheet and logo, Kobo from its `colors.scss`. Themes use the shared cool families (navy, blue, teal, indigo) and HI sand. HI orange and yellow and MapAction red are held back because they read as status. None of this is an official brand specification.

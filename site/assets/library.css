@@ -143,3 +143,72 @@
 }
 
 .lib-ask { font: 600 .74rem var(--font-mono, var(--font-body)); letter-spacing: .03em; color: var(--c-ink-2); padding: .5em .8em; border: 1.5px dashed var(--c-line); border-radius: var(--radius); }
+
+/* About: layers of governance */
+.lib-section--tint { background: var(--c-surface); }
+.lib-sub { max-width: 44rem; margin: -.3rem 0 2rem; }
+.gov-intro { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: start; }
+.gov-intro p { font-size: 1.05rem; }
+.gov-values { display: grid; gap: 1rem; }
+.gov-values li { padding-left: 1rem; border-left: 3px solid var(--c-accent); font-size: .95rem; }
+.gov-values b { display: block; color: var(--c-ink); font-family: var(--font-head); font-size: 1.05rem; }
+.gov-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 3rem; align-items: start; }
+.gov-fig { margin: 0; position: sticky; top: 6rem; }
+.gov-fig svg { width: 100%; height: auto; display: block; font-family: var(--font-head); }
+.gov-ring circle { stroke: var(--c-bg); stroke-width: 3; transition: opacity .15s; }
+.gov-ring text { font-size: 14px; font-weight: 700; fill: var(--c-ink); letter-spacing: .02em; }
+.gov-ring--partners circle { fill: color-mix(in srgb, var(--c-accent) 12%, var(--c-bg)); }
+.gov-ring--collab circle { fill: color-mix(in srgb, var(--c-accent) 28%, var(--c-bg)); }
+.gov-ring--core circle { fill: var(--c-primary); }
+.gov-ring--core text, .gov-core-names text { fill: var(--c-primary-ink); }
+.gov-core-names text { font-size: 14px; font-weight: 600; pointer-events: none; }
+.gov-ring--core text { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; opacity: .85; }
+.gov-ring:hover circle, .gov-base:hover rect { opacity: .85; }
+.gov-base rect { fill: var(--c-bg); stroke: var(--c-ink-2); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.gov-base text { font-size: 14px; font-weight: 600; fill: var(--c-ink); }
+.gov-layers { display: grid; gap: 1rem; }
+.gov-layer { background: var(--c-bg); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 1.4rem 1.6rem; scroll-margin-top: 6rem; }
+.gov-layer:target { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+.gov-layer--founding { border-left: 5px solid var(--c-primary); }
+.gov-layer--collaborators { border-left: 5px solid color-mix(in srgb, var(--c-accent) 55%, var(--c-bg)); }
+.gov-layer--partners { border-left: 5px solid color-mix(in srgb, var(--c-accent) 25%, var(--c-bg)); }
+.gov-layer--funders { border-left: 5px dashed var(--c-ink-2); }
+.gov-layer header { display: flex; gap: .9rem; align-items: baseline; margin-bottom: .5rem; }
+.gov-num { font: 600 .8rem var(--font-mono, var(--font-body)); color: var(--c-accent); }
+.gov-layer h3 { font-size: 1.25rem; }
+.gov-short { font: 500 .78rem var(--font-mono, var(--font-body)); text-transform: uppercase; letter-spacing: .06em; color: var(--c-ink-2); }
+.gov-layer > p { font-size: .95rem; }
+.gov-members { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .8rem; margin-top: 1rem; }
+.gov-members li { display: grid; gap: .15rem; padding: .8rem .9rem; background: var(--c-surface); border-radius: var(--radius); }
+.gov-members b { color: var(--c-ink); font-family: var(--font-head); font-size: 1.05rem; }
+.gov-members small { font-size: .75rem; color: var(--c-ink-2); }
+.gov-members span { font-size: .86rem; margin-top: .25rem; }
+.gov-two { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.gov-two p { font-size: 1rem; margin-bottom: 1rem; }
+.gov-two .btn { margin: .3rem .4rem 0 0; }
+@media (max-width: 980px) {
+  .gov-intro, .gov-grid, .gov-two { grid-template-columns: 1fr; }
+  .gov-fig { position: static; max-width: 420px; }
+}
+
+/* Who it's for (home pages) */
+.lib-who { padding-block: clamp(3.5rem, 7vw, 5.5rem); border-bottom: 1px solid var(--c-line); }
+.who-intro { max-width: 48rem; margin-bottom: 2.4rem; }
+.who-intro h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin-top: .6rem; }
+.who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+.who-card { display: flex; flex-direction: column; gap: .8rem; padding: 1.5rem; background: var(--c-bg); border: 1px solid var(--c-line); border-radius: var(--radius); }
+.who-card--lead { grid-row: span 2; background: var(--c-surface-2); border-color: transparent; }
+.who-card--lead h3 { font-size: 1.6rem; }
+.who-card--lead .who-q { font-size: 1.25rem; }
+.who-head h3 { font-size: 1.25rem; }
+.who-ex { font: 500 .78rem var(--font-mono, var(--font-body)); color: var(--c-ink-2); margin-top: .25rem; }
+.who-q { font: 600 1.05rem/1.35 var(--font-head); color: var(--c-ink); }
+.who-card ul { display: grid; gap: .45rem; font-size: .9rem; }
+.who-card li { display: flex; gap: .5rem; align-items: flex-start; }
+.who-card li svg { width: 1rem; height: 1rem; flex: none; margin-top: .2rem; color: var(--c-accent); }
+.who-card .link-arrow { margin-top: auto; padding-top: .4rem; }
+.who-also { margin-top: 1.6rem; font-size: .92rem; }
+.who-also b { color: var(--c-ink); }
+@media (max-width: 980px) { .who-grid { grid-template-columns: 1fr 1fr; } .who-card--lead { grid-row: auto; grid-column: 1 / -1; } }
+@media (max-width: 620px) { .who-grid { grid-template-columns: 1fr; } }
+.who-card--lead .icon-badge { background: var(--c-bg); }

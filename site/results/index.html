@@ -103,9 +103,9 @@
 (function () {
   const T = Object.fromEntries(RISAThemes.ready.map((t) => [t.id, t]));
   const L = RISALogos.byId;
-  const PAGES = { '': 'home', 'index.html': 'home', 'style-guide.html': 'guide', 'product.html': 'product', 'toolbox.html': 'toolbox', 'deployments.html': 'deployments', 'deployment.html': 'deployment', 'collateral.html': 'collateral' };
-  const PAGE_FILE = { home: 'index.html', guide: 'style-guide.html', product: 'product.html', toolbox: 'toolbox.html', deployments: 'deployments.html', deployment: 'deployment.html', collateral: 'collateral.html' };
-  const PAGE_NAME = { home: 'Home', guide: 'Style guide', product: 'Product', toolbox: 'Toolbox', deployments: 'Deployments', deployment: 'Deployment profile', collateral: 'Collateral' };
+  const PAGES = { '': 'home', 'index.html': 'home', 'style-guide.html': 'guide', 'product.html': 'product', 'about.html': 'about', 'toolbox.html': 'toolbox', 'deployments.html': 'deployments', 'deployment.html': 'deployment', 'collateral.html': 'collateral' };
+  const PAGE_FILE = { home: 'index.html', guide: 'style-guide.html', product: 'product.html', about: 'about.html', toolbox: 'toolbox.html', deployments: 'deployments.html', deployment: 'deployment.html', collateral: 'collateral.html' };
+  const PAGE_NAME = { home: 'Home', guide: 'Style guide', product: 'Product', about: 'About', toolbox: 'Toolbox', deployments: 'Deployments', deployment: 'Deployment profile', collateral: 'Collateral' };
   const KNOWN_PARAMS = new Set(['logo', 'd', 'v', 'clean', 'shot', 'slides']);
   const STORE = 'risa-results-input';
 

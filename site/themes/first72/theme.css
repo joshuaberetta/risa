@@ -217,3 +217,11 @@ h1, h2, h3, h4 { font-family: var(--font-head); color: var(--c-ink); letter-spac
 
 /* Collateral: an accent rule under the 'type' cover's map band (layout is shared). */
 [data-theme="first72"] .cl-cover--type .cl-cover-vis { border-bottom: .35em solid var(--c-accent); }
+
+/* Header: the timeline nav plus page links. Keep every item on one line and
+   drop the middle timeline stops on narrower screens. */
+.nav { gap: 1.15rem; }
+.nav a, .site-header .btn { white-space: nowrap; }
+@media (max-width: 1300px) {
+  .nav a[href$="#trigger"], .nav a[href$="#collect"], .nav a[href$="#product"], .nav a[href$="#follow-up"] { display: none; }
+}

@@ -26,6 +26,86 @@ window.RISAContent = {
     undac: { name: 'UNDAC / OCHA', role: 'Activation and coordination' },
   },
 
+  // Who RISA is for. The home page's central section; the first audience is
+  // the one the method is ultimately handed over to.
+  audiences: [
+    {
+      id: 'authorities', icon: 'i-handover', who: 'National authorities',
+      examples: 'National disaster and emergency management authorities',
+      question: 'Can we run our own assessments, without waiting for international teams?',
+      gets: ['A toolbox, SOP and forms built to be run nationally', 'Training of Trainers with a full simulation', 'Products that carry your authority’s name first'],
+      link: ['index.html#adopt', 'Adopt RISA'], lead: true,
+    },
+    {
+      id: 'coordinators', icon: 'i-people', who: 'Coordinators',
+      examples: 'UNDAC teams, OSOCC, cluster leads',
+      question: 'Where do we act first?',
+      gets: ['A three-page product you can brief from in a minute', 'Priority gaps, ranked, with who should act', 'An update a week later'],
+      link: ['product.html', 'See the product'],
+    },
+    {
+      id: 'sites', icon: 'i-pin', who: 'Site managers',
+      examples: 'Site and camp management, local authorities',
+      question: 'Which services in my site still work?',
+      gets: ['Every water point, latrine and health post, mapped and checked', 'Status by block, with flooded and cut-off areas', 'A georeferenced inventory to update'],
+      link: ['product.html#page-2', 'Key findings page'],
+    },
+    {
+      id: 'logistics', icon: 'i-road', who: 'Logistics teams',
+      examples: 'Logistics Cluster, agencies and NGOs delivering aid',
+      question: 'Can we reach people, and by which route?',
+      gets: ['Access routes by status: open, restricted, closed', 'Choke points, gates, storage and landing zones', 'Before and after imagery of what changed'],
+      link: ['product.html#page-1', 'The map page'],
+    },
+    {
+      id: 'field', icon: 'i-drone', who: 'Field teams',
+      examples: 'Enumerators, drone operators, GIS officers',
+      question: 'What do I collect, fly and map, and how?',
+      gets: ['The KoboCollect observation form', 'Flight defaults and the UAV checklist', 'Map templates and symbols'],
+      link: ['toolbox.html', 'Open the toolbox'],
+    },
+  ],
+
+  // Layers of governance, from the method's owners outwards. Roles marked tbc
+  // are not yet described in the consortium documents.
+  governance: [
+    {
+      id: 'founding', name: 'Founding members', short: 'Own the method',
+      text: 'Developed RISA together and jointly own the method, the SOP and the toolbox. They decide what changes between versions, and staff deployments and training.',
+      members: [
+        { name: 'Kobo', role: 'Field forms, data and metadata standards, the toolbox and data collection training.' },
+        { name: 'MapAction', role: 'GIS and map products, satellite imagery, and the move from static to interactive products.' },
+        { name: 'HI/Atlas Logistique', role: 'UAV operations, field logistics, country scoping and national partnerships. Leads the consortium.' },
+      ],
+    },
+    {
+      id: 'collaborators', name: 'Collaborators', short: 'Contribute tools and data',
+      text: 'Contribute open data, tools and expertise to the method, and take part in its development.',
+      members: [
+        { name: 'HOT', full: 'Humanitarian OpenStreetMap Team', role: 'Open geospatial data and basemaps, DroneTM and OpenAerialMap for imagery, basemap QA, and local OpenStreetMap communities in the training cohort.' },
+        { name: 'HeiGIT', full: 'Heidelberg Institute for Geoinformation Technology', role: 'Open geoinformation tools and research.', tbc: true },
+      ],
+    },
+    {
+      id: 'partners', name: 'Partners', short: 'Activate and use RISA',
+      text: 'Humanitarian organisations that activate RISA, use its products, or help shape them for their own workflows.',
+      members: [
+        { name: 'OCHA', role: 'Humanitarian coordination. RISA products feed OSOCC briefings and cluster coordination.' },
+        { name: 'UNDAC', role: 'Activates RISA in sudden-onset emergencies and is one of the main users of the product.' },
+        { name: 'IOM', role: 'Displacement and site management. Could adopt and adapt the method.', tbc: true },
+        { name: 'UNHCR', role: 'Refugee and displacement response.', tbc: true },
+      ],
+    },
+    {
+      id: 'funders', name: 'Funded by', short: 'Fund the work',
+      text: 'Fund the development of the method, deployments and capacity transfer.',
+      members: [
+        { name: 'Luxembourg', full: 'Government of Luxembourg', role: 'Supports aerial assessment work, on annual funding cycles.' },
+        { name: 'ECHO', full: 'European Civil Protection and Humanitarian Aid Operations', role: 'Humanitarian funding.', tbc: true },
+      ],
+    },
+  ],
+
   deployments: [
     {
       id: 'mozambique-floods-2026', kind: 'response', status: 'completed', mode: 'deployed', scenario: 'full',

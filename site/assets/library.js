@@ -6,6 +6,8 @@
  *   <body data-view="toolbox">       resource library with filters
  *   <body data-view="deployments">   world map, filters and the list
  *   <body data-view="deployment">    one profile, from ?d=<id>
+ *   <body data-view="about">         what RISA is and its layers of governance
+ *   <section data-block="audiences"> "Who it's for", placed on each home page
  *
  * The world outlines (assets/world.js) are pre-projected to Equal Earth;
  * pins use the same projection, as on kobo.ngo.
@@ -241,6 +243,66 @@
       </div></section>`;
   }
 
+  // ---- who it's for (home page block) ----------------------------------------------
+  function audiences() {
+    const card = (a) => `<article class="who-card${a.lead ? ' who-card--lead' : ''}">
+        <span class="icon-badge">${icon(a.icon)}</span>
+        <div class="who-head"><h3>${esc(a.who)}</h3><p class="who-ex">${esc(a.examples)}</p></div>
+        <p class="who-q">“${esc(a.question)}”</p>
+        <ul role="list">${a.gets.map((g) => `<li>${icon('i-check')}${esc(g)}</li>`).join('')}</ul>
+        <a class="link-arrow" href="${a.link[0]}">${esc(a.link[1])} ${icon('i-arrow')}</a>
+      </article>`;
+    return `<div class="container">
+        <div class="who-intro"><p class="eyebrow">Who it’s for</p><h2>For the people deciding what happens in the first days, and the national teams who will run it next.</h2></div>
+        <div class="who-grid">${C.audiences.map(card).join('')}</div>
+        <p class="who-also"><b>Also useful for donors and advocates:</b> the optional third page shows a hotspot with before and after imagery and recommended actions.</p>
+      </div>`;
+  }
+
+  // ---- about ------------------------------------------------------------------
+  function about() {
+    const G = C.governance;
+    const [core, collab, partners, funders] = G;
+    // Nested rings: founding members at the centre, then collaborators, then partners.
+    const ring = (layer, r, cls, labelY) => `<a href="#${layer.id}" class="gov-ring gov-ring--${cls}" aria-label="${esc(layer.name)}">
+        <circle cx="200" cy="200" r="${r}"/><text x="200" y="${labelY}" text-anchor="middle">${esc(layer.name)}</text></a>`;
+    const diagram = `<figure class="gov-fig"><svg viewBox="0 0 400 470" role="img" aria-label="Layers of RISA governance: founding members at the centre, then collaborators, then partners, with funders underneath">
+        ${ring(partners, 196, 'partners', 30)}${ring(collab, 148, 'collab', 76)}${ring(core, 100, 'core', 156)}
+        <g class="gov-core-names">${core.members.map((m, i) => `<text x="200" y="${192 + i * 21}" text-anchor="middle">${esc(m.name)}</text>`).join('')}</g>
+        <a href="#${funders.id}" class="gov-base"><rect x="20" y="414" width="360" height="44" rx="6"/><text x="200" y="441" text-anchor="middle">${esc(funders.name)} ${esc(funders.members.map((m) => m.name).join(' · '))}</text></a>
+      </svg></figure>`;
+    const layerCard = (l, i) => `<article class="gov-layer gov-layer--${l.id}" id="${l.id}">
+        <header><span class="gov-num">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(l.name)}</h3><p class="gov-short">${esc(l.short)}</p></div></header>
+        <p>${esc(l.text)}</p>
+        <ul class="gov-members" role="list">${l.members.map((m) => `<li><b>${esc(m.name)}</b>${m.full ? `<small>${esc(m.full)}</small>` : ''}<span>${esc(m.role)}${m.tbc ? ' <em class="tbc">Role TBC</em>' : ''}</span></li>`).join('')}</ul>
+      </article>`;
+    return hero('About', 'An open method, owned together', 'RISA was developed by three organisations who jointly own it, with collaborators, humanitarian partners and funders around them. Nothing is patented: the method is meant to be handed over to national authorities and adapted by others.')
+      + `<section class="lib-section"><div class="container">
+        <div class="gov-intro">
+          <div><h2>What RISA is</h2><p>A rapid assessment method that turns drone imagery and direct field observation into operational maps of displacement sites, within days. It answers three questions: can we reach people, which services still work, and where do we act first.</p></div>
+          <ul class="gov-values" role="list">
+            <li><b>Open</b>Nothing is patented. Anyone can use and adapt the method and the toolbox.</li>
+            <li><b>Standard</b>One versioned SOP and toolbox, updated after every deployment.</li>
+            <li><b>Nationally owned</b>Built to be handed over, so national teams run the next assessment.</li>
+          </ul>
+        </div>
+      </div></section>
+      <section class="lib-section lib-section--tint"><div class="container">
+        <h2>Layers of governance</h2>
+        <p class="lib-sub">From the organisations that own the method to those who fund it. Select a layer to see who is in it.</p>
+        <div class="gov-grid">${diagram}<div class="gov-layers">${G.map(layerCard).join('')}</div></div>
+      </div></section>
+      <section class="lib-section"><div class="container gov-two">
+        <div><h2>How decisions are made</h2>
+          <p>The founding members agree changes to the method, the SOP and the toolbox. Every deployment feeds lessons into the next version, and collaborators and partners are consulted on the parts that touch their work.</p>
+          <p class="lib-note">${icon('i-alert')}<span>A draft governance is being agreed at the Lyon workshop (29–30 October 2026). This page will follow it.</span></p></div>
+        <div><h2>When a national authority runs RISA</h2>
+          <p>The product is theirs. Their logo goes first, and RISA is credited as the method used. The consortium moves from leading deployments, to co-leading with remote support, to acting as a backstop for large or complex events.</p>
+          <p><a class="btn btn--primary" href="index.html#adopt">Adopt RISA ${icon('i-arrow')}</a> <a class="btn btn--secondary" href="deployments.html">See the deployments</a></p></div>
+      </div></section>
+      <section class="lib-section"><div class="container"><p class="lib-fine">Organisations are named as text. Logos, names and descriptions need each organisation’s approval before anything is published. Roles marked TBC are not yet described in the consortium documents.</p></div></section>`;
+  }
+
   // ---- toolbox ----------------------------------------------------------------
   function action(r) {
     if (r.build) return `<button class="btn btn--primary btn--sm" type="button" data-build="${r.build}">${icon('i-download')} Download ${r.format}</button>`;
@@ -322,8 +384,11 @@
 
   // ---- init ---------------------------------------------------------------------
   function init() {
+    document.querySelectorAll('[data-block="audiences"]').forEach((b) => { b.innerHTML = audiences(); });
     const el = document.getElementById('lib');
+    if (!el) return;
     if (view === 'toolbox') { el.innerHTML = toolbox(); wireToolbox(el); }
+    if (view === 'about') el.innerHTML = about();
     if (view === 'deployments') { el.innerHTML = deployments(); wireDeployments(el); }
     if (view === 'deployment') {
       const d = DEP[new URLSearchParams(location.search).get('d')];

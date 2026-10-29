@@ -14,6 +14,7 @@ import pathlib, re
 SITE = pathlib.Path(__file__).resolve().parent.parent / 'site'
 THEMES = ['briefing', 'groundtruth', 'overhead', 'streams', 'sharedground', 'first72']
 PAGES = {
+    'about': ('about.html', 'About', []),
     'toolbox': ('toolbox.html', 'Toolbox', []),
     'deployments': ('deployments.html', 'Deployments', ['world']),
     'deployment': ('deployment.html', 'Deployment', ['world']),
@@ -43,7 +44,7 @@ def nav(header, current=None, home=False):
             return 'href="index.html"'
         return f'href="index.html{href}"'
     header = re.sub(r'href="(#[^"]*)"', fix, header)
-    for key, (file, label, _) in list(PAGES.items())[:2]:
+    for key, (file, label, _) in list(PAGES.items())[:3]:
         if f'href="{file}"' not in header:
             # Add the link before the header's call-to-action button, or at the end of the nav.
             link = f'<a href="{file}">{label}</a>'
@@ -51,10 +52,42 @@ def nav(header, current=None, home=False):
                 header = re.sub(r'(<a class="btn)', link + r'\1', header, count=1)
             else:
                 header = header.replace('</nav>', link + '</nav>', 1)
+    if 'href="#who"' not in header and 'href="index.html#who"' not in header:
+        who = 'href="#who"' if home else 'href="index.html#who"'
+        header = re.sub(r'(<nav[^>]*>\s*)', rf'\1<a {who}>Who it’s for</a>', header, count=1)
     if current:
         file = PAGES['deployments' if current == 'deployment' else current][0]
         header = header.replace(f'<a href="{file}">', f'<a href="{file}" aria-current="page">', 1)
     return header
+
+
+# The "Who it's for" section goes straight after the hero (after First 72's clock bar).
+AFTER = {'first72': 'clockbar'}
+WHO = '<section class="lib-who" id="who" data-block="audiences" aria-label="Who RISA is for"></section>'
+
+
+def block_end(html, start_re):
+    m = re.search(start_re, html)
+    return html.index('</section>', m.end()) + len('</section>') if m else None
+
+
+def who_first(html, theme):
+    """Put "Who it's for" after the hero, and the owners strip at the bottom of the page."""
+    if 'data-block="audiences"' not in html:
+        end = block_end(html, rf'<section class="{AFTER.get(theme, "hero")}[^"]*"[^>]*>')
+        html = html[:end] + '\n\n  ' + WHO + html[end:]
+    strip = re.search(r'\n  <section class="(?:strip|kitband)[^"]*"[^>]*>.*?</section>', html, re.S)
+    if strip and not html[strip.end():].lstrip().startswith('</main>'):
+        html = html[:strip.start()] + html[strip.end():]
+        html = html.replace('\n</main>', strip.group(0) + '\n</main>', 1)
+    # Shared styles and script for the section.
+    if 'assets/library.css' not in html:
+        html = html.replace('<link rel="stylesheet" href="../../assets/review.css">',
+                            '<link rel="stylesheet" href="../../assets/library.css">\n  <link rel="stylesheet" href="../../assets/review.css">', 1)
+    if 'assets/library.js' not in html:
+        html = html.replace('<script src="../../assets/review.js"></script>',
+                            '<script src="../../assets/content.js"></script>\n<script src="../../assets/library.js"></script>\n<script src="../../assets/review.js"></script>', 1)
+    return html
 
 
 def teasers(html):
@@ -74,7 +107,14 @@ def teasers(html):
 for theme in THEMES:
     folder = SITE / 'themes' / theme
     home = (folder / 'index.html').read_text()
+    new_home = who_first(teasers(home.replace(
+        re.search(r'<header class="site-header.*?</header>', home, re.S).group(0),
+        nav(re.search(r'<header class="site-header.*?</header>', home, re.S).group(0), home=True))), theme)
+    if new_home != home:
+        (folder / 'index.html').write_text(new_home)
+        home = new_home
     head = home[:home.index('</head>')]
+    head = head.replace('\n  <link rel="stylesheet" href="../../assets/library.css">', '')
     head = head.replace('<link rel="stylesheet" href="../../assets/review.css">',
                         '<link rel="stylesheet" href="../../assets/library.css">\n  <link rel="stylesheet" href="../../assets/review.css">')
     header = re.search(r'<header class="site-header.*?</header>', home, re.S).group(0)
@@ -100,8 +140,4 @@ for theme in THEMES:
 '''
         (folder / file).write_text(out)
 
-    new_home = home.replace(header, nav(header, home=True))
-    new_home = teasers(new_home)
-    if new_home != home:
-        (folder / 'index.html').write_text(new_home)
     print(f'{theme}: {", ".join(f for f, _, _ in PAGES.values())}')

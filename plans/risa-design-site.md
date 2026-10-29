@@ -134,7 +134,9 @@ Timing: the Lyon workshop (29-30 Oct) is now, so aim to have round one ready for
 ## 9. Decisions (29 Oct 2026)
 
 - **Brand architecture:** standalone methodology brand, with a "developed by HI/Atlas Logistique, MapAction and Kobo" line. A national authority's logo can lead.
-- **HOT:** not named in round one. Add HOT once its role is agreed (the token and logo-strip templates should have room for a fourth partner).
+- **HOT:** originally left off round one; now named as a collaborator (see governance below).
+- **Governance (29 Oct):** founding members Kobo, MapAction, HI/Atlas Logistique; collaborators HOT, HeiGIT; partners OCHA, UNDAC, IOM, UNHCR; funded by Luxembourg and ECHO. Shown on an About page.
+- **Audience first (29 Oct):** “Who it’s for” is a central section straight after each home page’s hero; the owners are secondary and appear lower down.
 - **Method:** follow SOP v2 (see 4).
 - **Hosting:** `risa.kobolabs.dev`, a DigitalOcean App Platform static site like HDA, `noindex`.
 - **Partner colours (29 Oct):** themes draw on the colours the owners share. Deep navy (HI #002E43, MapAction #19458D, Kobo #003870), strong blue (HI #0077C8, Kobo #2095F3) and teal/indigo (MapAction #32A4A0, Kobo #1C6D74, HI #06038D). HI orange and yellow and MapAction red are held back because they read as status on the map. Each direction leans on one family: A shared navy, B carbon plus HI navy, C Kobo blues, D one colour per owner, E HI navy and sand, F MapAction blues.
