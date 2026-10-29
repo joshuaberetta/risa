@@ -21,7 +21,7 @@ Any static server works. Pages use relative paths.
 | Path | What |
 |---|---|
 | `site/index.html` | Review hub: brief, how to review, direction cards, logo overview, design principles |
-| `site/themes/<id>/index.html` | Home page: the RISA methodology site. Built: `briefing` (A). Planned: `groundtruth` (B), `overhead` (C), `streams` (D), `sharedground` (E), `first72` (F) |
+| `site/themes/<id>/index.html` | Home page: the RISA methodology site, in six directions: `briefing` (A), `groundtruth` (B), `overhead` (C), `streams` (D), `sharedground` (E), `first72` (F) |
 | `site/themes/<id>/style-guide.html` | Logo use (incl. co-branding with a national authority), colour, **reserved status colours**, type, components, **map symbology**, graphics, voice |
 | `site/themes/<id>/product.html` | The three-page RISA product (map, key findings, hotspot) and a working mock of the interactive viewer |
 | `site/themes/<id>/collateral.html` | RISA in Brief (A4 two-pager), ToT/SIMEX slides, workshop stand, field kit (ADAK case label, ID card, hi-vis tabard, KoboCollect form), badge, social posts, ToT certificate, email signature |
@@ -76,7 +76,7 @@ Then paste the doc into `results/index.html` (`?example` shows the format). It t
 With the local server running (needs Google Chrome):
 
 ```sh
-for id in briefing; do
+for id in briefing groundtruth overhead streams sharedground first72; do
   scripts/shot.sh "themes/$id/index.html?shot&logo=default" /tmp/$id.png 1440 900
   sips -Z 960 -s format jpeg -s formatOptions 78 /tmp/$id.png --out site/assets/thumbs/$id.jpg
 done
@@ -93,4 +93,5 @@ Pages carry `<meta name="robots" content="noindex">`. Keep that while the site i
 - Copy follows RISA SOP v2 and RISA in Brief v2 (observation-only field data, six steps), from the Notion workstream page.
 - HOT is not named in round one while its role is agreed.
 - All maps and figures use a fictional sample site and are marked as such. Dates and figures marked **TBC** are placeholders.
-- Partner names appear as text; official logos would be swapped in once a direction is chosen. HI/Atlas Logistique and MapAction colours still need sampling.
+- Partner names appear as text; official logos would be swapped in once a direction is chosen.
+- Partner colours were sampled in October 2026: HI/Atlas Logistique from hi.org, MapAction from its site stylesheet and logo, Kobo from its `colors.scss`. Themes use the shared cool families (navy, blue, teal, indigo) and HI sand. HI orange and yellow and MapAction red are held back because they read as status. None of this is an official brand specification.

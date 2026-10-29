@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700;800&family=Sora:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="../assets/base.css">
   <link rel="stylesheet" href="../themes/briefing/tokens.css">
+  <link rel="stylesheet" href="../themes/groundtruth/tokens.css">
+  <link rel="stylesheet" href="../themes/overhead/tokens.css">
+  <link rel="stylesheet" href="../themes/streams/tokens.css">
+  <link rel="stylesheet" href="../themes/sharedground/tokens.css">
+  <link rel="stylesheet" href="../themes/first72/tokens.css">
   <link rel="stylesheet" href="../assets/hub.css">
   <link rel="icon" href="../assets/favicon.svg">
   <style>
@@ -21,7 +26,9 @@
     .chip i { height: 28px; border-radius: 6px; border: 1px solid rgb(0 0 0 / .08); }
     .chip span { color: var(--h-ink); }
     .chip code { font-size: 12px; color: var(--h-ink-2); }
-    .overlaps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .overlaps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .overlap.is-held { border-style: dashed; }
+    .overlap.is-held .bars { opacity: .85; }
     .overlap { background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; overflow: hidden; }
     .overlap .bars { display: flex; height: 70px; }
     .overlap .bars i { flex: 1; position: relative; }
@@ -88,8 +95,14 @@
 
   <section class="hub-section hub-rule"><div class="container">
     <h2>Partner colours, as observed</h2>
-    <p class="sub">For reference only: RISA is a method brand, so no theme is built from partner colours. Kobo values come from its site’s <code>colors.scss</code>. HI/Atlas Logistique and MapAction still need sampling from their sites and map products, and each partner should confirm.</p>
+    <p class="sub">Sampled in October 2026. HI/Atlas Logistique from hi.org (Atlas Logistique appears under HI’s branding there), MapAction from its site stylesheet and logo, and Kobo from its site’s <code>colors.scss</code>. These are not official brand specifications, so each partner should confirm them.</p>
     <div class="members-grid" id="members"></div>
+  </div></section>
+
+  <section class="hub-section hub-rule"><div class="container">
+    <h2>Where we overlap, and what we hold back</h2>
+    <p class="sub">The shared cool families become the backbone of the themes. The warm partner colours are kept for each partner’s own materials, because on a RISA map they would read as status.</p>
+    <div class="overlaps" id="overlaps"></div>
   </div></section>
 
   <section class="hub-section hub-rule"><div class="container">
@@ -104,14 +117,25 @@
 <script src="../assets/themes.js"></script>
 <script>
   const MEMBERS = [
-    { name: 'HI/Atlas Logistique', note: 'To sample from the HI and Atlas Logistique sites and field kit.', todo: true, chips: [['Primary', ''], ['Secondary', ''], ['Accent', '']] },
-    { name: 'MapAction', note: 'To sample from the MapAction site and its map product templates.', todo: true, chips: [['Primary', ''], ['Secondary', ''], ['Accent', '']] },
+    { name: 'HI/Atlas Logistique', note: 'Blues and indigo with a strong orange; Nunito type.', chips: [['HI blue', '#0077C8'], ['Indigo', '#06038D'], ['Deep navy', '#002E43'], ['Orange', '#E35205'], ['Yellow', '#FFD100'], ['Sand', '#EDC8A3']] },
+    { name: 'MapAction', note: 'One strong navy, used for the logo and most of the site, with teal and sky.', chips: [['Navy', '#19458D'], ['Teal', '#32A4A0'], ['Sky', '#92B4EC'], ['Pale teal', '#DFF1F0'], ['Logo red', '#E63C2F']] },
     { name: 'Kobo', note: 'Blues and teal from the product UI, Lora headings.', chips: [['Yale blue', '#003870'], ['Dark blue', '#00599D'], ['Kobo blue', '#2095F3'], ['Dark teal', '#1C6D74'], ['Gray 24', '#333847']] },
   ];
   document.getElementById('members').innerHTML = MEMBERS.map((m) => `
-    <div class="member-card${m.todo ? ' is-todo' : ''}"><h3>${m.name}</h3><p>${m.note}</p><div class="chip-row">
-      ${m.chips.map(([n, h]) => `<div class="chip"><i${h ? ` style="background:${h}"` : ''}></i><span>${n}</span><code>${h || 'TBC'}</code></div>`).join('')}
+    <div class="member-card"><h3>${m.name}</h3><p>${m.note}</p><div class="chip-row">
+      ${m.chips.map(([n, h]) => `<div class="chip"><i style="background:${h}"></i><span>${n}</span><code>${h}</code></div>`).join('')}
     </div></div>`).join('');
+
+  const OVERLAPS = [
+    { title: 'Deep navy', who: 'HI · MapAction · Kobo', text: 'All three owners have one. It becomes the structure colour: headings, title bands, dark sections.', bars: [['HI', '#002E43'], ['MapAction', '#19458D'], ['Kobo', '#003870']], becomes: [['A', '#132A45'], ['E', '#002E43'], ['F', '#0E2550']] },
+    { title: 'Strong blue', who: 'HI · Kobo · MapAction', text: 'Links, actions, survey lines and the field-data stream.', bars: [['HI', '#0077C8'], ['Kobo', '#2095F3'], ['MapAction', '#92B4EC']], becomes: [['A', '#2160D8'], ['C', '#00599D'], ['D', '#2095F3'], ['E', '#0066AB'], ['F', '#19458D']] },
+    { title: 'Teal and indigo', who: 'MapAction · Kobo · HI', text: 'Supporting colours. In Three Streams, indigo, blue and teal are the three inputs.', bars: [['MapAction', '#32A4A0'], ['Kobo', '#1C6D74'], ['HI', '#06038D']], becomes: [['D', '#06038D'], ['D', '#32A4A0'], ['F', '#DFF1F0']] },
+    { title: 'Held back', who: 'HI orange and yellow · MapAction red', text: 'Too close to “closed” and “restricted”. Used in each partner’s own materials, never in RISA’s brand.', bars: [['HI', '#E35205'], ['HI', '#FFD100'], ['MapAction', '#E63C2F']], becomes: [['Status', '#A8281A'], ['Status', '#E9A23B']], held: true },
+  ];
+  document.getElementById('overlaps').innerHTML = OVERLAPS.map((o) => `
+    <div class="overlap${o.held ? ' is-held' : ''}"><div class="bars">${o.bars.map(([n, h]) => `<i style="background:${h}"><b>${n}</b></i>`).join('')}</div>
+      <div class="body"><h3>${o.title}</h3><p><b style="color:var(--h-ink)">${o.who}.</b> ${o.text}</p>
+        <div class="becomes">${o.held ? 'Reserved for' : 'In themes'}: ${o.becomes.map(([l, h]) => `<span><i style="background:${h}"></i> ${l}</span>`).join(' ')}</div></div></div>`).join('');
 
   // Colour maths
   const hexToRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));

@@ -137,6 +137,7 @@ Timing: the Lyon workshop (29-30 Oct) is now, so aim to have round one ready for
 - **HOT:** not named in round one. Add HOT once its role is agreed (the token and logo-strip templates should have room for a fourth partner).
 - **Method:** follow SOP v2 (see 4).
 - **Hosting:** `risa.kobolabs.dev`, a DigitalOcean App Platform static site like HDA, `noindex`.
+- **Partner colours (29 Oct):** themes draw on the colours the owners share. Deep navy (HI #002E43, MapAction #19458D, Kobo #003870), strong blue (HI #0077C8, Kobo #2095F3) and teal/indigo (MapAction #32A4A0, Kobo #1C6D74, HI #06038D). HI orange and yellow and MapAction red are held back because they read as status on the map. Each direction leans on one family: A shared navy, B carbon plus HI navy, C Kobo blues, D one colour per owner, E HI navy and sand, F MapAction blues.
 
 ## 10. Still open
 

@@ -1,0 +1,36 @@
+/* Theme D: Three Streams. One colour per input, which is one per owner:
+   imagery = HI indigo, field data = Kobo blue, GIS = MapAction teal. */
+[data-theme="streams"] {
+  --c-bg: #FFFFFF;
+  --c-surface: #F5F6F8;
+  --c-surface-2: #EEF0FA;
+  --c-ink: #1E2A3A;
+  --c-ink-2: #505B6B;
+  --c-line: #DCE0E6;
+  --c-line-soft: #E9ECF0;
+  --c-primary: #1E2A3A;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #06038D;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #2095F3;
+  --c-accent-3: #32A4A0;
+  /* Stream colours: graphics and large type only (3:1). Text versions below. */
+  --c-imagery: #06038D; --c-field: #2095F3; --c-gis: #32A4A0;
+  --c-field-text: #0B6FC2; --c-gis-text: #217A77;
+
+  --logo-a: #1E2A3A; --logo-b: #06038D; --logo-c: #2095F3; --logo-d: #32A4A0;
+  --logo-ink: #1E2A3A; --logo-bg: #FFFFFF;
+
+  --font-head: 'Sora', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 12px;
+  --shadow: 0 1px 2px rgb(30 42 58 / .06), 0 10px 30px rgb(30 42 58 / .08);
+}
+[data-theme="streams"] .inverse {
+  --c-bg: #1E2A3A; --c-surface: #26354A; --c-surface-2: #2E405A;
+  --c-ink: #FFFFFF; --c-ink-2: #BAC4D2; --c-line: #3A4C66; --c-line-soft: #31425A;
+  --c-primary: #FFFFFF; --c-primary-ink: #1E2A3A; --c-accent: #9C9BFF; --c-accent-ink: #1E2A3A; --c-accent-2: #5FB4F7; --c-accent-3: #5CC4BF;
+  --c-imagery: #8E8CFF; --c-field: #5FB4F7; --c-gis: #5CC4BF; --c-field-text: #5FB4F7; --c-gis-text: #5CC4BF;
+  --logo-a: #FFFFFF; --logo-b: #8E8CFF; --logo-c: #5FB4F7; --logo-d: #5CC4BF; --logo-ink: #FFFFFF; --logo-bg: #1E2A3A;
+}

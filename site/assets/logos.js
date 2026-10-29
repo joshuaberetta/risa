@@ -69,8 +69,8 @@
       <defs><path id="${id}" d="M32 32m-23.4 0a23.4 23.4 0 1 1 46.8 0a23.4 23.4 0 1 1-46.8 0"/></defs>
       <circle cx="32" cy="32" r="30" fill="none" stroke="${B}" stroke-width="2.6"/>
       <circle cx="32" cy="32" r="17.6" fill="none" stroke="${B}" stroke-width="1.4"/>
-      <text font-size="5.6" font-weight="700" letter-spacing=".55" fill="${B}" style="font-family:var(--font-head,'Public Sans'),system-ui,sans-serif">
-        <textPath href="#${id}" startOffset="0">RAPID INFRASTRUCTURE · SERVICE ASSESSMENT ·</textPath></text>
+      <text font-size="5.2" font-weight="700" fill="${B}" style="font-family:'Inter','Public Sans',system-ui,sans-serif">
+        <textPath href="#${id}" startOffset="0" textLength="145" lengthAdjust="spacingAndGlyphs">RAPID INFRASTRUCTURE · SERVICE ASSESSMENT ·</textPath></text>
       <path d="M32 17.5v8M32 38.5v8M17.5 32h8M38.5 32h8" stroke="${B}" stroke-width="2.6"/>
       <rect x="27.5" y="27.5" width="9" height="9" rx="1" fill="${A}"/>`);
   }

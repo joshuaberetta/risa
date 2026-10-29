@@ -1,0 +1,32 @@
+/* Theme F: First 72. MapAction navy, sky and pale teal, with a strong timeline. */
+[data-theme="first72"] {
+  --c-bg: #F6F6F4;
+  --c-surface: #ECEEF2;
+  --c-surface-2: #FFFFFF;
+  --c-ink: #111317;
+  --c-ink-2: #4C4F58;
+  --c-line: #D8DBE2;
+  --c-line-soft: #E6E8ED;
+  --c-primary: #111317;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #19458D;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #92B4EC;
+  --c-accent-3: #DFF1F0;
+  --c-night: #0E2550;
+
+  --logo-a: #19458D; --logo-b: #111317; --logo-c: #92B4EC; --logo-d: #DFF1F0;
+  --logo-ink: #111317; --logo-bg: #F6F6F4;
+
+  --font-head: 'Archivo', system-ui, sans-serif;
+  --font-body: 'Archivo', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 0px;
+  --shadow: none;
+}
+[data-theme="first72"] .inverse {
+  --c-bg: #0E2550; --c-surface: #15306A; --c-surface-2: #1C3B7E;
+  --c-ink: #FFFFFF; --c-ink-2: #BFCDE8; --c-line: #2A4785; --c-line-soft: #223D76;
+  --c-primary: #FFFFFF; --c-primary-ink: #0E2550; --c-accent: #92B4EC; --c-accent-ink: #0E2550; --c-accent-2: #DFF1F0;
+  --logo-a: #92B4EC; --logo-b: #FFFFFF; --logo-c: #92B4EC; --logo-d: #DFF1F0; --logo-ink: #FFFFFF; --logo-bg: #0E2550;
+}

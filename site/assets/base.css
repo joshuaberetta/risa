@@ -4,7 +4,7 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body { margin: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
 img, svg { max-width: 100%; }
 h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
-ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+:where(ul, ol)[role="list"] { list-style: none; padding: 0; }
 a { color: inherit; }
 button, input, textarea, select { font: inherit; color: inherit; }
 

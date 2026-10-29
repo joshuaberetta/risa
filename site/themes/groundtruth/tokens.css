@@ -1,0 +1,32 @@
+/* Theme B: Ground Truth. Carbon and signal yellow from field kit; HI deep navy for links. */
+[data-theme="groundtruth"] {
+  --c-bg: #F4F4F0;
+  --c-surface: #E9E9E3;
+  --c-surface-2: #FFFFFF;
+  --c-ink: #16181D;
+  --c-ink-2: #4A4F57;
+  --c-line: #CFD1CC;
+  --c-line-soft: #E0E1DC;
+  --c-primary: #16181D;
+  --c-primary-ink: #E2EC3A;
+  --c-accent: #002E43;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #5E656E;
+  --c-accent-3: #8A9099;
+  --c-hivis: #E2EC3A;
+
+  --logo-a: #16181D; --logo-b: #16181D; --logo-c: #4A4F57; --logo-d: #8A9099;
+  --logo-ink: #16181D; --logo-bg: #F4F4F0;
+
+  --font-head: 'Barlow Condensed', 'Barlow', system-ui, sans-serif;
+  --font-body: 'Barlow', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 2px;
+  --shadow: 0 1px 0 rgb(22 24 29 / .12);
+}
+[data-theme="groundtruth"] .inverse {
+  --c-bg: #16181D; --c-surface: #22252B; --c-surface-2: #2C3038;
+  --c-ink: #F4F4F0; --c-ink-2: #B5B9BF; --c-line: #3A3E46; --c-line-soft: #30343B;
+  --c-primary: #E2EC3A; --c-primary-ink: #16181D; --c-accent: #E2EC3A; --c-accent-ink: #16181D; --c-accent-2: #E2EC3A;
+  --logo-a: #E2EC3A; --logo-b: #F4F4F0; --logo-c: #B5B9BF; --logo-d: #8A9099; --logo-ink: #F4F4F0; --logo-bg: #16181D;
+}

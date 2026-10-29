@@ -10,7 +10,7 @@
 .pd-page h1, .pd-page h2, .pd-page h3 { color: var(--map-ink); letter-spacing: -.01em; }
 
 /* Title band: the brand frame. The national authority leads. */
-.pd-band { display: grid; grid-template-columns: auto 1fr auto; gap: 2em; align-items: center; padding: 1em 1.6em; background: var(--c-primary); color: var(--c-primary-ink); }
+.pd-band { display: grid; grid-template-columns: auto 1fr auto; gap: 2em; align-items: center; padding: 1em 1.6em; background: var(--c-band, var(--c-primary)); color: var(--c-band-ink, var(--c-primary-ink)); }
 .pd-band h1 { color: inherit; font: 700 2em/1.05 var(--font-head); }
 .pd-band-title p { font: 500 .85em var(--font-mono); opacity: .8; margin-top: .3em; }
 .pd-band-meta { display: grid; justify-items: end; gap: .15em; font: 500 .8em var(--font-mono); }
@@ -76,7 +76,7 @@
 .pd-h3 small { font: 500 .75em var(--font-mono); color: #4A5A6D; margin-left: .4em; }
 .pd-blocks { display: grid; gap: .25em; }
 .pd-blocks div { display: grid; grid-template-columns: 2em 1fr 2.4em; align-items: center; gap: .5em; font: 500 .75em var(--font-mono); }
-.pd-blocks i { height: .8em; background: linear-gradient(90deg, var(--c-accent-2) var(--v), #EEF0F2 var(--v)); }
+.pd-blocks i { height: .8em; background: linear-gradient(90deg, var(--c-data, #6B7682) var(--v), #EEF0F2 var(--v)); }
 .pd-blocks .is-hot i { background: linear-gradient(90deg, var(--hz-flood) var(--v), #EEF0F2 var(--v)); }
 .pd-blocks b { text-align: right; }
 .pd-pop { margin-top: .9em; font-size: .85em; }
@@ -111,7 +111,7 @@
 /* Interactive mock */
 .pd-app { border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 10px 34px rgb(0 0 0 / .1); font-size: 14px; color: var(--map-ink); }
 .pd-app button { font: inherit; cursor: pointer; }
-.pd-app-top { display: flex; align-items: center; gap: 1.4rem; padding: .7rem 1rem; background: var(--c-primary); color: var(--c-primary-ink); --logo-a: var(--c-accent); --logo-b: var(--c-primary-ink); --logo-ink: var(--c-primary-ink); --logo-bg: var(--c-primary); }
+.pd-app-top { display: flex; align-items: center; gap: 1.4rem; padding: .7rem 1rem; background: var(--c-band, var(--c-primary)); color: var(--c-band-ink, var(--c-primary-ink)); --logo-a: var(--c-accent); --logo-b: var(--c-primary-ink); --logo-ink: var(--c-primary-ink); --logo-bg: var(--c-primary); }
 .pd-app-top [data-risa-logo] { font-size: 12px; }
 .pd-app-site { font: 500 .8rem var(--font-mono); opacity: .85; }
 .pd-app-site b { font-family: var(--font-body); }

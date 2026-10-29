@@ -41,11 +41,6 @@
 
 /* Headline emphasis follows each theme's home page */
 .cl-page em { font-style: normal; color: var(--c-accent); }
-[data-theme="fieldwork"] .cl-page em, [data-theme="relief"] .cl-page em { font-style: italic; }
-[data-theme="fieldwork"] .cl-page em { font-weight: 500; }
-[data-theme="signal"] .cl-page em { color: var(--c-primary); }
-[data-theme="atlas"] .cl-page em { color: transparent; background: linear-gradient(90deg, var(--c-primary), var(--c-accent-2)); -webkit-background-clip: text; background-clip: text; }
-[data-theme="commons"] .cl-page h1, [data-theme="commons"] .cl-page h2 { font-weight: 800; letter-spacing: -.035em; }
 
 /* An accent-coloured variant, alongside the theme's own .inverse */
 .cl-accent { --c-bg: var(--cl-acc); --c-surface: color-mix(in srgb, #000 12%, var(--cl-acc)); --c-ink: #fff; --c-ink-2: rgb(255 255 255 / .88);
@@ -133,7 +128,6 @@
 .cl-qr i:nth-child(1) { top: 0; left: 0; } .cl-qr i:nth-child(2) { top: 0; right: 0; } .cl-qr i:nth-child(3) { bottom: 0; left: 0; }
 .cl-members { display: grid; gap: 1em; margin-top: .6em; }
 .cl-panel-quote { margin-top: auto; padding-top: 1em; border-top: .12em solid var(--c-accent); font: 600 1.05em/1.15 var(--font-head); color: var(--c-ink); }
-[data-theme="fieldwork"] .cl-panel-quote, [data-theme="relief"] .cl-panel-quote { font-style: italic; font-weight: 400; }
 .cl-members div { padding-top: .8em; border-top: 1px solid var(--c-line-soft, var(--c-line)); }
 .cl-members b, .cl-services b, .cl-phases b, .cl-cta b { display: block; font-family: var(--font-head); color: var(--c-ink); line-height: 1.15; }
 .cl-members b { font-size: 1.05em; }
@@ -256,7 +250,6 @@
 .cl-s--quote { flex-direction: row; align-items: center; gap: 2.8em; padding-inline: 4em; }
 .cl-quote-mark { flex: none; width: 6.5em; height: 6.5em; }
 .cl-quote { font: 600 2.5em/1.08 var(--font-head); color: var(--c-ink); letter-spacing: -.025em; margin-bottom: .45em !important; text-wrap: balance; }
-[data-theme="fieldwork"] .cl-quote, [data-theme="relief"] .cl-quote { font-style: italic; font-weight: 400; }
 .cl-s--end { display: grid; grid-template-columns: 1.1fr 1fr; gap: 2.6em; padding-bottom: 2.4em; }
 .cl-s--end > div:first-child { display: flex; flex-direction: column; justify-content: center; }
 .cl-s--end .cl-lead { margin: .6em 0 1.8em; }
@@ -330,8 +323,7 @@
   .cl-counter { min-width: 0; font-size: .82rem; }
   .cl-thumbs { grid-auto-columns: 120px; }
 }
-.cl-doc--social .cl-cover--split.cl-cover--port .cl-cover-vis { top: 9%; height: 40%; }
-.cl-doc--social .cl-cover--split.cl-cover--port .cl-art--stack > div { width: 46%; }
+.cl-doc--social .cl-cover--split.cl-cover--port .cl-cover-vis { top: 20%; height: 36%; }
 
 /* ---- RISA pieces ------------------------------------------------------- */
 .cl-doc--a4 { --ar: 210 / 297; --em: 38; }
@@ -483,3 +475,7 @@
 .cl-readmap svg { width: 100%; height: 1.3em; fill: none; overflow: visible; font-family: var(--font-head); }
 .cl-readmap small { font-family: var(--font-mono, var(--font-body)); color: var(--c-ink-2); font-size: .9em; }
 .cl-readmap .sm-casing { stroke: var(--c-surface); }
+
+/* Certificate: modules completed */
+.cl-cert-mods { display: flex; flex-wrap: wrap; gap: .4em .5em; margin-top: 1.2em; }
+.cl-cert-mods span { font: 500 .52em var(--font-mono, var(--font-body)); padding: .35em .7em; border: 1px solid var(--c-line); border-radius: 99px; color: var(--c-ink); }

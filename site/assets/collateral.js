@@ -15,6 +15,11 @@
   //   art: main motif · tex: quiet background texture · cover: cover layout
   const FLAVOUR = {
     briefing: { hl: 'Know what’s on the ground, <em>in the first days.</em>', art: 'site', tex: 'grid', cover: 'split', divider: 'inverse' },
+    groundtruth: { hl: 'Ground truth, <em>in the first days.</em>', art: 'site', tex: 'grid', cover: 'split', divider: 'inverse' },
+    overhead: { hl: 'See the site <em>from above.</em>', art: 'ortho', tex: 'grid', cover: 'full', dark: true, divider: 'inverse' },
+    streams: { hl: 'Three inputs. <em>One picture.</em>', art: 'site', tex: 'none', cover: 'split', divider: 'inverse' },
+    sharedground: { hl: 'Your teams. Your sites. <em>One shared method.</em>', art: 'contours', tex: 'contours', cover: 'full', divider: 'inverse' },
+    first72: { hl: 'The first 72 hours <em>decide the response.</em>', art: 'site', tex: 'none', cover: 'type', divider: 'inverse' },
   };
   const F = FLAVOUR[theme.id] || FLAVOUR.briefing;
 
@@ -43,9 +48,13 @@
 
   // ---- building blocks -----------------------------------------------------
   function art(seed = 4, o = {}) {
-    if (F.art === 'site' || o.mode) {
-      const mode = o.mode || 'map';
-      return `<div class="cl-art cl-art--fill cl-art--site" data-graphic="site" data-mode="${mode}"${o.view ? ` data-view="${o.view}"` : ''} data-layers="${o.layers || (mode === 'map' ? 'roads,blocks,hazards,routes,services' : 'imagery,roads,blocks,hazards,routes,services')}"></div>`;
+    if (F.art === 'site' || F.art === 'ortho' || o.mode) {
+      const mode = o.mode || (F.art === 'ortho' ? 'ortho' : 'map');
+      // Covers are decoration, so they never show status symbols or route status.
+      const layers = o.layers || (o.cover
+        ? (mode === 'map' ? 'roads,blocks,hazards' : 'imagery,roads,blocks')
+        : (mode === 'map' ? 'roads,blocks,hazards,routes,services' : 'imagery,roads,blocks,hazards,routes,services'));
+      return `<div class="cl-art cl-art--fill cl-art--site" data-graphic="site" data-mode="${mode}"${o.view ? ` data-view="${o.view}"` : ''} data-layers="${layers}"></div>`;
     }
     return `<div class="cl-art cl-art--fill" data-graphic="contours" data-seed="${seed}" data-levels="${o.levels || 16}"></div>`;
   }
@@ -65,7 +74,7 @@
   /** The theme's cover composition. orient: 'land' | 'port'. */
   function cover({ orient = 'land', lead = true, meta = '', seed = 4, eyebrow = NAME, hl = F.hl, o = {} } = {}) {
     return `<div class="cl-cover cl-cover--${F.cover} cl-cover--${orient}${F.dark ? ' inverse' : ''}">
-      <div class="cl-cover-vis">${art(seed, o)}</div>
+      <div class="cl-cover-vis">${art(seed, Object.assign({ cover: true }, o))}</div>
       <div class="cl-cover-copy">
         ${logo()}
         <div class="cl-cover-main">
@@ -87,7 +96,7 @@
     const front = doc('a4', `<div class="cl-brief">
         <header class="cl-brief-top">${logo()}<span class="tag">RISA in Brief · v2 draft</span></header>
         <div class="cl-brief-hero"><p class="eyebrow">${NAME}</p><h1 class="cl-display">${F.hl}</h1><p class="cl-lead">${LEAD}</p></div>
-        <div class="cl-brief-map">${art(4)}${keyRow()}</div>
+        <div class="cl-brief-map">${art(4, { mode: 'map' })}${keyRow()}</div>
         <div class="cl-brief-qs">${QUESTIONS.map(([i, h, p], n) => `<div><span class="cl-ico">${icon(i)}</span><b>${n + 1}. ${h}</b><p>${p}</p></div>`).join('')}</div>
         <p class="cl-p cl-brief-note">RISA records what physically exists on the ground. It complements, rather than replaces, MIRA and rapid needs assessments.</p>
       </div>`);
@@ -134,7 +143,7 @@
     ['Content + map', () => doc('slide', `<div class="cl-s cl-s--two">
         <div><p class="eyebrow">The gap</p><h2 class="cl-h1">The tools exist. They arrive separately.</h2>
           <ul class="cl-bullets" role="list"><li>Access routes and site layouts are unknown or out of date.</li><li>Drone, satellite and field data come from different teams, at different times.</li><li>Surge teams leave, and the capacity leaves with them.</li></ul></div>
-        <div class="cl-artbox">${art(12)}</div>
+        <div class="cl-artbox">${art(12, { mode: 'map' })}</div>
       </div>${sfoot(5)}`)],
     ['Three inputs', () => doc('slide', `<div class="cl-s">
         <p class="eyebrow">The method</p><h2 class="cl-h1">Three inputs, one common operational picture</h2>
@@ -249,7 +258,7 @@
       </div>${base}`, 'inverse')],
   ];
   const backdrop = () => doc('backdrop', cover({ lead: false, meta: `${URL} · ${EMAIL}`, seed: 3 }) + '<span class="cl-zone cl-zone--table" aria-hidden="true"><em>Hidden by the table (0.75 m)</em></span>');
-  const table = () => doc('table', `<div class="cl-table${F.dark ? ' inverse' : ''}">${tex(29)}${logo()}<div class="cl-table-copy"><p>Know what’s on the ground, in the first days.</p><b>${URL}</b></div></div>`);
+  const table = () => doc('table', `<div class="cl-table${F.dark ? ' inverse' : ''}">${tex(29)}${logo()}<div class="cl-table-copy"><p>${F.hl.replace(/<[^>]+>/g, '')}</p><b>${URL}</b></div></div>`);
 
   function events() {
     const person = `<svg class="cl-person" viewBox="0 0 40 170" aria-hidden="true"><circle cx="20" cy="11" r="10"/><path d="M8 26h24c4 0 6 3 6 7v50c0 3-2 4-4 4h-2v78c0 3-2 5-5 5h-2l-5-70-5 70h-2c-3 0-5-2-5-5V87H6c-2 0-4-1-4-4V33c0-4 2-7 6-7z"/></svg>`;
@@ -336,7 +345,8 @@
     const cert = doc('sheet', `${tex(50)}<div class="cl-cert">
       <header>${logo()}<span class="cl-id-nema"><i></i>National authority</span></header>
       <div><p class="eyebrow">Certificate of completion</p><h2 class="cl-h0">Firstname Lastname</h2>
-        <p class="cl-lead">has completed the RISA Training of Trainers course, including the SIMEX, and is qualified to train RISA field teams.</p></div>
+        <p class="cl-lead">has completed the RISA Training of Trainers course, including the SIMEX, and is qualified to train RISA field teams.</p>
+        <p class="cl-cert-mods">${['Why RISA', 'Three inputs', 'Six steps', 'Reading the product', 'SIMEX', 'Handover'].map((m) => `<span>${m}</span>`).join('')}</p></div>
       <footer><div><b>Durban, November 2026</b><span>Course RISA-ToT-02</span></div><div class="cl-sign"><i></i><span>Lead facilitator</span></div><div class="cl-sign"><i></i><span>National authority</span></div></footer>
     </div>`);
     const sig = `<div class="cl-sig">

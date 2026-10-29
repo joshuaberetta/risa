@@ -1,0 +1,32 @@
+/* Theme E: Shared Ground. HI deep navy and sand on warm paper, so a national
+   authority's colours can sit on top without clashing. */
+[data-theme="sharedground"] {
+  --c-bg: #FBF7F0;
+  --c-surface: #F3EBDF;
+  --c-surface-2: #FFFFFF;
+  --c-ink: #2B2622;
+  --c-ink-2: #5E554C;
+  --c-line: #E2D6C4;
+  --c-line-soft: #ECE3D5;
+  --c-primary: #002E43;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #0066AB;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #7A5A3A;
+  --c-accent-3: #EDC8A3;
+
+  --logo-a: #0077C8; --logo-b: #002E43; --logo-c: #7A5A3A; --logo-d: #EDC8A3;
+  --logo-ink: #002E43; --logo-bg: #FBF7F0;
+
+  --font-head: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 3px;
+  --shadow: 0 1px 2px rgb(43 38 34 / .06), 0 8px 24px rgb(43 38 34 / .06);
+}
+[data-theme="sharedground"] .inverse {
+  --c-bg: #002E43; --c-surface: #0B3B52; --c-surface-2: #144862;
+  --c-ink: #FBF7F0; --c-ink-2: #C3CED3; --c-line: #24546B; --c-line-soft: #1A4A60;
+  --c-primary: #FBF7F0; --c-primary-ink: #002E43; --c-accent: #EDC8A3; --c-accent-ink: #002E43; --c-accent-2: #EDC8A3;
+  --logo-a: #EDC8A3; --logo-b: #FBF7F0; --logo-c: #C3CED3; --logo-d: #EDC8A3; --logo-ink: #FBF7F0; --logo-bg: #002E43;
+}

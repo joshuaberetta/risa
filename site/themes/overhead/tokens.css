@@ -1,0 +1,32 @@
+/* Theme C: Overhead. Imagery-room night, Kobo blues for the survey line, a magenta marker. */
+[data-theme="overhead"] {
+  --c-bg: #F3F5F6;
+  --c-surface: #E6EBEE;
+  --c-surface-2: #FFFFFF;
+  --c-ink: #0D1418;
+  --c-ink-2: #4B5862;
+  --c-line: #D2DADF;
+  --c-line-soft: #E1E7EA;
+  --c-primary: #0D1418;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #00599D;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #C2338F;
+  --c-accent-3: #92B4EC;
+  --c-night: #0D1418;
+
+  --logo-a: #C2338F; --logo-b: #0D1418; --logo-c: #00599D; --logo-d: #92B4EC;
+  --logo-ink: #0D1418; --logo-bg: #F3F5F6;
+
+  --font-head: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 4px;
+  --shadow: 0 1px 2px rgb(13 20 24 / .08), 0 8px 24px rgb(13 20 24 / .08);
+}
+[data-theme="overhead"] .inverse {
+  --c-bg: #0D1418; --c-surface: #152027; --c-surface-2: #1C2A33;
+  --c-ink: #F3F5F6; --c-ink-2: #A7B4BD; --c-line: #2A3943; --c-line-soft: #22313A;
+  --c-primary: #F3F5F6; --c-primary-ink: #0D1418; --c-accent: #2095F3; --c-accent-ink: #0D1418; --c-accent-2: #E25CB3;
+  --logo-a: #E25CB3; --logo-b: #F3F5F6; --logo-c: #2095F3; --logo-d: #92B4EC; --logo-ink: #F3F5F6; --logo-bg: #0D1418;
+}

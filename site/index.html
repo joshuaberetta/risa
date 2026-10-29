@@ -37,7 +37,7 @@
 
   <section class="hub-section hub-rule" id="themes"><div class="container">
     <h2>Directions</h2>
-    <p class="sub">All six use the same content, from the RISA SOP v2, RISA in Brief v2 and the consortium notes, and the same fictional sample site. Figures and dates marked “TBC” are placeholders. <b>Theme A is ready to review; B to F are in progress.</b></p>
+    <p class="sub">Each builds on colours the three owners already use (see <a href="palettes/index.html">Colour</a>). All six use the same content, from the RISA SOP v2, RISA in Brief v2 and the consortium notes, and the same fictional sample site. Figures and dates marked “TBC” are placeholders.</p>
     <div class="theme-cards" id="theme-cards"></div>
   </div></section>
 
@@ -68,14 +68,14 @@
 <script src="assets/themes.js"></script>
 <script src="assets/logos.js"></script>
 <script>
-  // Key colours per theme. Built themes copy their tokens.css; the others are draft palettes.
+  // Key colours per theme, copied from each tokens.css.
   const PALETTE = {
     briefing: ['#132A45', '#2160D8', '#56728F', '#9DB2C8', '#F2F3F1', '#FFFFFF'],
-    groundtruth: ['#16181D', '#E2EC3A', '#5E656E', '#C9CFD3', '#F4F4F0', '#FFFFFF'],
-    overhead: ['#0D1418', '#22C3D6', '#C2338F', '#3A4A52', '#E8EDEF', '#FFFFFF'],
-    streams: ['#1E2A3A', '#7C5CC4', '#2E9BB0', '#B0647A', '#F5F6F8', '#FFFFFF'],
-    sharedground: ['#2B2622', '#8C5A3C', '#C9B79C', '#6B6F8A', '#F4EFE6', '#FFFFFF'],
-    first72: ['#111317', '#5B3FD1', '#9C8CE8', '#E9E6F7', '#F6F6F4', '#FFFFFF'],
+    groundtruth: ['#16181D', '#E2EC3A', '#002E43', '#8A9099', '#E9E9E3', '#F4F4F0'],
+    overhead: ['#0D1418', '#00599D', '#2095F3', '#C2338F', '#92B4EC', '#F3F5F6'],
+    streams: ['#1E2A3A', '#06038D', '#2095F3', '#32A4A0', '#EEF0FA', '#FFFFFF'],
+    sharedground: ['#002E43', '#0066AB', '#EDC8A3', '#7A5A3A', '#F3EBDF', '#FBF7F0'],
+    first72: ['#111317', '#19458D', '#0E2550', '#92B4EC', '#DFF1F0', '#F6F6F4'],
   };
 
   document.getElementById('theme-cards').innerHTML = RISAThemes.map((t) => {
@@ -96,7 +96,7 @@
         <div class="title"><span class="letter">${t.letter}</span><h3>${t.name}</h3></div>
         <p class="tagline">${t.tagline}</p>
         <div class="strip" aria-hidden="true">${chips}</div>
-        <p class="meta"><b>Type:</b> ${t.fonts.head}${t.fonts.body !== t.fonts.head ? ' + ' + t.fonts.body : ''}${t.fonts.mono ? ' + ' + t.fonts.mono : ''} · <b>Paired logo:</b> ${logo.num} ${logo.name}${t.ready ? '' : ' · <b>Palette:</b> draft'}</p>
+        <p class="meta"><b>Type:</b> ${t.fonts.head}${t.fonts.body !== t.fonts.head ? ' + ' + t.fonts.body : ''}${t.fonts.mono ? ' + ' + t.fonts.mono : ''} · <b>Paired logo:</b> ${logo.num} ${logo.name}</p>
         <p class="meta"><b>Best for:</b> ${t.bestFor}</p>
         <div class="actions">${actions}</div>
       </div></article>`;
