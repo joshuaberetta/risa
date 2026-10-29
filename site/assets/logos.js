@@ -66,6 +66,16 @@
     <rect x="5" y="8" width="10" height="10" rx="1.5" fill="${B}"/>
     <circle cx="17" cy="52" r="6.5" fill="${A}"/>`);
 
+  // --- 5b. Flight line R: one flight path that draws the R of RISA ----------
+  // The white dashes along the line are photo-capture points; they drop out
+  // at small sizes, leaving a clean R. In lockups the mark is the R itself.
+  const FLIGHT_R = 'M15 57V9H35a12.5 12.5 0 0 1 0 25H23L46 57';
+  const flightR = () => svg(`
+    <path d="${FLIGHT_R}" fill="none" stroke="${B}" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="${FLIGHT_R}" fill="none" stroke="${BG}" stroke-width="2" stroke-dasharray="2.2 5.8"/>
+    <rect x="8" y="51" width="14" height="11" rx="1.8" fill="${B}"/>
+    <circle cx="48.5" cy="57" r="6.8" fill="${A}"/>`);
+
   // --- 6. Seal: a stamp of method, with room for an adopting authority -----
   let sealN = 0;
   function seal() {
@@ -122,6 +132,11 @@
       rationale: 'The back-and-forth pattern every mapping drone flies, from take-off (the square) to the drone (the dot). Anyone who has planned a flight recognises it, and it is easy to animate on screens.',
     },
     {
+      id: 'flightline-r', num: '5b', name: 'Flight line R', draw: flightR, wm: 'wm-barlow', initial: true,
+      summary: 'A variation of Flight line: one flight path that draws the R of RISA.',
+      rationale: 'The flight line, redrawn as a single path from take-off (the square) up the stem, round the bowl and out along the leg to the drone. The dashes along it are the photo-capture points. In the lockup the mark becomes the first letter, so it reads as RISA rather than a symbol next to a name, and at 16 px it is simply a strong R.',
+    },
+    {
       id: 'seal', num: 6, name: 'Seal', draw: seal, wm: 'wm-fraunces',
       summary: 'A stamp of method, with room for an adopting authority.',
       rationale: 'RISA is a standard, not an organisation, so the mark behaves like a seal: something a national authority applies to its own product to say “made with the RISA method”. Its centre is a small reticle. The ring of text is for print sizes; at small sizes the centre alone is used.',
@@ -148,6 +163,11 @@
     const logo = byId[id] || LOGOS[0];
     if (layout === 'mark') {
       return `<span class="risa-lockup risa-lockup--mark" data-logo-id="${logo.id}">${logo.draw()}</span>`;
+    }
+    if (logo.initial) {
+      // The mark stands in for the R of RISA.
+      return `<span class="risa-lockup risa-lockup--${layout} ${logo.wm} is-initial" data-logo-id="${logo.id}">
+        <span class="risa-wordmark"><b><span class="risa-initial">${logo.draw()}</span>ISA</b><small>Rapid Infrastructure <br>and Service Assessment</small></span></span>`;
     }
     const mark = logo.wordOnly && layout === 'horizontal' ? '' : logo.draw();
     return `<span class="risa-lockup risa-lockup--${layout} ${logo.wm}${logo.wordOnly ? ' is-word' : ''}" data-logo-id="${logo.id}">
@@ -183,6 +203,10 @@
   .wm-fraunces .risa-wordmark{font-family:'Fraunces',Georgia,serif}.wm-fraunces .risa-wordmark b{font-weight:600;letter-spacing:.02em}.wm-fraunces .risa-wordmark small{font-family:'Inter',system-ui,sans-serif}
   .wm-archivo .risa-wordmark{font-family:'Archivo',system-ui,sans-serif}.wm-archivo .risa-wordmark b{font-weight:800;letter-spacing:-.01em}
   .risa-lockup.is-word .risa-wordmark b{font-size:2.1em}
+  .risa-lockup.is-initial .risa-wordmark b{display:inline-flex;align-items:flex-end;font-size:2.3em}
+  .risa-initial{display:inline-block;line-height:0}
+  .risa-lockup .risa-initial .risa-mark{height:.93em;width:auto;margin:0 .02em -.05em -.07em}
+  .risa-lockup--stacked.is-initial .risa-wordmark b{font-size:3em}
   `;
   const style = document.createElement('style');
   style.textContent = css;
