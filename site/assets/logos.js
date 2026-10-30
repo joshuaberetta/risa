@@ -76,6 +76,34 @@
     <rect x="8" y="51" width="14" height="11" rx="1.8" fill="${B}"/>
     <circle cx="48.5" cy="57" r="6.8" fill="${A}"/>`);
 
+  // --- 10. Grid track: logo 7's grid with a flight track drawing the R -------
+  // From the October sketches: a 3 x 3 grid, a take-off square, the track up
+  // the stem, round the bowl and through an S-bend to the drone. A casing in
+  // the background colour keeps the track clear of the grid in one colour.
+  const TRACK = 'M12 44V18Q12 12 18 12H30C38 12 41 17 41 22C41 27 37 30 31 30H25C21 30 20 33 21 36C22 39 27 40 31 41L34 42';
+  const gtGrid = (o, i) => `<rect width="48" height="48" fill="none" stroke="${A}" stroke-width="${o}"/><path d="M16 0V48M32 0V48M0 16H48M0 32H48" stroke="${A}" stroke-width="${i}"/>`;
+  const gtTrack = (w) => `<path d="${TRACK}" fill="none" stroke="${BG}" stroke-width="${w + 3}" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="${TRACK}" fill="none" stroke="${B}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="8" y="41" width="8" height="8" rx="1" fill="${B}" stroke="${BG}" stroke-width="1.5"/>`;
+  // Flat: the grid with a dashed layer offset behind it.
+  const gridtrack = () => svg(`<g transform="translate(5 11)">
+    <path d="M6 -6H54V42" fill="none" stroke="${A}" stroke-width="2.2" stroke-dasharray="4 3.2"/>
+    <path d="M0 0L6 -6M48 0L54 -6M48 48L54 42" stroke="${A}" stroke-width="2"/>
+    ${gtGrid(3.2, 2.2)}${gtTrack(4.6)}<circle cx="36.5" cy="42" r="4.6" fill="${A}" stroke="${BG}" stroke-width="1.5"/></g>`);
+  // Layered: the same plate in isometric view on two layer outlines.
+  const K = 0.866, TX = 46, TY = 4;
+  const iso = (x, y) => [TX + (x - y) * K, TY + (x + y) * 0.5];
+  function gridtrackLayers() {
+    const plate = (dy) => {
+      const [lx, ly] = iso(0, 48), [bx, by] = iso(48, 48), [rx, ry] = iso(48, 0);
+      return `<path d="M${lx.toFixed(1)} ${(ly + dy - 6).toFixed(1)}V${(ly + dy).toFixed(1)}L${bx.toFixed(1)} ${(by + dy).toFixed(1)}L${rx.toFixed(1)} ${(ry + dy).toFixed(1)}V${(ry + dy - 6).toFixed(1)}" fill="none" stroke="${B}" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    };
+    const [dx, dy] = iso(36.5, 42);
+    return `<svg class="risa-mark" viewBox="0 0 92 80" aria-hidden="true">${plate(12)}${plate(23)}
+      <g transform="matrix(${K} 0.5 -${K} 0.5 ${TX} ${TY})"><rect width="48" height="48" fill="${BG}"/>${gtGrid(3.6, 2.4)}${gtTrack(5)}</g>
+      <circle cx="${dx.toFixed(1)}" cy="${(dy - 1).toFixed(1)}" r="4.6" fill="${A}" stroke="${BG}" stroke-width="1.5"/></svg>`;
+  }
+
   // --- 6. Seal: a stamp of method, with room for an adopting authority -----
   let sealN = 0;
   function seal() {
@@ -147,12 +175,24 @@
       rationale: 'Maps are read cell by cell. The highlighted square with a tick is ground truth: one place that someone has actually checked. It is bold, simple and unmistakably cartographic.',
     },
     {
+      id: 'gridtrack', num: 10, name: 'Grid track', draw: gridtrack, wm: 'wm-public',
+      summary: 'Logos 5 and 7 combined: a flight track drawing the R across a map grid.',
+      rationale: 'From the October sketches. The grid square (logo 7) is the site, cell by cell; the flight line (logo 5) becomes one track that draws the R of RISA, from the take-off square up the stem, round the bowl and through an S-bend to the drone. The dashed outline behind is the next layer of data. It reads as a map and as a letter, and holds up in one colour.',
+    },
+    {
+      id: 'gridtrack-layers', num: '10b', name: 'Grid track, layered', draw: gridtrackLayers, wm: 'wm-public',
+      summary: 'Grid track as the top of a stack of map layers.',
+      rationale: 'The second sketch: the same grid and track on the top plate of a GIS layer stack, seen in isometric view. The layers underneath are the inputs (imagery, field observation, GIS) that the flight builds on. More illustrative than the flat version, so it suits covers, slides and the website more than a 16 px favicon.',
+    },
+    {
       id: 'wordmark', num: 8, name: 'Wordmark', draw: wordmark, wm: 'wm-public', wordOnly: true,
       summary: 'Type only, with an R tile for favicons.',
       rationale: 'The quietest option, and the easiest to hand over. The name does the work; the small square on the R tile is the one point of colour. It sits under a national authority’s logo without competing with it.',
     },
   ];
 
+  // Keep variants next to their parent: 5, 5b, ... 10, 10b.
+  LOGOS.sort((x, y) => parseFloat(x.num) - parseFloat(y.num));
   const byId = Object.fromEntries(LOGOS.map((l) => [l.id, l]));
   const WORDS = '<b>RISA</b><small>Rapid Infrastructure <br>and Service Assessment</small>';
 
