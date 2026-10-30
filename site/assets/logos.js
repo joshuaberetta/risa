@@ -90,19 +90,127 @@
     <path d="M6 -6H54V42" fill="none" stroke="${A}" stroke-width="2.2" stroke-dasharray="4 3.2"/>
     <path d="M0 0L6 -6M48 0L54 -6M48 48L54 42" stroke="${A}" stroke-width="2"/>
     ${gtGrid(3.2, 2.2)}${gtTrack(4.6)}<circle cx="36.5" cy="42" r="4.6" fill="${A}" stroke="${BG}" stroke-width="1.5"/></g>`);
-  // Layered: the same plate in isometric view on two layer outlines.
-  const K = 0.866, TX = 46, TY = 4;
-  const iso = (x, y) => [TX + (x - y) * K, TY + (x + y) * 0.5];
-  function gridtrackLayers() {
-    const plate = (dy) => {
-      const [lx, ly] = iso(0, 48), [bx, by] = iso(48, 48), [rx, ry] = iso(48, 0);
-      return `<path d="M${lx.toFixed(1)} ${(ly + dy - 6).toFixed(1)}V${(ly + dy).toFixed(1)}L${bx.toFixed(1)} ${(by + dy).toFixed(1)}L${rx.toFixed(1)} ${(ry + dy).toFixed(1)}V${(ry + dy - 6).toFixed(1)}" fill="none" stroke="${B}" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>`;
-    };
-    const [dx, dy] = iso(36.5, 42);
-    return `<svg class="risa-mark" viewBox="0 0 92 80" aria-hidden="true">${plate(12)}${plate(23)}
-      <g transform="matrix(${K} 0.5 -${K} 0.5 ${TX} ${TY})"><rect width="48" height="48" fill="${BG}"/>${gtGrid(3.6, 2.4)}${gtTrack(5)}</g>
-      <circle cx="${dx.toFixed(1)}" cy="${(dy - 1).toFixed(1)}" r="4.6" fill="${A}" stroke="${BG}" stroke-width="1.5"/></svg>`;
+  // Layered: the same plate in perspective on a stack of layer outlines.
+  // Fully parameterised so it can be tuned in logos/studio.html; the defaults
+  // reproduce the sketch. Settings persist in localStorage and can be shared
+  // with ?gt=<code> (base64url JSON of the values that differ) or ?gt=reset.
+  const GT_DEFAULTS = {
+    angle: 45, tilt: 0.577, mirror: false,                 // plate rotation, vertical squash, R reflected
+    cells: 3, frameW: 3.6, gridW: 2.4,                     // grid
+    trackX: 0, trackY: 0, trackScale: 1, trackW: 5,        // flight path position, size, weight
+    leg: 'curve', casing: true, takeoff: 8, dot: 4.6,      // leg shape, casing, take-off square, drone dot
+    layers: 2, layerDX: 0, layerDY: 11.5, layerW: 3.2,     // layers: count, offset of each, weight
+    layerStyle: 'bracket', tick: 6, connectors: false,     // bracket (open outline) or plates (stacked)
+    layerDash: false,
+    gridColour: 'A', trackColour: 'B', dotColour: 'A', layerColour: 'B',
+  };
+  const GT_KEY = 'risa-gridtrack';
+  const enc = (o) => btoa(JSON.stringify(o)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  const dec = (c) => JSON.parse(atob(c.replace(/-/g, '+').replace(/_/g, '/')));
+  const gtDiff = (p) => Object.fromEntries(Object.entries(p).filter(([k, v]) => k in GT_DEFAULTS && GT_DEFAULTS[k] !== v));
+  const gtStored = () => { try { return JSON.parse(localStorage.getItem(GT_KEY) || '{}'); } catch { return {}; } };
+  try {
+    const q = new URLSearchParams(location.search).get('gt');
+    if (q === 'reset') localStorage.removeItem(GT_KEY);
+    else if (q) localStorage.setItem(GT_KEY, JSON.stringify(gtDiff(Object.assign({}, GT_DEFAULTS, dec(q)))));
+  } catch { /* ignore a malformed code */ }
+  const PAINT = { A, B, C, D };
+
+  // The R's leg: the sketches' S-bend, or a straight diagonal like a letter R.
+  const LEGS = {
+    curve: { d: TRACK, end: [36.5, 42] },
+    straight: { d: 'M12 44V18Q12 12 18 12H30C38 12 41 17 41 22C41 27 37 30 31 30H23L35 44', end: [37, 46] },
+  };
+  function gridtrackLayers(params) {
+    const p = Object.assign({}, GT_DEFAULTS, params === undefined ? gtStored() : params);
+    const leg = LEGS[p.leg] || LEGS.curve;
+    const paint = (k) => PAINT[k] || B;
+    // Plate transform: rotate, then scale so the default is the classic isometric view.
+    const t = (p.angle * Math.PI) / 180, sx = 1.2247, sy = sx * p.tilt;
+    const a = sx * Math.cos(t), c = -sx * Math.sin(t), b = sy * Math.sin(t), d = sy * Math.cos(t);
+    const P = (x, y) => [a * (x - 24) + c * (y - 24), b * (x - 24) + d * (y - 24)];
+    // Flight path transform inside the plate: mirror and scale about the grid centre, then offset.
+    const m = p.mirror ? -1 : 1, ts = p.trackScale;
+    const T = (x, y) => [24 + p.trackX + m * ts * (x - 24), 24 + p.trackY + ts * (y - 24)];
+    const trackT = `translate(${24 + p.trackX} ${24 + p.trackY}) scale(${m * ts} ${ts}) translate(-24 -24)`;
+
+    const corners = [P(0, 0), P(48, 0), P(48, 48), P(0, 48)];
+    const f = (n) => n.toFixed(2);
+    const lc = paint(p.layerColour);
+    const dash = p.layerDash ? ` stroke-dasharray="${(p.layerW * 1.6).toFixed(1)} ${(p.layerW * 1.2).toFixed(1)}"` : '';
+    const off = (k) => [p.layerDX * k, p.layerDY * k];
+    let layers = '';
+    if (p.layerStyle === 'plates') {
+      // Stacked plates, drawn back to front so nearer plates hide the ones behind.
+      const poly = (k) => corners.map(([x, y]) => { const [ox, oy] = off(k); return [x + ox, y + oy]; });
+      const conn = (k) => (p.connectors ? poly(k).map(([x, y], i) => { const [x2, y2] = poly(k + 1)[i]; return `M${f(x)} ${f(y)}L${f(x2)} ${f(y2)}`; }).join('') : '');
+      for (let k = p.layers; k >= 1; k--) {
+        layers += `<path d="M${poly(k).map(([x, y]) => `${f(x)} ${f(y)}`).join('L')}Z" fill="${BG}" stroke="${lc}" stroke-width="${p.layerW}" stroke-linejoin="round"${dash}/>`;
+        const c2 = conn(k - 1);
+        if (c2) layers += `<path d="${c2}" stroke="${lc}" stroke-width="${p.layerW}" stroke-linecap="round"/>`;
+      }
+    } else {
+      // Brackets: the outline of the plate's far side from the offset direction, with
+      // short ticks back towards the plate at each end (the first sketch).
+      const len = Math.hypot(p.layerDX, p.layerDY) || 1, ux = p.layerDX / len, uy = p.layerDY / len;
+      // Corners furthest along the offset direction form the visible edge.
+      const score = corners.map(([x, y]) => x * ux + y * uy);
+      const side = (q) => q[0] * -uy + q[1] * ux; // position across the offset direction
+      const ends = [0, 1, 2, 3].sort((i, j) => side(corners[i]) - side(corners[j]));
+      const lo = ends[0], hi = ends[3];
+      const walk = (dir) => { const out = [lo]; let i = lo; while (i !== hi) { i = (i + dir + 4) % 4; out.push(i); } return out; };
+      const [w1, w2] = [walk(1), walk(-1)];
+      const sum = (w) => w.reduce((t2, i) => t2 + score[i], 0) / w.length;
+      const chain = (sum(w1) >= sum(w2) ? w1 : w2).map((i) => corners[i]);
+      for (let k = p.layers; k >= 1; k--) {
+        const [ox, oy] = off(k);
+        const pts = chain.map(([x, y]) => `${f(x + ox)} ${f(y + oy)}`);
+        const [x0, y0] = chain[0], [x1, y1] = chain[chain.length - 1];
+        const tx = -ux * p.tick, ty = -uy * p.tick;
+        layers += `<path d="M${f(x0 + ox + tx)} ${f(y0 + oy + ty)}L${pts.join('L')}L${f(x1 + ox + tx)} ${f(y1 + oy + ty)}" fill="none" stroke="${lc}" stroke-width="${p.layerW}" stroke-linejoin="round" stroke-linecap="round"${dash}/>`;
+      }
+    }
+
+    const n = Math.max(1, Math.round(p.cells)), lines = [];
+    for (let i = 1; i < n; i++) { const v = f((48 * i) / n); lines.push(`M${v} 0V48M0 ${v}H48`); }
+    const g = paint(p.gridColour), tr = paint(p.trackColour);
+    const plate = `<g transform="matrix(${f(a)} ${f(b)} ${f(c)} ${f(d)} 0 0)">
+        <rect width="48" height="48" transform="translate(-24 -24)" fill="${BG}"/>
+        <g transform="translate(-24 -24)">
+          <rect width="48" height="48" fill="none" stroke="${g}" stroke-width="${p.frameW}"/>
+          ${lines.length ? `<path d="${lines.join('')}" stroke="${g}" stroke-width="${p.gridW}"/>` : ''}
+          <g transform="${trackT}">
+            ${p.casing ? `<path d="${leg.d}" fill="none" stroke="${BG}" stroke-width="${p.trackW / ts + 3}" stroke-linecap="round" stroke-linejoin="round"/>` : ''}
+            <path d="${leg.d}" fill="none" stroke="${tr}" stroke-width="${p.trackW / ts}" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="${12 - p.takeoff / 2}" y="${45 - p.takeoff / 2}" width="${p.takeoff}" height="${p.takeoff}" rx="1" fill="${tr}"${p.casing ? ` stroke="${BG}" stroke-width="1.5"` : ''}/>
+          </g>
+        </g></g>`;
+    const [ex, ey] = P(...T(...leg.end));
+    const dot = p.dot > 0 ? `<circle cx="${f(ex)}" cy="${f(ey - 1)}" r="${p.dot}" fill="${paint(p.dotColour)}"${p.casing ? ` stroke="${BG}" stroke-width="1.5"` : ''}/>` : '';
+
+    // Fit the view to the drawing.
+    const pad = Math.max(p.frameW, p.layerW) / 2 + 1;
+    const all = [];
+    for (let k = 0; k <= p.layers; k++) corners.forEach(([x, y]) => { const [ox, oy] = off(k); all.push([x + ox, y + oy]); });
+    const xs = all.map((q) => q[0]), ys = all.map((q) => q[1]);
+    const x0 = Math.min(...xs, ex - p.dot) - pad, x1 = Math.max(...xs, ex + p.dot) + pad;
+    const y0 = Math.min(...ys, ey - p.dot - 1) - pad, y1 = Math.max(...ys, ey + p.dot) + pad;
+    return `<svg class="risa-mark" viewBox="${f(x0)} ${f(y0)} ${f(x1 - x0)} ${f(y1 - y0)}" aria-hidden="true">${layers}${plate}${dot}</svg>`;
   }
+  // Starting points matching the three sketches.
+  const GT_PRESETS = {
+    isometric: { label: 'Isometric, layers below (sketch 1)', values: {} },
+    flat: { label: 'Flat grid, dashed layer behind (sketch 2)', values: { angle: 0, tilt: 0.8165, layers: 1, layerStyle: 'plates', layerDX: 7, layerDY: -7, connectors: true, layerDash: true, layerColour: 'A', layerW: 2.2 } },
+    faceon: { label: 'Face-on, layers behind, mirrored (sketch 3)', values: { angle: 0, tilt: 0.8165, mirror: true, leg: 'straight', layers: 2, layerStyle: 'plates', layerDX: 11, layerDY: -11, connectors: true, layerColour: 'A' } },
+  };
+  const gridtrackApi = {
+    defaults: GT_DEFAULTS, presets: GT_PRESETS, draw: gridtrackLayers,
+    get: () => Object.assign({}, GT_DEFAULTS, gtStored()),
+    isCustom: () => Object.keys(gtDiff(Object.assign({}, GT_DEFAULTS, gtStored()))).length > 0,
+    save: (p) => localStorage.setItem(GT_KEY, JSON.stringify(gtDiff(p))),
+    reset: () => localStorage.removeItem(GT_KEY),
+    diff: gtDiff, encode: enc, decode: dec,
+  };
 
   // --- 6. Seal: a stamp of method, with room for an adopting authority -----
   let sealN = 0;
@@ -199,17 +307,17 @@
   /**
    * layout: 'horizontal' | 'stacked' | 'mark'
    */
-  function render(id, layout = 'horizontal') {
+  function render(id, layout = 'horizontal', params) {
     const logo = byId[id] || LOGOS[0];
     if (layout === 'mark') {
-      return `<span class="risa-lockup risa-lockup--mark" data-logo-id="${logo.id}">${logo.draw()}</span>`;
+      return `<span class="risa-lockup risa-lockup--mark" data-logo-id="${logo.id}">${logo.draw(params)}</span>`;
     }
     if (logo.initial) {
       // The mark stands in for the R of RISA.
       return `<span class="risa-lockup risa-lockup--${layout} ${logo.wm} is-initial" data-logo-id="${logo.id}">
         <span class="risa-wordmark"><b><span class="risa-initial">${logo.draw()}</span>ISA</b><small>Rapid Infrastructure <br>and Service Assessment</small></span></span>`;
     }
-    const mark = logo.wordOnly && layout === 'horizontal' ? '' : logo.draw();
+    const mark = logo.wordOnly && layout === 'horizontal' ? '' : logo.draw(params);
     return `<span class="risa-lockup risa-lockup--${layout} ${logo.wm}${logo.wordOnly ? ' is-word' : ''}" data-logo-id="${logo.id}">
       ${mark}<span class="risa-wordmark">${WORDS}</span></span>`;
   }
@@ -252,5 +360,5 @@
   style.textContent = css;
   document.head.appendChild(style);
 
-  window.RISALogos = { list: LOGOS, byId, render, hydrate };
+  window.RISALogos = { list: LOGOS, byId, render, hydrate, gridtrack: gridtrackApi };
 })();

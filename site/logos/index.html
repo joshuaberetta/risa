@@ -67,7 +67,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="hub-top"><div class="container">
   <a class="hub-brand" href="../index.html">RISA <span>Design review</span></a>
-  <nav aria-label="Review pages"><a href="../index.html">Overview</a><a href="index.html" aria-current="page">Logos</a><a href="../palettes/index.html">Colour</a></nav>
+  <nav aria-label="Review pages"><a href="../index.html">Overview</a><a href="index.html" aria-current="page">Logos</a><a href="studio.html">Studio</a><a href="../palettes/index.html">Colour</a></nav>
 </div></header>
 
 <main id="main">
@@ -102,7 +102,7 @@
         <div><span class="lg-num">Concept ${l.num}</span><h2>${l.name}</h2><p class="summary">${l.summary}</p></div>
         <div><p class="rationale">${l.rationale}</p>
           <p class="paired">${paired ? `Paired by default with ${paired}.` : 'Not paired with a theme by default, but works with all of them.'}</p>
-          <div class="lg-tools">${tryIn}<button class="hbtn" type="button" data-download="${l.id}">Download SVG mark</button></div></div>
+          <div class="lg-tools">${tryIn}<button class="hbtn" type="button" data-download="${l.id}">Download SVG mark</button>${l.id === 'gridtrack-layers' ? '<a class="hbtn hbtn--dark" href="studio.html">Fine-tune in the studio →</a>' : ''}</div></div>
       </div>
       <div class="lg-grid">
         <figure class="lg-cell"><div class="lg-stage" data-mark-source="${l.id}">${L(l.id, 'horizontal', 'font-size:30px')}</div><figcaption>Primary lockup</figcaption></figure>

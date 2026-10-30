@@ -29,6 +29,7 @@ Any static server works. Pages use relative paths.
 | `site/themes/<id>/deployment.html?d=<id>` | One profile per deployment: key facts, locator map, story, lessons, products, toolbox items used |
 | `site/themes/<id>/product.html` | The three-page RISA product (map, key findings, hotspot) and a working mock of the interactive viewer |
 | `site/themes/<id>/collateral.html` | RISA in Brief (A4 two-pager), ToT/SIMEX slides, workshop stand, field kit (ADAK case label, ID card, hi-vis tabard, KoboCollect form), badge, social posts, ToT certificate, email signature |
+| `site/logos/studio.html` | Studio for the chosen logo, 10b Grid track, layered: presets from the three sketches, then angle, tilt, mirror, grid, flight-path position and size, leg shape, layers (brackets or stacked plates, offset, connectors, dashes) and colours. Apply across the site, share as a link (`?gt=<code>`), copy the settings or download the SVG |
 | `site/logos/index.html` | Eight logo concepts with rationale, greyscale and one-colour tests, imagery, and co-branding |
 | `site/palettes/index.html` | The reserved status set with greyscale and colour-vision simulations, partner colours, theme palettes with WCAG contrast |
 | `site/results/index.html` | Organisers only (not linked from the hub): paste the review doc to tally everyone's top three picks |

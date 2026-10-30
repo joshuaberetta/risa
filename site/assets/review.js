@@ -64,6 +64,9 @@
       const url = new URL(location.href);
       url.search = ''; url.hash = ''; url.searchParams.set('logo', effective());
       if (params.get('d')) url.searchParams.set('d', params.get('d'));
+      // A tuned version of logo 10b travels with the link.
+      const G = window.RISALogos.gridtrack;
+      if (effective() === 'gridtrack-layers' && G.isCustom()) url.searchParams.set('gt', G.encode(G.diff(G.get())));
       try { await navigator.clipboard.writeText(url.toString()); e.target.textContent = 'Copied'; }
       catch { prompt('Copy this link', url.toString()); }
       setTimeout(() => (e.target.textContent = 'Copy link'), 1600);

@@ -8,7 +8,7 @@
  */
 window.RISAThemes = [
   {
-    id: 'briefing', letter: 'A', name: 'Briefing', defaultLogo: 'footprint', ready: true,
+    id: 'briefing', letter: 'A', name: 'Briefing', defaultLogo: 'gridtrack-layers', ready: true,
     tagline: 'Calm, institutional and quick to read. Built to sit next to OSOCC and cluster products without fuss.',
     blend: 'A deep navy, the colour family all three owners share (HI #002E43, Kobo #003870, MapAction #19458D), and a single cobalt blue do all the brand work, on white and a cool stone. There are no reds, ambers or greens in the brand, so the status colours on the map always mean status. Public Sans is a plain, open government typeface. IBM Plex Mono carries coordinates, dates and data labels.',
     fonts: { head: 'Public Sans', body: 'Public Sans', mono: 'IBM Plex Mono' },
@@ -25,7 +25,7 @@ window.RISAThemes = [
     ],
   },
   {
-    id: 'groundtruth', letter: 'B', name: 'Ground Truth', defaultLogo: 'route', ready: true,
+    id: 'groundtruth', letter: 'B', name: 'Ground Truth', defaultLogo: 'gridtrack-layers', ready: true,
     tagline: 'Field-manual utility. Carbon and signal yellow, condensed type and labels that look at home on a Pelican case.',
     blend: 'Takes its cues from the ADAK kit and safety gear rather than from a partner: carbon black, a signal yellow and steel grey. HI’s deep navy (#002E43) is the link colour. The yellow is a greenish hi-vis, well away from the amber that means “restricted”, and it stays in the frame and on kit, never on the map. On light backgrounds the logo uses a darkened signal yellow (#7A8200), so the mark keeps its accent at 3.8:1. Barlow Condensed reads at a distance and survives a bad photocopy.',
     fonts: { head: 'Barlow Condensed', body: 'Barlow', mono: 'IBM Plex Mono' },
@@ -42,7 +42,7 @@ window.RISAThemes = [
     ],
   },
   {
-    id: 'overhead', letter: 'C', name: 'Overhead', defaultLogo: 'overlap', ready: true, darkHero: true,
+    id: 'overhead', letter: 'C', name: 'Overhead', defaultLogo: 'gridtrack-layers', ready: true, darkHero: true,
     tagline: 'Aerial-imagery led. A nadir grid, flight lines and crosshairs on a dark imagery-room hero.',
     blend: 'Built around the orthomosaic. Dark imagery tones for the hero, Kobo’s blues (#00599D on light, #2095F3 on dark) as the survey line, MapAction’s sky blue (#92B4EC) for grids, and one magenta marker that can’t be mistaken for any status colour. Space Grotesk and IBM Plex Mono give it an instrument-panel feel.',
     fonts: { head: 'Space Grotesk', body: 'Inter', mono: 'IBM Plex Mono' },
@@ -59,7 +59,7 @@ window.RISAThemes = [
     ],
   },
   {
-    id: 'streams', letter: 'D', name: 'Three Streams', defaultLogo: 'confluence', ready: true,
+    id: 'streams', letter: 'D', name: 'Three Streams', defaultLogo: 'gridtrack-layers', ready: true,
     tagline: 'Three inputs, one product. Imagery, field observation and GIS each get a colour and converge.',
     blend: 'One colour per input, and so one per owner: HI indigo (#06038D) for aerial imagery from Atlas, Kobo blue (#2095F3) for field observation, MapAction teal (#32A4A0) for GIS. Each partner is equally visible without owning the brand, and the three meet in a neutral ink. Stream colours are for graphics and large type; darker text versions keep body copy at AA.',
     fonts: { head: 'Sora', body: 'Inter', mono: 'IBM Plex Mono' },
@@ -76,7 +76,7 @@ window.RISAThemes = [
     ],
   },
   {
-    id: 'sharedground', letter: 'E', name: 'Shared Ground', defaultLogo: 'seal', ready: true,
+    id: 'sharedground', letter: 'E', name: 'Shared Ground', defaultLogo: 'gridtrack-layers', ready: true,
     tagline: 'Localisation first. Warm, neutral and quiet, built so any national authority can put its name first.',
     blend: 'Warm paper and ink, with HI’s deep navy (#002E43) for structure, a slightly darkened HI blue for links and HI’s sand (#EDC8A3) as the warm accent. It is deliberately low-key, so a national authority’s own colours can sit on top. Fraunces gives the seal and headings a considered, institutional voice.',
     fonts: { head: 'Fraunces', body: 'Inter', mono: 'IBM Plex Mono' },
@@ -93,7 +93,7 @@ window.RISAThemes = [
     ],
   },
   {
-    id: 'first72', letter: 'F', name: 'First 72', defaultLogo: 'gridsquare', ready: true,
+    id: 'first72', letter: 'F', name: 'First 72', defaultLogo: 'gridtrack-layers', ready: true,
     tagline: 'Time-critical. A strong timeline from trigger to update, with urgency but no alarm.',
     blend: 'MapAction’s navy (#19458D), sky (#92B4EC) and pale teal (#DFF1F0) on near-white, with black type. Urgency comes from structure (a running timeline, big numbers, hard edges) rather than from red. Archivo is compact and strong at display sizes.',
     fonts: { head: 'Archivo', body: 'Archivo', mono: 'IBM Plex Mono' },
@@ -110,7 +110,7 @@ window.RISAThemes = [
     ],
   },
   {
-    id: 'handbook', letter: 'G', name: 'Handbook', defaultLogo: 'flightline', ready: true,
+    id: 'handbook', letter: 'G', name: 'Handbook', defaultLogo: 'gridtrack-layers', ready: true,
     tagline: 'Plain documentation. A contents sidebar, one reading column, underlined links and tables. Nothing decorative.',
     blend: 'Black text on white with one link blue (Kobo’s dark blue, #00599D) and government greys. Source Sans 3 throughout. It looks like a manual you trust because it doesn’t try to sell: headings, paragraphs, numbered steps and tables.',
     fonts: { head: 'Source Sans 3', body: 'Source Sans 3', mono: 'IBM Plex Mono' },
@@ -125,7 +125,7 @@ window.RISAThemes = [
     ],
   },
   {
-    id: 'report', letter: 'H', name: 'Field Report', defaultLogo: 'flightline', ready: true,
+    id: 'report', letter: 'H', name: 'Field Report', defaultLogo: 'gridtrack-layers', ready: true,
     tagline: 'Like a printed report. Serif text in columns, thin rules, figures with captions and sources as footnotes.',
     blend: 'Ink on warm paper with MapAction navy (#19458D) as the only colour, used for links, figure numbers and the product band. Source Serif 4 for text and headings, Source Sans 3 for small labels. It borrows the habits of a well-made NGO report: numbered figures, captions, footnoted sources.',
     fonts: { head: 'Source Serif 4', body: 'Source Serif 4', mono: 'IBM Plex Mono' },
@@ -140,7 +140,7 @@ window.RISAThemes = [
     ],
   },
   {
-    id: 'noticeboard', letter: 'I', name: 'Notice Board', defaultLogo: 'flightline', ready: true,
+    id: 'noticeboard', letter: 'I', name: 'Notice Board', defaultLogo: 'gridtrack-layers', ready: true,
     tagline: 'A practical agency page. Arial, thin-bordered boxes, documents listed with dates and formats.',
     blend: 'HI deep navy (#002E43) for the header and headings, a darkened HI blue for links, and cool greys for boxes. Arial throughout, so it renders the same everywhere, including on old laptops in an OSOCC. Dense and functional, like ReliefWeb or a UN agency product page.',
     fonts: { head: 'Arial', body: 'Arial', mono: 'IBM Plex Mono' },

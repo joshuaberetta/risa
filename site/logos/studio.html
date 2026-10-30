@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RISA · Logo studio</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700;800&family=Sora:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+  <link rel="stylesheet" href="../assets/base.css">
+  <link rel="stylesheet" href="../themes/briefing/tokens.css">
+  <link rel="stylesheet" href="../themes/groundtruth/tokens.css">
+  <link rel="stylesheet" href="../themes/overhead/tokens.css">
+  <link rel="stylesheet" href="../themes/streams/tokens.css">
+  <link rel="stylesheet" href="../themes/sharedground/tokens.css">
+  <link rel="stylesheet" href="../themes/first72/tokens.css">
+  <link rel="stylesheet" href="../themes/handbook/tokens.css">
+  <link rel="stylesheet" href="../themes/report/tokens.css">
+  <link rel="stylesheet" href="../themes/noticeboard/tokens.css">
+  <link rel="stylesheet" href="../assets/hub.css">
+  <link rel="icon" href="../assets/favicon.svg">
+  <style>
+    .st { display: grid; grid-template-columns: 340px 1fr; gap: 2rem; align-items: start; padding-block: 2rem 4rem; }
+    .st-panel { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; padding: 1.2rem 1.3rem; }
+    .st-panel h2 { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--h-ink-2); margin: 1.3rem 0 .6rem; font-weight: 600; }
+    .st-panel h2:first-child { margin-top: 0; }
+    .st-presets { display: grid; gap: .4rem; }
+    .st-presets button { text-align: left; }
+    .st-row { display: grid; grid-template-columns: 7.2rem 1fr 3rem; gap: .6rem; align-items: center; font-size: 13.5px; color: var(--h-ink); padding-block: .22rem; }
+    .st-row input[type=range] { width: 100%; accent-color: var(--h-ink); }
+    .st-row output { font: 12px 'IBM Plex Mono', monospace; text-align: right; color: var(--h-ink-2); }
+    .st-row select { font-size: 13px; padding: .25rem .3rem; border: 1px solid var(--h-line); border-radius: 6px; background: #fff; grid-column: 2 / 4; }
+    .st-check { display: flex; align-items: center; gap: .5rem; font-size: 13.5px; color: var(--h-ink); padding-block: .25rem; }
+    .st-actions { display: grid; gap: .45rem; margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--h-line); }
+    .st-actions .hbtn { justify-content: center; }
+    .st-status { font-size: 12.5px; margin-top: .6rem; color: var(--h-ink-2); min-height: 1.2em; }
+    .st-view { display: grid; gap: 1rem; min-width: 0; }
+    .st-bar { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; font-size: 13.5px; }
+    .st-bar select { font-size: 13.5px; padding: .35rem .5rem; border: 1px solid var(--h-line); border-radius: 8px; background: #fff; }
+    .st-hero { display: grid; place-items: center; min-height: 420px; background: var(--c-bg); border: 1px solid var(--h-line); border-radius: 12px; padding: 2rem; position: relative; }
+    .st-hero .big { height: 340px; }
+    .st-hero .big svg { height: 100%; width: auto; display: block; }
+    .st-grid-bg { background-image: linear-gradient(rgb(0 0 0 / .04) 1px, transparent 1px), linear-gradient(90deg, rgb(0 0 0 / .04) 1px, transparent 1px); background-size: 20px 20px; }
+    .st-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .st-tile { margin: 0; }
+    .st-tile > div { overflow: hidden; display: flex; align-items: center; justify-content: center; gap: 1.4rem; min-height: 150px; padding: 1.4rem; background: var(--c-bg); border: 1px solid var(--h-line); border-radius: 12px; }
+    .st-tile figcaption { font-size: 12.5px; margin-top: .45rem; }
+    .st-tile--wide { grid-column: span 2; }
+    .st-tile .inverse { background: var(--c-bg); border-color: transparent; }
+    .st-mono { --logo-a: #16181D; --logo-b: #16181D; --logo-c: #16181D; --logo-d: #16181D; --logo-ink: #16181D; }
+    .st-sizes { align-items: flex-end !important; }
+    .st-sizes span { display: block; }
+    .st-tab { display: flex; gap: .45rem; align-items: center; background: #EDEDEA; border-radius: 8px 8px 0 0; padding: .45rem .7rem; font: 500 12px Inter, sans-serif; color: var(--h-ink); }
+    .st-tab span { width: 16px; height: 16px; display: block; }
+    .st-code { font: 12px 'IBM Plex Mono', monospace; background: #F3F2EE; border-radius: 8px; padding: .8rem 1rem; white-space: pre-wrap; word-break: break-all; color: var(--h-ink); }
+    @media (max-width: 980px) { .st { grid-template-columns: 1fr; } .st-panel { position: static; max-height: none; } .st-tiles { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body class="hub">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hub-top"><div class="container">
+  <a class="hub-brand" href="../index.html">RISA <span>Design review</span></a>
+  <nav aria-label="Review pages"><a href="../index.html">Overview</a><a href="index.html">Logos</a><a href="studio.html" aria-current="page">Studio</a><a href="../palettes/index.html">Colour</a></nav>
+</div></header>
+
+<main id="main" class="container">
+  <section class="hub-hero" style="padding-block:3rem 1rem">
+    <p class="hub-kicker">Logo studio · 10b Grid track, layered</p>
+    <h1>Fine-tune the chosen logo.</h1>
+    <p class="lede">Start from one of the sketches, then adjust the angle, mirror the R, move it inside the grid and change the layers. <b>Apply across the site</b> shows your version on every page; <b>Copy settings</b> gives the values to make it final.</p>
+  </section>
+
+  <div class="st">
+    <aside class="st-panel" aria-label="Logo settings">
+      <h2>Start from a sketch</h2>
+      <div class="st-presets" id="presets"></div>
+      <div id="controls"></div>
+      <div class="st-actions">
+        <button class="hbtn hbtn--dark" type="button" id="apply">Apply across the site</button>
+        <button class="hbtn" type="button" id="copy">Copy settings</button>
+        <button class="hbtn" type="button" id="share">Copy share link</button>
+        <button class="hbtn" type="button" id="svg">Download SVG</button>
+        <button class="hbtn" type="button" id="reset">Reset to the original</button>
+        <p class="st-status" id="status" aria-live="polite"></p>
+      </div>
+    </aside>
+
+    <div class="st-view">
+      <div class="st-bar">
+        <label>Preview in theme <select id="theme"></select></label>
+        <label class="st-check"><input type="checkbox" id="gridbg"> Background grid</label>
+      </div>
+      <div id="preview" data-theme="briefing">
+        <div class="st-hero" id="hero"><div class="big" id="big"></div></div>
+        <div class="st-tiles" style="margin-top:1rem">
+          <figure class="st-tile st-tile--wide"><div><span id="lock-h" style="font-size:28px"></span></div><figcaption>Horizontal lockup</figcaption></figure>
+          <figure class="st-tile"><div><span id="lock-s" style="font-size:20px"></span></div><figcaption>Stacked</figcaption></figure>
+          <figure class="st-tile"><div class="inverse"><span id="lock-d" style="font-size:14px"></span></div><figcaption>On dark</figcaption></figure>
+          <figure class="st-tile"><div class="st-mono"><span id="lock-m" style="font-size:14px"></span></div><figcaption>One colour</figcaption></figure>
+          <figure class="st-tile"><div class="st-sizes"><span id="sz64" style="height:64px"></span><span id="sz32" style="height:32px"></span><span id="sz16" style="height:16px"></span></div><figcaption>64 / 32 / 16 px</figcaption></figure>
+          <figure class="st-tile st-tile--wide"><div style="justify-content:flex-start"><div class="st-tab"><span id="fav"></span>RISA · Toolbox</div></div><figcaption>Browser tab</figcaption></figure>
+          <figure class="st-tile"><div style="filter:grayscale(1)"><span id="lock-g" style="font-size:13px"></span></div><figcaption>Greyscale print</figcaption></figure>
+        </div>
+      </div>
+      <h2 style="font-size:1rem;margin-top:1rem">Settings</h2>
+      <p class="sub" style="margin:0">These are the values that differ from the original. Send them over to make this the final logo.</p>
+      <pre class="st-code" id="code"></pre>
+    </div>
+  </div>
+</main>
+
+<footer class="hub-foot"><div class="container">Settings are saved in this browser only, until they are made final in the site’s code.</div></footer>
+
+<script src="../assets/themes.js"></script>
+<script src="../assets/logos.js"></script>
+<script>
+(function () {
+  const L = RISALogos, G = L.gridtrack, ID = 'gridtrack-layers';
+  const $ = (id) => document.getElementById(id);
+  let p = G.get();
+
+  // [key, label, min, max, step] for sliders; selects and checkboxes are listed separately.
+  const GROUPS = [
+    ['Orientation', [['angle', 'Angle', -180, 180, 1], ['tilt', 'Tilt', 0.3, 1.2, 0.01], ['mirror', 'Mirror the R', 'check']]],
+    ['Grid', [['cells', 'Cells per side', 1, 5, 1], ['frameW', 'Frame weight', 0.5, 8, 0.1], ['gridW', 'Line weight', 0, 6, 0.1]]],
+    ['Flight path', [['trackX', 'Across', -16, 16, 0.5], ['trackY', 'Up and down', -16, 16, 0.5], ['trackScale', 'Size', 0.5, 1.4, 0.01], ['trackW', 'Weight', 1, 10, 0.1], ['leg', 'Leg of the R', [['curve', 'S-bend (sketch 2)'], ['straight', 'Straight (sketch 3)']]], ['takeoff', 'Take-off square', 0, 14, 0.5], ['dot', 'Drone dot', 0, 9, 0.1], ['casing', 'Casing around the path', 'check']]],
+    ['Layers', [['layers', 'Count', 0, 4, 1], ['layerStyle', 'Style', [['bracket', 'Brackets (open, below)'], ['plates', 'Plates (stacked)']]], ['layerDX', 'Offset across', -20, 20, 0.5], ['layerDY', 'Offset up/down', -20, 20, 0.5], ['layerW', 'Weight', 0.5, 6, 0.1], ['tick', 'End ticks', 0, 14, 0.5], ['connectors', 'Corner connectors', 'check'], ['layerDash', 'Dashed', 'check']]],
+    ['Colour', [['gridColour', 'Grid', 'paint'], ['trackColour', 'Flight path', 'paint'], ['dotColour', 'Drone dot', 'paint'], ['layerColour', 'Layers', 'paint']]],
+  ];
+  const PAINTS = [['A', 'Accent'], ['B', 'Ink'], ['C', 'Support 1'], ['D', 'Support 2']];
+
+  $('controls').innerHTML = GROUPS.map(([title, rows]) => `<h2>${title}</h2>` + rows.map(([k, label, a, b, step]) => {
+    if (a === 'check') return `<label class="st-check"><input type="checkbox" data-k="${k}"> ${label}</label>`;
+    if (a === 'paint' || Array.isArray(a)) {
+      const opts = a === 'paint' ? PAINTS : a;
+      return `<label class="st-row"><span>${label}</span><select data-k="${k}">${opts.map(([v, l]) => `<option value="${v}">${l}</option>`).join('')}</select></label>`;
+    }
+    return `<label class="st-row"><span>${label}</span><input type="range" data-k="${k}" min="${a}" max="${b}" step="${step}"><output data-o="${k}"></output></label>`;
+  }).join('')).join('');
+  $('presets').innerHTML = Object.entries(G.presets).map(([k, v]) => `<button class="hbtn" type="button" data-preset="${k}">${v.label}</button>`).join('');
+  $('theme').innerHTML = RISAThemes.map((t) => `<option value="${t.id}">${t.letter} · ${t.name}</option>`).join('');
+
+  const fmt = (v) => (typeof v === 'number' ? (Math.round(v * 100) / 100).toString() : v);
+  function sync() {
+    document.querySelectorAll('[data-k]').forEach((el) => {
+      const k = el.dataset.k;
+      if (el.type === 'checkbox') el.checked = !!p[k]; else el.value = p[k];
+    });
+    document.querySelectorAll('[data-o]').forEach((o) => { o.textContent = fmt(p[o.dataset.o]); });
+  }
+  function draw() {
+    $('big').innerHTML = G.draw(p);
+    const lock = (id, layout) => { $(id).innerHTML = L.render(ID, layout, p); };
+    lock('lock-h', 'horizontal'); lock('lock-s', 'stacked'); lock('lock-d', 'horizontal'); lock('lock-m', 'horizontal'); lock('lock-g', 'horizontal');
+    ['sz64', 'sz32', 'sz16', 'fav'].forEach((id) => { $(id).innerHTML = L.render(ID, 'mark', p); });
+    const diff = G.diff(p);
+    $('code').textContent = Object.keys(diff).length ? JSON.stringify(diff, null, 2) : '(the original, no changes)';
+  }
+  const update = () => { sync(); draw(); };
+
+  document.addEventListener('input', (e) => {
+    const k = e.target.dataset && e.target.dataset.k; if (!k) return;
+    const el = e.target;
+    p[k] = el.type === 'checkbox' ? el.checked : el.tagName === 'SELECT' ? el.value : parseFloat(el.value);
+    update();
+  });
+  document.addEventListener('change', (e) => { if (e.target.tagName === 'SELECT' && e.target.dataset.k) { p[e.target.dataset.k] = e.target.value; update(); } });
+  $('presets').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-preset]'); if (!b) return;
+    p = Object.assign({}, G.defaults, G.presets[b.dataset.preset].values); update();
+  });
+  $('theme').addEventListener('change', () => { $('preview').dataset.theme = $('theme').value; });
+  $('gridbg').addEventListener('change', () => $('hero').classList.toggle('st-grid-bg', $('gridbg').checked));
+
+  const say = (t) => { $('status').textContent = t; setTimeout(() => ($('status').textContent = ''), 2600); };
+  const copy = async (text, msg) => { try { await navigator.clipboard.writeText(text); say(msg); } catch { prompt('Copy this', text); } };
+  $('apply').addEventListener('click', () => { G.save(p); say('Applied. Every page now uses this version of logo 10b.'); });
+  $('reset').addEventListener('click', () => { G.reset(); p = G.get(); update(); say('Back to the original.'); });
+  $('copy').addEventListener('click', () => copy(JSON.stringify(G.diff(p), null, 2), 'Settings copied.'));
+  $('share').addEventListener('click', () => {
+    const url = new URL('studio.html', location.href);
+    const d = G.diff(p); url.searchParams.set('gt', Object.keys(d).length ? G.encode(d) : 'reset');
+    copy(url.toString(), 'Link copied. Opening it applies these settings.');
+  });
+  $('svg').addEventListener('click', () => {
+    const host = $('big'), svg = host.querySelector('svg').cloneNode(true), cs = getComputedStyle(host);
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg'); svg.removeAttribute('class'); svg.removeAttribute('aria-hidden');
+    const out = svg.outerHTML.replace(/var\(--logo-([a-z]+),\s*([^)]+)\)/g, (_, k, fb) => cs.getPropertyValue('--logo-' + k).trim() || fb);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([out], { type: 'image/svg+xml' })); a.download = 'risa-logo-10b.svg'; a.click();
+  });
+
+  const pre = new URLSearchParams(location.search).get('preset');
+  if (pre && G.presets[pre]) p = Object.assign({}, G.defaults, G.presets[pre].values);
+  update();
+})();
+</script>
+</body>
+</html>
