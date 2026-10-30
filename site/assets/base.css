@@ -14,7 +14,8 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .skip-link:focus { top: 1rem; }
 
 /* Placeholder content marker: visible to reviewers, easy to strip later. */
-.tbc { font-size: .72em; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; opacity: .6; white-space: nowrap; }
+/* Themes can switch the marker to sentence case (--tbc-case: none; --tbc-track: 0). */
+.tbc { font-size: .72em; font-weight: 600; letter-spacing: var(--tbc-track, .04em); text-transform: var(--tbc-case, uppercase); opacity: .6; white-space: nowrap; }
 
 /*
  * Reserved status colours. The same in every theme and never used as brand

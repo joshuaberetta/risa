@@ -1,0 +1,35 @@
+/* Theme G: Handbook. Plain documentation: black on white, one link blue (Kobo dark blue). */
+[data-theme="handbook"] {
+  --c-bg: #FFFFFF;
+  --c-surface: #F3F2F1;
+  --c-surface-2: #F3F2F1;
+  --c-ink: #0B0C0C;
+  --c-ink-2: #505A5F;
+  --c-line: #B1B4B6;
+  --c-line-soft: #DDDDDD;
+  --c-primary: #0B0C0C;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #00599D;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #505A5F;
+  --c-accent-3: #B1B4B6;
+  --c-data: #505A5F;
+
+  --logo-a: #00599D; --logo-b: #0B0C0C; --logo-c: #505A5F; --logo-d: #B1B4B6;
+  --logo-ink: #0B0C0C; --logo-bg: #FFFFFF;
+
+  --font-head: 'Source Sans 3', Arial, sans-serif;
+  --font-body: 'Source Sans 3', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 0px;
+  --shadow: none;
+  /* Plain labels: sentence-case TBC markers and kickers. */
+  --tbc-case: none; --tbc-track: 0;
+  --kicker-font: var(--font-body); --kicker-case: none; --kicker-track: 0;
+}
+[data-theme="handbook"] .inverse {
+  --c-bg: #0B0C0C; --c-surface: #1D1F20; --c-surface-2: #2A2D2E;
+  --c-ink: #FFFFFF; --c-ink-2: #C5C9CB; --c-line: #505A5F; --c-line-soft: #3A3F41;
+  --c-primary: #FFFFFF; --c-primary-ink: #0B0C0C; --c-accent: #8FC1EA; --c-accent-ink: #0B0C0C;
+  --logo-a: #8FC1EA; --logo-b: #FFFFFF; --logo-ink: #FFFFFF; --logo-bg: #0B0C0C;
+}

@@ -21,7 +21,7 @@ Any static server works. Pages use relative paths.
 | Path | What |
 |---|---|
 | `site/index.html` | Review hub: brief, how to review, direction cards, logo overview, design principles |
-| `site/themes/<id>/index.html` | Home page: the RISA methodology site, in six directions: `briefing` (A), `groundtruth` (B), `overhead` (C), `streams` (D), `sharedground` (E), `first72` (F) |
+| `site/themes/<id>/index.html` | Home page: the RISA methodology site, in nine directions: `briefing` (A), `groundtruth` (B), `overhead` (C), `streams` (D), `sharedground` (E), `first72` (F), and three deliberately plain ones, `handbook` (G), `report` (H) and `noticeboard` (I) |
 | `site/themes/<id>/style-guide.html` | Logo use (incl. co-branding with a national authority), colour, **reserved status colours**, type, components, **map symbology**, graphics, voice |
 | `site/themes/<id>/about.html` | What RISA is and its layers of governance: founding members, collaborators, partners and funders |
 | `site/themes/<id>/toolbox.html` | The toolbox: SOP, annexes A–E, forms, map templates, training material and the brief, with version, status, owner and a download or request link |
@@ -82,7 +82,7 @@ Then paste the doc into `results/index.html` (`?example` shows the format). It t
 With the local server running (needs Google Chrome):
 
 ```sh
-for id in briefing groundtruth overhead streams sharedground first72; do
+for id in briefing groundtruth overhead streams sharedground first72 handbook report noticeboard; do
   scripts/shot.sh "themes/$id/index.html?shot&logo=default" /tmp/$id.png 1440 900
   sips -Z 960 -s format jpeg -s formatOptions 78 /tmp/$id.png --out site/assets/thumbs/$id.jpg
 done

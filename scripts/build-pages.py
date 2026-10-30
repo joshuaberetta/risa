@@ -7,12 +7,13 @@ The page content itself is rendered by assets/library.js.
 Also points each home page's nav at the new pages and adds links to them
 under the home page's toolbox and deployments sections. Safe to re-run.
 
-  python3 scripts/build-pages.py
+  python3 scripts/build-pages.py            # every theme
+  python3 scripts/build-pages.py handbook   # one theme
 """
-import pathlib, re
+import pathlib, re, sys
 
 SITE = pathlib.Path(__file__).resolve().parent.parent / 'site'
-THEMES = ['briefing', 'groundtruth', 'overhead', 'streams', 'sharedground', 'first72']
+THEMES = ['briefing', 'groundtruth', 'overhead', 'streams', 'sharedground', 'first72', 'handbook', 'report', 'noticeboard']
 PAGES = {
     'about': ('about.html', 'About', []),
     'toolbox': ('toolbox.html', 'Toolbox', []),
@@ -104,7 +105,7 @@ def teasers(html):
     return html
 
 
-for theme in THEMES:
+for theme in (sys.argv[1:] or THEMES):
     folder = SITE / 'themes' / theme
     home = (folder / 'index.html').read_text()
     new_home = who_first(teasers(home.replace(

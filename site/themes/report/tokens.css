@@ -1,0 +1,37 @@
+/* Theme H: Field Report. A printed report: serif text on paper, ink and MapAction navy. */
+[data-theme="report"] {
+  --c-bg: #FDFCF9;
+  --c-surface: #F4F1EA;
+  --c-surface-2: #FFFFFF;
+  --c-ink: #1A1A1A;
+  --c-ink-2: #4A4741;
+  --c-line: #D8D3C8;
+  --c-line-soft: #E8E4DB;
+  --c-primary: #1A1A1A;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #19458D;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #6B665D;
+  --c-accent-3: #D8D3C8;
+  --c-data: #6B665D;
+  --c-band: #19458D;
+
+  --logo-a: #19458D; --logo-b: #1A1A1A; --logo-c: #6B665D; --logo-d: #D8D3C8;
+  --logo-ink: #1A1A1A; --logo-bg: #FDFCF9;
+
+  --font-head: 'Source Serif 4', Georgia, serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-label: 'Source Sans 3', Arial, sans-serif;
+  --radius: 0px;
+  --shadow: none;
+  /* Plain labels: sentence-case TBC markers and kickers. */
+  --tbc-case: none; --tbc-track: 0;
+  --kicker-font: var(--font-body); --kicker-case: none; --kicker-track: 0;
+}
+[data-theme="report"] .inverse {
+  --c-bg: #19458D; --c-surface: #1F5099; --c-surface-2: #255AA6;
+  --c-ink: #FFFFFF; --c-ink-2: #D6E0F0; --c-line: #4A6FAA; --c-line-soft: #3A62A0;
+  --c-primary: #FFFFFF; --c-primary-ink: #19458D; --c-accent: #FFFFFF; --c-accent-ink: #19458D;
+  --logo-a: #FFFFFF; --logo-b: #FFFFFF; --logo-ink: #FFFFFF; --logo-bg: #19458D;
+}

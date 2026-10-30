@@ -19,6 +19,9 @@
     overhead: { hl: 'See the site <em>from above.</em>', art: 'ortho', tex: 'grid', cover: 'full', dark: true, divider: 'inverse' },
     streams: { hl: 'Three inputs. <em>One picture.</em>', art: 'site', tex: 'none', cover: 'split', divider: 'inverse' },
     sharedground: { hl: 'Your teams. Your sites. <em>One shared method.</em>', art: 'contours', tex: 'contours', cover: 'full', divider: 'inverse' },
+    handbook: { hl: 'Know what’s on the ground in the first days.', art: 'site', tex: 'none', cover: 'split', divider: 'inverse' },
+    report: { hl: 'Knowing what’s on the ground, <em>in the first days.</em>', art: 'site', tex: 'none', cover: 'split', divider: 'inverse' },
+    noticeboard: { hl: 'Rapid assessment of displacement sites.', art: 'site', tex: 'none', cover: 'split', divider: 'inverse' },
     first72: { hl: 'The first 72 hours <em>decide the response.</em>', art: 'site', tex: 'none', cover: 'type', divider: 'inverse' },
   };
   const F = FLAVOUR[theme.id] || FLAVOUR.briefing;

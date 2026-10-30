@@ -1,0 +1,35 @@
+/* Theme I: Notice Board. A practical agency product page: Arial, thin borders, HI navy and blue. */
+[data-theme="noticeboard"] {
+  --c-bg: #FFFFFF;
+  --c-surface: #EEF1F3;
+  --c-surface-2: #F7F8F9;
+  --c-ink: #1B2733;
+  --c-ink-2: #4D5B67;
+  --c-line: #C9D1D8;
+  --c-line-soft: #E1E6EA;
+  --c-primary: #002E43;
+  --c-primary-ink: #FFFFFF;
+  --c-accent: #0066AB;
+  --c-accent-ink: #FFFFFF;
+  --c-accent-2: #4D5B67;
+  --c-accent-3: #C9D1D8;
+  --c-data: #4D5B67;
+
+  --logo-a: #0066AB; --logo-b: #002E43; --logo-c: #4D5B67; --logo-d: #C9D1D8;
+  --logo-ink: #002E43; --logo-bg: #FFFFFF;
+
+  --font-head: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-body: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 2px;
+  --shadow: none;
+  /* Plain labels: sentence-case TBC markers and kickers. */
+  --tbc-case: none; --tbc-track: 0;
+  --kicker-font: var(--font-body); --kicker-case: none; --kicker-track: 0;
+}
+[data-theme="noticeboard"] .inverse {
+  --c-bg: #002E43; --c-surface: #0B3B52; --c-surface-2: #144862;
+  --c-ink: #FFFFFF; --c-ink-2: #C3CED3; --c-line: #24546B; --c-line-soft: #1A4A60;
+  --c-primary: #FFFFFF; --c-primary-ink: #002E43; --c-accent: #8CC4EC; --c-accent-ink: #002E43;
+  --logo-a: #8CC4EC; --logo-b: #FFFFFF; --logo-ink: #FFFFFF; --logo-bg: #002E43;
+}

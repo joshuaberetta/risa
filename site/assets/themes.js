@@ -109,6 +109,51 @@ window.RISAThemes = [
       ['--c-line', 'Rule', 'Borders and dividers'],
     ],
   },
+  {
+    id: 'handbook', letter: 'G', name: 'Handbook', defaultLogo: 'flightline', ready: true,
+    tagline: 'Plain documentation. A contents sidebar, one reading column, underlined links and tables. Nothing decorative.',
+    blend: 'Black text on white with one link blue (Kobo’s dark blue, #00599D) and government greys. Source Sans 3 throughout. It looks like a manual you trust because it doesn’t try to sell: headings, paragraphs, numbered steps and tables.',
+    fonts: { head: 'Source Sans 3', body: 'Source Sans 3', mono: 'IBM Plex Mono' },
+    bestFor: 'People who need to find and follow the method: national teams, trainers and field staff.',
+    swatches: [
+      ['--c-ink', 'Text', 'Headings and body text'],
+      ['--c-accent', 'Link blue', 'Links and the one primary action'],
+      ['--c-ink-2', 'Secondary text', 'Captions, metadata'],
+      ['--c-line', 'Border', 'Rules and table borders'],
+      ['--c-surface', 'Panel grey', 'Inset panels and the contents sidebar'],
+      ['--c-bg', 'White', 'Page background'],
+    ],
+  },
+  {
+    id: 'report', letter: 'H', name: 'Field Report', defaultLogo: 'flightline', ready: true,
+    tagline: 'Like a printed report. Serif text in columns, thin rules, figures with captions and sources as footnotes.',
+    blend: 'Ink on warm paper with MapAction navy (#19458D) as the only colour, used for links, figure numbers and the product band. Source Serif 4 for text and headings, Source Sans 3 for small labels. It borrows the habits of a well-made NGO report: numbered figures, captions, footnoted sources.',
+    fonts: { head: 'Source Serif 4', body: 'Source Serif 4', mono: 'IBM Plex Mono' },
+    bestFor: 'Donors, coordinators and anyone reading the case for RISA in full.',
+    swatches: [
+      ['--c-ink', 'Ink', 'Headings and text'],
+      ['--c-accent', 'MapAction navy', 'Links, figure numbers, the product band'],
+      ['--c-ink-2', 'Grey ink', 'Captions and footnotes'],
+      ['--c-line', 'Rule', 'Column and section rules'],
+      ['--c-surface', 'Newsprint', 'Inset boxes'],
+      ['--c-bg', 'Paper', 'Page background'],
+    ],
+  },
+  {
+    id: 'noticeboard', letter: 'I', name: 'Notice Board', defaultLogo: 'flightline', ready: true,
+    tagline: 'A practical agency page. Arial, thin-bordered boxes, documents listed with dates and formats.',
+    blend: 'HI deep navy (#002E43) for the header and headings, a darkened HI blue for links, and cool greys for boxes. Arial throughout, so it renders the same everywhere, including on old laptops in an OSOCC. Dense and functional, like ReliefWeb or a UN agency product page.',
+    fonts: { head: 'Arial', body: 'Arial', mono: 'IBM Plex Mono' },
+    bestFor: 'Responders who come to get something: the latest product, a form, a checklist.',
+    swatches: [
+      ['--c-primary', 'HI deep navy', 'Header, headings'],
+      ['--c-accent', 'Link blue', 'Links and buttons'],
+      ['--c-ink', 'Text', 'Body text'],
+      ['--c-ink-2', 'Secondary text', 'Dates, formats, metadata'],
+      ['--c-line', 'Border', 'Box borders and table rules'],
+      ['--c-surface', 'Box grey', 'Box headers, filters'],
+    ],
+  },
 ];
 // Directions with pages to review.
 window.RISAThemes.ready = window.RISAThemes.filter((t) => t.ready);

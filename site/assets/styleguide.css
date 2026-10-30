@@ -7,11 +7,12 @@
 .sg-top nav a:hover { color: var(--c-ink); }
 
 .sg-intro { background: var(--c-surface); padding-block: 4rem 3.5rem; }
-.sg-kicker { font: 600 .78rem/1 var(--font-mono, var(--font-body)); letter-spacing: .12em; text-transform: uppercase; color: var(--c-accent); }
+/* Kickers and small headings: themes can make them plain with --kicker-font, --kicker-case and --kicker-track. */
+.sg-kicker { font: 600 .78rem/1 var(--kicker-font, var(--font-mono, var(--font-body))); letter-spacing: var(--kicker-track, .12em); text-transform: var(--kicker-case, uppercase); color: var(--c-accent); }
 .sg-intro h1 { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1; margin: .8rem 0 1rem; }
 .sg-lede { font-size: 1.3rem; max-width: 40rem; color: var(--c-ink); }
 .sg-intro-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--c-line); }
-.sg-intro-grid h2, .sg-comp > h3, .sg-logo-colours h3, .sg-ratio h3 { font: 600 .78rem/1.2 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--c-ink-2); margin-bottom: .7rem; }
+.sg-intro-grid h2, .sg-comp > h3, .sg-logo-colours h3, .sg-ratio h3 { font: 600 .78rem/1.2 var(--font-body); letter-spacing: var(--kicker-track, .1em); text-transform: var(--kicker-case, uppercase); color: var(--c-ink-2); margin-bottom: .7rem; }
 
 .sg-section { padding-block: 4.5rem; }
 .sg-alt { background: var(--c-surface); }

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en" data-theme="report">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RISA · Theme H: Field Report</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700;800&family=Sora:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+  <link rel="stylesheet" href="../../assets/base.css">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="../../assets/library.css">
+  <link rel="stylesheet" href="../../assets/review.css">
+  <link rel="icon" href="../../assets/favicon.svg">
+</head>
+<body data-root="../../" data-theme-id="report" data-view="home">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="#" data-risa-logo="horizontal"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#who">Who it’s for</a><a href="#method">Method</a><a href="#product">Product</a><a href="toolbox.html">Toolbox</a><a href="#training">Training</a><a href="deployments.html">Deployments</a>
+      <a href="about.html">About</a><a class="btn btn--primary btn--sm" href="#adopt">Adopt RISA</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="container">
+      <p class="masthead"><span>Rapid Infrastructure and Service Assessment</span><span>Methodology note</span><span>October 2026</span></p>
+      <h1>Knowing what’s on the ground, in the first days</h1>
+      <p class="standfirst">RISA turns drone imagery and direct field observation into one operational map of a displacement site, within days of the site being set up. It answers three questions: can we reach people, which services still work, and where do we act first.</p>
+      <figure class="figure figure--lead">
+        <div class="figure-map" data-graphic="site"></div>
+        <figcaption><b>Figure 1.</b> Sample site 07, initial assessment on day 4. Access routes and services are shown by status: solid, dashed and dotted lines for open, restricted and closed routes; filled, half-filled and crossed-out symbols for working, partly working and not working services.
+          <span class="source">Source: fictional data, for illustration.</span></figcaption>
+      </figure>
+      <p class="hero-links"><a href="product.html">Read the three-page product</a> · <a href="#method">How the method works</a></p>
+    </div>
+  </section>
+
+  <section class="lib-who" id="who" data-block="audiences" aria-label="Who RISA is for"></section>
+
+  <section class="section" id="why">
+    <div class="container">
+      <h2><span class="num">1</span>Why RISA</h2>
+      <p class="lede">The first days decide the response. They are also when we know least.</p>
+      <div class="cols">
+        <p><b>The first 72 hours.</b> Access routes, site layout and damage are often unknown, out of date or anecdotal, just when the most important decisions are made.</p>
+        <p><b>Integration, not technology.</b> Drones, satellites and mobile data collection already exist. They are deployed separately, so the picture arrives late or in pieces.</p>
+        <p><b>Capacity that stays.</b> Surge teams arrive, assess and leave. RISA is built to be handed over, so national teams can run the next assessment themselves.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="method">
+    <div class="container">
+      <h2><span class="num">2</span>The method</h2>
+      <p class="lede">Three inputs, one common operational picture.</p>
+      <div class="cols">
+        <p>RISA records what physically exists on the ground. It complements, rather than replaces, MIRA and rapid needs assessments. Three inputs are collected in parallel and combined on one map.</p>
+        <p><b>Aerial imagery</b> (HI/Atlas Logistique). A drone orthomosaic of the site, flown at 120 m for about 4 cm per pixel, or recent satellite imagery where flying isn’t possible.</p>
+        <p><b>Field observation</b> (Kobo). A standard KoboCollect survey, recorded by direct observation rather than interviews, that works offline and syncs when there’s signal.</p>
+        <p><b>GIS integration</b> (MapAction). Both are brought together on one map with common symbology: a georeferenced inventory of every water point, latrine and service.</p>
+      </div>
+      <table class="report-table">
+        <caption><b>Table 1.</b> The six steps of the standard operating procedure</caption>
+        <thead><tr><th scope="col">Step</th><th scope="col">What happens</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">1. Mission preparation</th><td>Scope, permits, flight authorisation and the GEO zone unlock, done before travelling.</td></tr>
+          <tr><th scope="row">2. Field data collection</th><td>Drone flights and observation surveys, in parallel.</td></tr>
+          <tr><th scope="row">3. Data processing</th><td>Orthomosaic stitching and survey cleaning.</td></tr>
+          <tr><th scope="row">4. GIS integration</th><td>Layers, symbology and the map layout.</td></tr>
+          <tr><th scope="row">5. Dissemination</th><td>To UNDAC, the national authority, clusters and partners.</td></tr>
+          <tr><th scope="row">6. Updating</th><td>Follow-up a week later, then as the site changes.</td></tr>
+        </tbody>
+      </table>
+      <p>The initial assessment is produced 3 to 5 days after a site is set up, with a follow-up about a week later and updates as the site evolves.<sup><a href="#n1" id="r1">1</a></sup></p>
+      <ol class="notes"><li id="n1">RISA SOP v2 and RISA in Brief v2. The earlier concept note describes a five-step version with key informant interviews as a third input; the documents are being aligned.</li></ol>
+    </div>
+  </section>
+
+  <section class="section" id="scenarios">
+    <div class="container">
+      <h2><span class="num">3</span>Deployment scenarios</h2>
+      <p class="lede">One method, scaled to what’s available.</p>
+      <table class="report-table">
+        <caption><b>Table 2.</b> Inputs used in each deployment scenario</caption>
+        <thead><tr><th scope="col">Scenario</th><th scope="col">Field team</th><th scope="col">Drone</th><th scope="col">Satellite</th><th scope="col">GIS</th><th scope="col">Use when</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Full RISA</th><td>Yes</td><td>Yes</td><td>Optional</td><td>Yes</td><td>Access, permits and a kit are available</td></tr>
+          <tr><th scope="row">Hybrid RISA</th><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td><td>Flying isn’t possible or authorised</td></tr>
+          <tr><th scope="row">Rapid initial RISA</th><td>Limited</td><td>No</td><td>Existing</td><td>Yes</td><td>The first picture is needed before teams arrive</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="product">
+    <div class="container">
+      <h2><span class="num">4</span>The product</h2>
+      <p class="lede">Three pages, read in under a minute.</p>
+      <div class="cols">
+        <p>The product is a mission-ready document, not a research report. It works printed and offline, so a coordinator can brief from it in an OSOCC or in the field. An interactive version is being piloted alongside it for when there is a connection.</p>
+        <p>Page 1 is the map: site layout, access routes by status, services, hazards and logistics points. Page 2 sets out the key findings on access, essential services and priority gaps. Page 3, which is optional, is a close-up of the most urgent area with before and after imagery and recommended actions.</p>
+      </div>
+      <figure class="figure">
+        <div class="figure-row">
+          <a href="product.html#page-1"><div class="figure-thumb" data-graphic="site" data-layers="hazards,roads,routes,blocks,services"></div><span>(a) Page 1, the map</span></a>
+          <a href="product.html#page-2"><div class="figure-thumb figure-thumb--text" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><span>(b) Page 2, key findings</span></a>
+          <a href="product.html#page-3"><div class="figure-thumb" data-graphic="site" data-mode="ortho" data-view="zoom" data-layers="imagery,hazards,blocks,routes,services"></div><span>(c) Page 3, hotspot</span></a>
+        </div>
+        <figcaption><b>Figure 2.</b> The three pages of the RISA product. <a href="product.html">Open the full product</a>.
+          <span class="source">Source: worked example on the fictional sample site.</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="toolbox">
+    <div class="container">
+      <h2><span class="num">5</span>The toolbox</h2>
+      <p class="lede">Everything a trained team needs to deploy without the consortium.</p>
+      <p class="single">The toolbox is versioned and updated after every deployment. It is open to use and adapt: nothing in RISA is patented.</p>
+      <table class="report-table">
+        <caption><b>Table 3.</b> Contents of the RISA toolbox</caption>
+        <thead><tr><th scope="col">Document</th><th scope="col">Contents</th><th scope="col">Format</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Standard operating procedure</th><td>The six-step workflow, roles and quality checks</td><td>PDF</td><td>Draft v2</td></tr>
+          <tr><th scope="row">Annex A. Master XLSForm</th><td>The KoboCollect observation survey</td><td>XLSX</td><td>In progress</td></tr>
+          <tr><th scope="row">Annex B. GIS standards</th><td>Data model, symbology and naming</td><td>PDF, QML</td><td>In progress</td></tr>
+          <tr><th scope="row">Annex C. Map layouts</th><td>QGIS templates for the three pages</td><td>QPT</td><td>In progress</td></tr>
+          <tr><th scope="row">Annex D. UAV checklist and ADAK kit</th><td>Pre-flight, in-flight and processing checks</td><td>PDF</td><td>Draft</td></tr>
+          <tr><th scope="row">Annex E. Deployment checklist</th><td>What to pack, sign and unlock before you go</td><td>PDF</td><td>In progress</td></tr>
+        </tbody>
+      </table>
+    </div>
+  <div class="container lib-more"><a class="btn btn--primary" href="toolbox.html">Open the toolbox</a></div>
+  </section>
+
+  <section class="section" id="training">
+    <div class="container">
+      <h2><span class="num">6</span>Training and handover</h2>
+      <p class="lede">Built to be run by national teams.</p>
+      <div class="cols">
+        <p>A Training of Trainers course prepares a national cohort, who then train enumerators, site managers and drone teams. Every course starts with a SIMEX: a full simulation on realistic scenario data. Drone capacity is built with the Flying Labs network of local operators.<sup><a href="#n2" id="r2">2</a></sup></p>
+        <p>Handover happens in three stages. <b>Consortium-led:</b> national counterparts shadow every step of a deployment. <b>Co-led:</b> national teams lead, with remote support from the consortium. <b>Nationally led:</b> the consortium is the backstop for large or complex events.</p>
+      </div>
+      <ol class="notes" start="2"><li id="n2">The Flying Labs arrangement is to be confirmed.</li></ol>
+    </div>
+  </section>
+
+  <section class="section" id="deployments">
+    <div class="container">
+      <h2><span class="num">7</span>Where RISA has been used</h2>
+      <div class="cols">
+        <p><b>Mozambique, January 2026 (SADC SIMEX).</b> The three inputs were collected in parallel and combined into the three-page product. The static PDF worked, but lost much of the richness of the combined data, which led to the interactive pilot.</p>
+        <p><b>Venezuela, earthquake response.</b> The drone orthomosaic showed handwashing stations, latrines, child-friendly spaces and health services that satellite imagery could not reliably show.<sup><a href="#n3" id="r3">3</a></sup></p>
+        <p><b>Next.</b> Presenting RISA to SHOC and SADC member states in Durban, and a possible capacity-strengthening pilot with the Bahamas disaster management authority.<sup><a href="#n4" id="r4">4</a></sup></p>
+      </div>
+      <blockquote class="pull"><p>The orthomosaic showed what satellite imagery couldn’t.</p><cite>Paraphrased from the Venezuela earthquake response notes</cite></blockquote>
+      <ol class="notes" start="3"><li id="n3">Date of the field flights to be confirmed.</li><li id="n4">Dates and arrangements to be confirmed.</li></ol>
+    </div>
+  <div class="container lib-more"><a class="btn btn--primary" href="deployments.html">All deployments on the map</a></div>
+  </section>
+
+  <section class="section" id="adopt">
+    <div class="container adopt">
+      <div>
+        <h2><span class="num">8</span>Adopt RISA</h2>
+        <p class="lede">Bring RISA to your national emergency management authority.</p>
+        <p>We’ll help you scope a deployment, run a Training of Trainers course and adapt the toolbox to your context. RISA products carry your authority’s name first.</p>
+      </div>
+      <form onsubmit="return false">
+        <label>Name<input class="input"></label>
+        <label>Organisation<input class="input"></label>
+        <label class="full">Email<input class="input" type="email"></label>
+        <button class="btn btn--primary" type="submit">Get in touch</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="container">
+      <p>Developed by HI/Atlas Logistique, MapAction and Kobo. Used in Mozambique (SADC SIMEX) and in the Venezuela earthquake response.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span data-risa-logo="horizontal"></span>
+    <p>RISA is an open methodology developed by HI/Atlas Logistique, MapAction and Kobo. Nothing is patented. Use it and adapt it.</p>
+    <p class="fineprint">Design draft for review. All figures and dates are placeholders. Sample maps use fictional data.</p>
+  </div>
+</footer>
+
+<script src="../../assets/themes.js"></script>
+<script src="../../assets/logos.js"></script>
+<script src="../../assets/sitemap.js"></script>
+<script src="../../assets/content.js"></script>
+<script src="../../assets/library.js"></script>
+<script src="../../assets/review.js"></script>
+</body>
+</html>
