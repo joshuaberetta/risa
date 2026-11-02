@@ -98,7 +98,8 @@
     angle: 45, tilt: 0.577, mirror: false,                 // plate rotation, vertical squash, R reflected
     cells: 3, frameW: 3.6, gridW: 2.4,                     // grid
     trackX: 0, trackY: 0, trackScale: 1, trackW: 5,        // flight path position, size, weight
-    leg: 'curve', casing: true, takeoff: 8, dot: 4.6,      // leg shape, casing, take-off square, drone dot
+    leg: 'curve', casing: true, takeoff: 8, dot: 4.6,      // leg shape, casing, take-off square, drone marker size
+    marker: 'dot',                                         // drone as a dot or a map pin
     layers: 2, layerDX: 0, layerDY: 11.5, layerW: 3.2,     // layers: count, offset of each, weight
     layerStyle: 'bracket', tick: 6, connectors: false,     // bracket (open outline) or plates (stacked)
     layerDash: false,
@@ -116,10 +117,19 @@
   } catch { /* ignore a malformed code */ }
   const PAINT = { A, B, C, D };
 
-  // The R's leg: the sketches' S-bend, or a straight diagonal like a letter R.
+  // The R's leg: the sketches' S-bend, a straight diagonal like a letter R, or the
+  // November road: a wider R filling the grid, with the take-off square set apart.
   const LEGS = {
-    curve: { d: TRACK, end: [36.5, 42] },
-    straight: { d: 'M12 44V18Q12 12 18 12H30C38 12 41 17 41 22C41 27 37 30 31 30H23L35 44', end: [37, 46] },
+    curve: { d: TRACK, start: [12, 45], end: [36.5, 42] },
+    straight: { d: 'M12 44V18Q12 12 18 12H30C38 12 41 17 41 22C41 27 37 30 31 30H23L35 44', start: [12, 45], end: [37, 46] },
+    road: { d: 'M10 32V11Q10 5.5 15.5 5.5H36C40.5 5.5 43.5 9.5 43.5 13.5C43.5 18 40 21.5 35.5 21.5H28C23.5 21.5 21 24.5 21.5 28C22 32 27 34.5 33 37L41 40.5', start: [10, 39.5], end: [41, 40.5] },
+  };
+  // A map pin with its tip at (x, y), r being the head's radius.
+  const pin = (x, y, r, fill, cased) => {
+    const h = 1.9 * r, tx = 0.85 * r, ty = y - 1.374 * r, f = (n) => n.toFixed(2);
+    return `<ellipse cx="${f(x)}" cy="${f(y)}" rx="${f(r * 0.6)}" ry="${f(r * 0.22)}" fill="${fill}"/>
+      <path d="M${f(x)} ${f(y)}L${f(x - tx)} ${f(ty)}A${f(r)} ${f(r)} 0 1 1 ${f(x + tx)} ${f(ty)}Z" fill="${fill}"${cased ? ` stroke="${BG}" stroke-width="1.5" stroke-linejoin="round"` : ''}/>
+      <circle cx="${f(x)}" cy="${f(y - h)}" r="${f(r * 0.42)}" fill="${BG}"/>`;
   };
   function gridtrackLayers(params) {
     const p = Object.assign({}, GT_DEFAULTS, params === undefined ? gtStored() : params);
@@ -182,19 +192,21 @@
           <g transform="${trackT}">
             ${p.casing ? `<path d="${leg.d}" fill="none" stroke="${BG}" stroke-width="${p.trackW / ts + 3}" stroke-linecap="round" stroke-linejoin="round"/>` : ''}
             <path d="${leg.d}" fill="none" stroke="${tr}" stroke-width="${p.trackW / ts}" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="${12 - p.takeoff / 2}" y="${45 - p.takeoff / 2}" width="${p.takeoff}" height="${p.takeoff}" rx="1" fill="${tr}"${p.casing ? ` stroke="${BG}" stroke-width="1.5"` : ''}/>
+            <rect x="${leg.start[0] - p.takeoff / 2}" y="${leg.start[1] - p.takeoff / 2}" width="${p.takeoff}" height="${p.takeoff}" rx="1" fill="${tr}"${p.casing ? ` stroke="${BG}" stroke-width="1.5"` : ''}/>
           </g>
         </g></g>`;
     const [ex, ey] = P(...T(...leg.end));
-    const dot = p.dot > 0 ? `<circle cx="${f(ex)}" cy="${f(ey - 1)}" r="${p.dot}" fill="${paint(p.dotColour)}"${p.casing ? ` stroke="${BG}" stroke-width="1.5"` : ''}/>` : '';
+    const isPin = p.marker === 'pin';
+    const dot = !(p.dot > 0) ? '' : isPin ? pin(ex, ey, p.dot, paint(p.dotColour), p.casing) : `<circle cx="${f(ex)}" cy="${f(ey - 1)}" r="${p.dot}" fill="${paint(p.dotColour)}"${p.casing ? ` stroke="${BG}" stroke-width="1.5"` : ''}/>`;
 
     // Fit the view to the drawing.
     const pad = Math.max(p.frameW, p.layerW) / 2 + 1;
     const all = [];
     for (let k = 0; k <= p.layers; k++) corners.forEach(([x, y]) => { const [ox, oy] = off(k); all.push([x + ox, y + oy]); });
     const xs = all.map((q) => q[0]), ys = all.map((q) => q[1]);
+    const top = isPin ? ey - 2.9 * p.dot : ey - p.dot - 1, bottom = isPin ? ey + p.dot * 0.22 : ey + p.dot;
     const x0 = Math.min(...xs, ex - p.dot) - pad, x1 = Math.max(...xs, ex + p.dot) + pad;
-    const y0 = Math.min(...ys, ey - p.dot - 1) - pad, y1 = Math.max(...ys, ey + p.dot) + pad;
+    const y0 = Math.min(...ys, top) - pad, y1 = Math.max(...ys, bottom) + pad;
     return `<svg class="risa-mark" viewBox="${f(x0)} ${f(y0)} ${f(x1 - x0)} ${f(y1 - y0)}" aria-hidden="true">${layers}${plate}${dot}</svg>`;
   }
   // Starting points matching the three sketches.
@@ -202,6 +214,7 @@
     isometric: { label: 'Isometric, layers below (sketch 1)', values: {} },
     flat: { label: 'Flat grid, dashed layer behind (sketch 2)', values: { angle: 0, tilt: 0.8165, layers: 1, layerStyle: 'plates', layerDX: 7, layerDY: -7, connectors: true, layerDash: true, layerColour: 'A', layerW: 2.2 } },
     faceon: { label: 'Face-on, layers behind, mirrored (sketch 3)', values: { angle: 0, tilt: 0.8165, mirror: true, leg: 'straight', layers: 2, layerStyle: 'plates', layerDX: 11, layerDY: -11, connectors: true, layerColour: 'A' } },
+    road: { label: 'Road R with map pin, plates behind (November, 10c)', values: { angle: 0, tilt: 0.92, leg: 'road', casing: false, frameW: 1.2, gridW: 0.8, trackW: 4.3, takeoff: 6.5, marker: 'pin', dot: 3, layers: 2, layerStyle: 'plates', layerDX: 5, layerDY: 5, layerW: 0.9 } },
   };
   const gridtrackApi = {
     defaults: GT_DEFAULTS, presets: GT_PRESETS, draw: gridtrackLayers,
@@ -291,6 +304,12 @@
       id: 'gridtrack-layers', num: '10b', name: 'Grid track, layered', draw: gridtrackLayers, wm: 'wm-public',
       summary: 'Grid track as the top of a stack of map layers.',
       rationale: 'The second sketch: the same grid and track on the top plate of a GIS layer stack, seen in isometric view. The layers underneath are the inputs (imagery, field observation, GIS) that the flight builds on. More illustrative than the flat version, so it suits covers, slides and the website more than a 16 px favicon.',
+    },
+    {
+      id: 'gridtrack-road', num: '10c', name: 'Grid track, road', wm: 'wm-public', studioPreset: 'road',
+      draw: (params) => gridtrackLayers(params === undefined ? GT_PRESETS.road.values : params),
+      summary: 'Grid track face-on, the R drawn as a road to a map pin, with plates stacked behind.',
+      rationale: 'From the November mock-up, without the road’s centre-line dashes so it stays clean at small sizes. The grid is seen face-on with two plates stacked behind it; the R is one bold road from the take-off square, round the bowl and through the S-bend to a map pin, the place being assessed. It is a preset of 10b, so it can be fine-tuned in the studio and applied across the site.',
     },
     {
       id: 'wordmark', num: 8, name: 'Wordmark', draw: wordmark, wm: 'wm-public', wordOnly: true,

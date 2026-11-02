@@ -102,7 +102,7 @@
         <div><span class="lg-num">Concept ${l.num}</span><h2>${l.name}</h2><p class="summary">${l.summary}</p></div>
         <div><p class="rationale">${l.rationale}</p>
           <p class="paired">${paired ? `Paired by default with ${paired}.` : 'Not paired with a theme by default, but works with all of them.'}</p>
-          <div class="lg-tools">${tryIn}<button class="hbtn" type="button" data-download="${l.id}">Download SVG mark</button>${l.id === 'gridtrack-layers' ? '<a class="hbtn hbtn--dark" href="studio.html">Fine-tune in the studio →</a>' : ''}</div></div>
+          <div class="lg-tools">${tryIn}<button class="hbtn" type="button" data-download="${l.id}">Download SVG mark</button>${l.id === 'gridtrack-layers' || l.studioPreset ? `<a class="hbtn hbtn--dark" href="studio.html${l.studioPreset ? `?preset=${l.studioPreset}` : ''}">Fine-tune in the studio →</a>` : ''}</div></div>
       </div>
       <div class="lg-grid">
         <figure class="lg-cell"><div class="lg-stage" data-mark-source="${l.id}">${L(l.id, 'horizontal', 'font-size:30px')}</div><figcaption>Primary lockup</figcaption></figure>

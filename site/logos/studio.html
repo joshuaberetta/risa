@@ -24,6 +24,7 @@
     .st-panel { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; background: var(--h-surface); border: 1px solid var(--h-line); border-radius: 12px; padding: 1.2rem 1.3rem; }
     .st-panel h2 { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--h-ink-2); margin: 1.3rem 0 .6rem; font-weight: 600; }
     .st-panel h2:first-child { margin-top: 0; }
+    #controls h2:first-child { margin-top: 1.3rem; }
     .st-presets { display: grid; gap: .4rem; }
     .st-presets button { text-align: left; }
     .st-row { display: grid; grid-template-columns: 7.2rem 1fr 3rem; gap: .6rem; align-items: center; font-size: 13.5px; color: var(--h-ink); padding-block: .22rem; }
@@ -123,9 +124,9 @@
   const GROUPS = [
     ['Orientation', [['angle', 'Angle', -180, 180, 1], ['tilt', 'Tilt', 0.3, 1.2, 0.01], ['mirror', 'Mirror the R', 'check']]],
     ['Grid', [['cells', 'Cells per side', 1, 5, 1], ['frameW', 'Frame weight', 0.5, 8, 0.1], ['gridW', 'Line weight', 0, 6, 0.1]]],
-    ['Flight path', [['trackX', 'Across', -16, 16, 0.5], ['trackY', 'Up and down', -16, 16, 0.5], ['trackScale', 'Size', 0.5, 1.4, 0.01], ['trackW', 'Weight', 1, 10, 0.1], ['leg', 'Leg of the R', [['curve', 'S-bend (sketch 2)'], ['straight', 'Straight (sketch 3)']]], ['takeoff', 'Take-off square', 0, 14, 0.5], ['dot', 'Drone dot', 0, 9, 0.1], ['casing', 'Casing around the path', 'check']]],
+    ['Flight path', [['trackX', 'Across', -16, 16, 0.5], ['trackY', 'Up and down', -16, 16, 0.5], ['trackScale', 'Size', 0.5, 1.4, 0.01], ['trackW', 'Weight', 1, 10, 0.1], ['leg', 'Leg of the R', [['curve', 'S-bend (sketch 2)'], ['straight', 'Straight (sketch 3)'], ['road', 'Road (November, 10c)']]], ['takeoff', 'Take-off square', 0, 14, 0.5], ['marker', 'Drone as', [['dot', 'Dot'], ['pin', 'Map pin']]], ['dot', 'Drone size', 0, 9, 0.1], ['casing', 'Casing around the path', 'check']]],
     ['Layers', [['layers', 'Count', 0, 4, 1], ['layerStyle', 'Style', [['bracket', 'Brackets (open, below)'], ['plates', 'Plates (stacked)']]], ['layerDX', 'Offset across', -20, 20, 0.5], ['layerDY', 'Offset up/down', -20, 20, 0.5], ['layerW', 'Weight', 0.5, 6, 0.1], ['tick', 'End ticks', 0, 14, 0.5], ['connectors', 'Corner connectors', 'check'], ['layerDash', 'Dashed', 'check']]],
-    ['Colour', [['gridColour', 'Grid', 'paint'], ['trackColour', 'Flight path', 'paint'], ['dotColour', 'Drone dot', 'paint'], ['layerColour', 'Layers', 'paint']]],
+    ['Colour', [['gridColour', 'Grid', 'paint'], ['trackColour', 'Flight path', 'paint'], ['dotColour', 'Drone', 'paint'], ['layerColour', 'Layers', 'paint']]],
   ];
   const PAINTS = [['A', 'Accent'], ['B', 'Ink'], ['C', 'Support 1'], ['D', 'Support 2']];
 
