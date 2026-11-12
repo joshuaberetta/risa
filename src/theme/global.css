@@ -1,0 +1,98 @@
+html {
+  scroll-padding-top: 1.5rem;
+}
+
+body {
+  background: var(--risa-paper);
+  color: var(--risa-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(h1, h2, h3, h4) {
+  color: var(--risa-heading, var(--risa-ink));
+}
+
+/* Handbook links: always underlined, a thicker underline on hover. */
+a {
+  color: var(--risa-link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  text-decoration-thickness: 3px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--risa-link);
+  outline-offset: 2px;
+}
+
+/*
+ * Dark bands (ink): text, links and the logo flip. Used by SectionShell's
+ * `dark` background and the CTA band.
+ */
+.risa-dark {
+  --risa-paper: var(--mantine-color-ink-9);
+  --risa-surface: var(--mantine-color-ink-8);
+  --risa-ink: var(--mantine-color-white);
+  --risa-heading: var(--mantine-color-white);
+  --risa-ink-2: #c5c9cb;
+  --risa-line: var(--mantine-color-ink-6);
+  --risa-line-soft: var(--mantine-color-ink-7);
+  --risa-link: var(--mantine-color-blue-3);
+  --risa-link-hover: var(--mantine-color-white);
+  --logo-a: var(--mantine-color-blue-3);
+  --logo-b: var(--mantine-color-white);
+  --logo-ink: var(--mantine-color-white);
+  --logo-bg: var(--mantine-color-ink-9);
+
+  background: var(--risa-paper);
+  color: var(--risa-ink-2);
+}
+
+/* TBC markers (<Tbc>, and {tbc} in Markdown): a dashed outline, readable in greyscale. */
+.tbc {
+  display: inline-block;
+  margin-inline-start: 0.35em;
+  padding: 0 0.4em;
+  border: 1px dashed var(--risa-ink-2);
+  color: var(--risa-ink-2);
+  font-size: min(0.78em, 0.9rem);
+  font-weight: 600;
+  line-height: 1.5;
+  vertical-align: 0.15em;
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: 1rem;
+  inset-block-start: -100px;
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+  background: var(--risa-ink);
+  color: var(--risa-paper);
+
+  &:focus {
+    inset-block-start: 1rem;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

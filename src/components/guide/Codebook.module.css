@@ -1,0 +1,59 @@
+.codebook {
+  margin-block-start: 3rem;
+  padding-block-start: 1.6rem;
+  border-block-start: 4px solid var(--risa-ink);
+
+  & h2 {
+    margin-block-start: 0;
+  }
+
+  & h4 {
+    font-family: var(--risa-font-mono);
+    font-size: 1rem;
+    margin-block: 1.2rem 0.3rem;
+  }
+}
+
+.search {
+  max-inline-size: 26rem;
+}
+
+.count {
+  margin-block: 0.5rem 1rem;
+  font-size: 0.95rem;
+  color: var(--risa-ink-2);
+}
+
+.block {
+  margin-block-end: 1.4rem;
+}
+
+.scroll {
+  overflow-x: auto;
+
+  & table {
+    inline-size: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  & th,
+  & td {
+    text-align: start;
+    vertical-align: top;
+    padding: 0.45rem 0.9rem 0.45rem 0;
+    border-block-end: 1px solid var(--risa-line);
+  }
+
+  & thead th {
+    font-weight: 700;
+    border-block-end: 2px solid var(--risa-ink);
+    white-space: nowrap;
+  }
+
+  & code {
+    font-family: var(--risa-font-mono);
+    font-size: 0.85em;
+    white-space: nowrap;
+  }
+}

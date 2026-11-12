@@ -1,0 +1,362 @@
+/* Who it's for: Handbook's three-column rows. */
+.who {
+  border-block-end: 1px solid var(--risa-line);
+}
+
+.whoRow {
+  display: grid;
+  grid-template-columns: 12rem 1fr 1fr;
+  gap: 0.4rem 2rem;
+  padding-block: 1.1rem;
+  border-block-start: 1px solid var(--risa-line);
+
+  & h3 {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  & ul {
+    margin: 0;
+    padding-inline-start: 1.1em;
+    font-size: 1rem;
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  @media (max-width: $mantine-breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.whoEx {
+  margin: 0.2rem 0 0;
+  font-size: 0.95rem;
+  color: var(--risa-ink-2);
+}
+
+.whoQ {
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+/* Term and description rows. */
+.rows {
+  margin: 0.4rem 0 1rem;
+  border-block-start: 1px solid var(--risa-line);
+
+  & > div {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 1rem;
+    padding-block: 0.8rem;
+    border-block-end: 1px solid var(--risa-line);
+
+    @media (max-width: $mantine-breakpoint-sm) {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+    }
+  }
+
+  & dt {
+    font-weight: 700;
+  }
+
+  & dd {
+    margin: 0;
+  }
+
+  & dd p:last-child {
+    margin-block-end: 0;
+  }
+}
+
+.detail {
+  display: block;
+  margin-block-start: 0.2rem;
+  font-weight: 400;
+}
+
+.partnerNote {
+  color: var(--risa-ink-2);
+}
+
+/* Numbered steps. */
+.steps {
+  padding-inline-start: 0;
+  margin: 0.6rem 0 1.2rem;
+  list-style: none;
+  counter-reset: step;
+
+  & > li {
+    counter-increment: step;
+    position: relative;
+    padding: 0.2rem 0 1.2rem 3rem;
+    border-inline-start: 1px solid var(--risa-line);
+    margin-inline-start: 1.1rem;
+  }
+
+  & > li:last-child {
+    border-inline-start-color: transparent;
+  }
+
+  & > li::before {
+    content: counter(step);
+    position: absolute;
+    inset-inline-start: -1.1rem;
+    inset-block-start: 0;
+    inline-size: 2.2rem;
+    block-size: 2.2rem;
+    display: grid;
+    place-items: center;
+    background: var(--risa-ink);
+    color: var(--risa-paper);
+    font-weight: 700;
+  }
+
+  & h3 {
+    font-size: 1.25rem;
+    margin: 0.2rem 0 0.4rem;
+  }
+}
+
+.failure {
+  margin: 0.2rem 0 0;
+  padding-inline-start: 0.8rem;
+  border-inline-start: var(--risa-rule);
+  font-size: 1rem;
+  color: var(--risa-ink-2);
+
+  & b {
+    color: var(--risa-ink);
+  }
+}
+
+/* Tables. */
+.tableWrap {
+  overflow-x: auto;
+  margin-block: 0.6rem 1.4rem;
+}
+
+.table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+
+  & caption {
+    text-align: start;
+    caption-side: bottom;
+    padding-block-start: 0.6rem;
+    color: var(--risa-ink-2);
+    font-size: 0.95rem;
+  }
+
+  & th,
+  & td {
+    text-align: start;
+    vertical-align: top;
+    padding: 0.65rem 1rem 0.65rem 0;
+    border-block-end: 1px solid var(--risa-line);
+  }
+
+  & thead th {
+    font-weight: 700;
+    border-block-end: 2px solid var(--risa-ink);
+  }
+
+  & tbody th {
+    font-weight: 600;
+  }
+}
+
+/* Timeline. */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0.6rem 0 1.2rem;
+  border-block-start: 1px solid var(--risa-line);
+
+  & > li {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-block-end: 1px solid var(--risa-line);
+
+    @media (max-width: $mantine-breakpoint-sm) {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+    }
+  }
+
+  & h3 {
+    font-size: 1.15rem;
+    margin: 0 0 0.3rem;
+  }
+}
+
+.when {
+  font-family: var(--risa-font-mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--risa-ink-2);
+}
+
+/* The sample product's pages. */
+.productPage {
+  margin: 1.6rem 0 2.4rem;
+
+  & > h3 {
+    font-size: 1.3rem;
+    margin: 0 0 0.7rem;
+  }
+
+  & > figcaption {
+    margin-block-start: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--risa-ink-2);
+  }
+}
+
+/* Cards: plain rows in Handbook, not boxes. */
+.cards {
+  border-block-end: 1px solid var(--risa-line);
+}
+
+.card {
+  padding-block: 1.1rem;
+  border-block-start: 1px solid var(--risa-line);
+
+  & h3 {
+    font-size: 1.25rem;
+    margin: 0 0 0.4rem;
+  }
+
+  & p:last-child {
+    margin-block-end: 0;
+  }
+}
+
+.cardKicker {
+  margin: 0 0 0.2rem;
+  font-family: var(--risa-font-mono);
+  font-size: 0.9rem;
+  color: var(--risa-ink-2);
+}
+
+/* Stats: a plain row of figures. */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1rem 2rem;
+  margin: 0.6rem 0 1.2rem;
+
+  & > div {
+    display: flex;
+    flex-direction: column-reverse;
+    border-block-start: 1px solid var(--risa-ink);
+    padding-block-start: 0.5rem;
+  }
+
+  & dd {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  & dt {
+    font-size: 1rem;
+    color: var(--risa-ink-2);
+  }
+}
+
+/* The closing call to action, on ink. */
+.cta {
+  padding-block: 2.6rem;
+
+  &[data-in-column] {
+    padding: 2rem 2rem 2.2rem;
+    margin-block: 0 3.2rem;
+  }
+
+  & h2 {
+    font-size: 2rem;
+    margin: 0 0 0.8rem;
+  }
+}
+
+.ctaIntro {
+  font-size: 1.2rem;
+  max-inline-size: 36em;
+  margin: 0 0 1rem;
+}
+
+/* The owners line, above the footer. */
+.owners {
+  border-block-start: 1px solid var(--risa-line);
+  padding-block: 1.4rem;
+  color: var(--risa-ink-2);
+  font-size: 1rem;
+
+  & p {
+    margin: 0;
+  }
+}
+
+/* Governance layers. */
+.layers {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+
+  & > li {
+    padding-block: 1.4rem;
+    border-block-start: 1px solid var(--risa-line);
+    scroll-margin-block-start: 1.5rem;
+  }
+
+  & h3 {
+    font-size: 1.3rem;
+    margin: 0 0 0.3rem;
+  }
+}
+
+.layerNum {
+  margin: 0;
+  font-weight: 700;
+  color: var(--risa-ink-2);
+}
+
+.layerShort {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  color: var(--risa-ink-2);
+}
+
+.members {
+  list-style: none;
+  padding: 0;
+  margin: 0.6rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2rem;
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+
+  & li {
+    padding-block: 0.7rem;
+    border-block-start: 1px solid var(--risa-line-soft);
+  }
+
+  & span:not(:global(.tbc)) {
+    display: block;
+    font-size: 0.95rem;
+  }
+}
+
+.full {
+  color: var(--risa-ink-2);
+}

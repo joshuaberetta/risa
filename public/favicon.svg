@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-44.37 -26.78 88.74 76.57"><path d="M-41.57 17.00L-41.57 23.00L0.00 46.98L41.57 23.00L41.57 17.00" fill="none" stroke="#0B0C0C" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M-41.57 5.50L-41.57 11.50L0.00 35.48L41.57 11.50L41.57 5.50" fill="none" stroke="#0B0C0C" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><g transform="matrix(0.87 0.50 -0.87 0.50 0 0)"><g transform="translate(-24 -24)">
+<rect width="48" height="48" fill="#FFFFFF"/>
+<rect width="48" height="48" fill="none" stroke="#00599D" stroke-width="3.6"/>
+<path d="M16.00 0V48M0 16.00H48M32.00 0V48M0 32.00H48" stroke="#00599D" stroke-width="2.4"/>
+<path d="M12 44V18Q12 12 18 12H30C38 12 41 17 41 22C41 27 37 30 31 30H25C21 30 20 33 21 36C22 39 27 40 31 41L34 42" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 44V18Q12 12 18 12H30C38 12 41 17 41 22C41 27 37 30 31 30H25C21 30 20 33 21 36C22 39 27 40 31 41L34 42" fill="none" stroke="#0B0C0C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="8" y="41" width="8" height="8" rx="1" fill="#0B0C0C" stroke="#FFFFFF" stroke-width="1.5"/>
+</g></g><circle cx="-4.76" cy="14.24" r="4.6" fill="#00599D" stroke="#FFFFFF" stroke-width="1.5"/></svg>

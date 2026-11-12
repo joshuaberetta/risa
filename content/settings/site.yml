@@ -1,0 +1,50 @@
+# Site-wide settings. The format is in content/README.md.
+
+# The full name, as agreed at the Lyon workshop (Oct 2026). The logo wordmark
+# reads it too. Change nameStatus to `agreed` once the working group signs off.
+name: Rapid Infrastructures & Services Assessment
+nameStatus: pending
+shortName: RISA
+description: An open method for assessing infrastructure and services in the first days of an emergency, built to be handed over to national authorities.
+
+# Shown on the Adopt and Feedback forms, which open an email to it.
+contact: contact@risa-method.org
+contactTbc: true
+
+# The RISA dashboard (MVP). Who runs it for responses is still to be confirmed.
+dashboardUrl: https://risa-dash.kobolabs.dev
+
+partners:
+  - id: kobo
+    name: Kobo
+    role: Data collection
+  - id: mapaction
+    name: MapAction
+    role: GIS and maps
+  # SOP v3 says "Atlas Logistique"; the exact form is to be checked with the team.
+  - id: atlas
+    name: Atlas Logistique
+    role: Drone imagery
+    tbc: true
+
+endorsers:
+  - id: undac
+    name: UNDAC / OCHA
+    note: clearance pending
+    tbc: true
+
+nav:
+  - { label: Method, href: /method }
+  - { label: Product, href: /product }
+  - { label: Toolbox, href: /toolbox }
+  - { label: Data collection, href: /guide }
+  - { label: Deployments, href: /deployments }
+  - { label: About, href: /about }
+cta: { label: Adopt RISA, href: /adopt }
+
+footer:
+  owners: RISA is an open method developed by Kobo, MapAction and Atlas Logistique, and built to be handed over to national authorities. Nothing is patented. Use it and adapt it.
+  note: "Working draft: the SOP, the name and the endorsement are still pending sign-off. Sample maps use fictional data."
+  links:
+    - { label: Feedback, href: /feedback }
+    - { label: Design review, href: /designs/ }

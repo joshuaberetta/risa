@@ -1,0 +1,24 @@
+.list {
+  padding-inline-start: 1.6em;
+  margin-block: 1rem 1.6rem;
+
+  & li {
+    padding-block: 0.6rem;
+    border-block-end: 1px solid var(--risa-line);
+  }
+
+  & li::marker {
+    font-weight: 700;
+  }
+
+  & a {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  & span {
+    display: block;
+    color: var(--risa-ink-2);
+    font-size: 1rem;
+  }
+}

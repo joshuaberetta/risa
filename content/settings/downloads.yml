@@ -1,0 +1,7 @@
+# Written by scripts/sync-downloads.sh. Don't edit by hand; re-run the script.
+version: '2026111201'
+synced: '2026-11-12'
+files:
+  template: { path: /files/RISA_template_2026111201.xlsx, bytes: 28919 }
+  codebook: { path: /files/codebook.md, bytes: 26375 }
+  legacyCodes: { path: /files/legacy_codes.csv, bytes: 6927 }

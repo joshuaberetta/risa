@@ -1,0 +1,173 @@
+.plain {
+  padding-block: 3rem 1rem;
+}
+
+/* The opening band of a deployment or guide page: Handbook's hero, smaller. */
+.head {
+  border-block-end: 1px solid var(--risa-line);
+  padding-block: 2.4rem 2rem;
+
+  & h1 {
+    font-size: clamp(2rem, 1.5rem + 2vw, 2.6rem);
+    line-height: 1.15;
+    margin: 0.3rem 0 0.8rem;
+    max-inline-size: 26ch;
+  }
+}
+
+.crumbs {
+  margin: 0;
+  color: var(--risa-ink-2);
+}
+
+.lead {
+  font-size: 1.25rem;
+  max-inline-size: 40em;
+  margin: 0;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2.4rem;
+  margin: 1.4rem 0 0;
+
+  & dt {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--risa-ink-2);
+  }
+
+  & dd {
+    margin: 0;
+  }
+}
+
+.keyFacts {
+  margin: 0 0 2rem;
+  padding: 1rem 1.2rem;
+  background: var(--risa-surface);
+  border-inline-start: 5px solid var(--risa-ink-2);
+
+  & > div {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 1rem;
+    padding-block: 0.3rem;
+  }
+
+  & dt {
+    font-weight: 600;
+  }
+
+  & dd {
+    margin: 0;
+  }
+}
+
+.block {
+  margin-block-start: 2.6rem;
+  scroll-margin-block-start: 1.5rem;
+
+  & h2 {
+    font-size: 1.75rem;
+    margin: 0 0 0.8rem;
+  }
+}
+
+.lessons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  & li {
+    position: relative;
+    padding-inline-start: 1.2rem;
+    margin-block-end: 0.6rem;
+  }
+
+  & li::before {
+    content: '–';
+    position: absolute;
+    inset-inline-start: 0;
+    color: var(--risa-ink-2);
+  }
+}
+
+.note {
+  margin-block: 2rem 0;
+  padding-inline-start: 0.8rem;
+  border-inline-start: var(--risa-rule);
+  color: var(--risa-ink-2);
+  font-size: 1rem;
+
+  & b {
+    color: var(--risa-ink);
+  }
+}
+
+/* The guide's own page list, under the contents. */
+.guideNav {
+  margin-block-start: 2rem;
+
+  & h2 {
+    font-size: 1.1rem;
+    margin: 0 0 0.6rem;
+  }
+
+  & a[aria-current='page'] {
+    color: var(--risa-ink);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  @media (max-width: 56.25em) {
+    display: none;
+  }
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-start: 3rem;
+  padding-block-start: 1.2rem;
+  border-block-start: 4px solid var(--risa-ink);
+
+  & a {
+    display: grid;
+    gap: 0.1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    max-inline-size: 48%;
+  }
+
+  & a[data-next] {
+    text-align: end;
+  }
+
+  & small {
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: var(--risa-ink-2);
+  }
+}
+
+.source {
+  margin-block: 2rem 0;
+  font-size: 0.95rem;
+  color: var(--risa-ink-2);
+
+  & code {
+    font-family: var(--risa-font-mono);
+  }
+}
+
+.notFound {
+  padding-block: 6rem;
+
+  & h1 {
+    font-size: 2.6rem;
+    margin: 0.4rem 0 1rem;
+  }
+}

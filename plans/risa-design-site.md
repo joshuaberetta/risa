@@ -1,6 +1,6 @@
 # Plan: RISA brand identity and design options site
 
-Status: draft, not started.
+Status: done; superseded by [`website-build.md`](website-build.md) (12 Nov 2026). The review site now lives in `public/designs/`, served at `/designs/`.
 
 A static review site, modelled on `~/Desktop/work/repos/hda-website`, where the RISA owners (HI/Atlas Logistique, MapAction, Kobo) can compare several brand directions for RISA, rank their favourites by link, and converge on one in a second round. Source material: the Notion workstream page "Atlas / MapAction / HOT - RISA Methodology and tooling" (summary, RISA in Brief v2, SOP v2, Annex D, 30 Sep call notes).
 
@@ -133,6 +133,7 @@ Timing: the Lyon workshop (29-30 Oct) is now, so aim to have round one ready for
 
 ## 9. Decisions (29 Oct 2026)
 
+- **The vote (Nov 2026):** the team chose **Theme G, Handbook** and **logo 10b, Grid track, layered**. The website is built from them (`plans/website-build.md`); `GT_DEFAULTS` is frozen as the logo's geometry unless the team sends a `?gt=` code.
 - **Brand architecture:** standalone methodology brand, with a "developed by HI/Atlas Logistique, MapAction and Kobo" line. A national authority's logo can lead.
 - **HOT:** originally left off round one; now named as a collaborator (see governance below).
 - **Governance (29 Oct):** founding members Kobo, MapAction, HI/Atlas Logistique; advisory board (members TBC); collaborators HOT, HeiGIT; humanitarian partners OCHA, UNDAC, IOM, UNHCR; national and local partners (INGD Mozambique, SADC SHOC, Bahamas authority, Flying Labs); funded by Luxembourg and ECHO. Shown on an About page.

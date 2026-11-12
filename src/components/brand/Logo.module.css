@@ -1,0 +1,71 @@
+/* Ported from the lockup CSS in public/designs/assets/logos.js (wm-public). */
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--logo-ink);
+  line-height: 1;
+  vertical-align: middle;
+
+  &[data-layout='stacked'] {
+    flex-direction: column;
+    gap: 0.55em;
+    text-align: center;
+
+    & .mark {
+      block-size: 3.8em;
+    }
+
+    & .wordmark {
+      flex-direction: column;
+      gap: 0.45em;
+    }
+
+    & .wordmark small {
+      border-inline-start: 0;
+      padding-inline-start: 0;
+    }
+
+    & .wordmark br {
+      display: none;
+    }
+  }
+}
+
+.mark {
+  display: block;
+  flex: none;
+  block-size: 2.5em;
+
+  & svg {
+    display: block;
+    block-size: 100%;
+    inline-size: auto;
+    overflow: visible;
+  }
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  white-space: nowrap;
+  font-family: 'Public Sans Variable', 'Public Sans', system-ui, sans-serif;
+
+  & b {
+    font-size: 1.72em;
+    line-height: 0.8;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+  }
+
+  & small {
+    font-size: 0.5em;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding-inline-start: 0.75em;
+    border-inline-start: 1.5px solid currentColor;
+  }
+}

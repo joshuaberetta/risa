@@ -1,0 +1,23 @@
+.offsite {
+  margin-inline-start: 0.15em;
+  vertical-align: -0.1em;
+}
+
+.link {
+  font-weight: 600;
+}
+
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.4rem;
+  margin: 1.6rem 0 0;
+}
+
+/* The secondary button: ink outline, grey on hover (white on dark bands). */
+.secondary {
+  --button-bd: 2px solid var(--risa-ink);
+  --button-color: var(--risa-ink);
+  --button-hover: var(--risa-surface);
+}

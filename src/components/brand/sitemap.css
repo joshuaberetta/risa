@@ -1,0 +1,57 @@
+/*
+ * The sample site map (src/lib/sitemap.ts), ported from the review site's
+ * base.css. Map colours are the map's own, as on a printed product; status
+ * colours are the reserved --risa-st-* set (DESIGN.md).
+ */
+.risa-sitemap {
+  --map-paper: #f3f2ee;
+  --map-site: #e4e2db;
+  --map-water: #a9c6e0;
+  --map-tent: #9aa6b3;
+  --map-ink: #1d232b;
+  --map-street: #fff;
+  --map-street-case: #c4c6c9;
+  --map-grid: rgb(29 35 43 / 0.1);
+  --risa-hz-flood: #2f74b5;
+  --risa-hz-flood-fill: rgb(47 116 181 / 0.16);
+  --risa-hz-debris: #7b5a3c;
+
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.sitemap { display: block; width: 100%; height: 100%; font-family: var(--risa-font-mono); }
+.sitemap .is-off { display: none; }
+.sm-paper { fill: var(--map-paper); }
+.sm-site { fill: var(--map-site); }
+.sm-river { fill: none; stroke: var(--map-water); stroke-linecap: round; }
+.sm-grid path { stroke: var(--map-grid); stroke-width: 1; }
+.sm-grid-labels { font-size: 11px; fill: var(--map-ink); opacity: .45; }
+.sm-street { stroke: var(--map-street); stroke-width: 9; }
+.sitemap--map .sm-street { stroke: var(--map-street); filter: drop-shadow(0 0 .6px var(--map-street-case)); }
+.sitemap:not(.sitemap--map) .sm-street { stroke: #D9CCAF; stroke-width: 8; opacity: .8; }
+.sm-fence { stroke: var(--map-ink); stroke-width: 1.4; stroke-dasharray: 6 4; opacity: .55; }
+.sitemap:not(.sitemap--map) .sm-fence { stroke: #fff; opacity: .7; }
+.sm-tents { fill: var(--map-tent); }
+.sm-casing { stroke: #fff; stroke-linecap: butt; }
+.sm-cut path { stroke: var(--risa-st-no); stroke-width: 4; stroke-linecap: round; }
+.sm-flood { stroke: var(--hz-flood); stroke-width: 1.5; }
+.sm-debris { stroke: var(--hz-debris); stroke-width: 1.5; }
+.sm-sym text, .sm-lz text, .sm-choke text { font-family: var(--mantine-font-family); }
+.sm-gate rect { fill: var(--map-ink); stroke: #fff; stroke-width: 2; }
+.sm-lz circle { fill: #fff; stroke: var(--map-ink); stroke-width: 2.5; }
+.sm-lz text { font-size: 17px; font-weight: 800; fill: var(--map-ink); }
+.sm-choke path { fill: var(--risa-st-partial); stroke: var(--risa-st-ink); stroke-width: 1.6; stroke-linejoin: round; }
+.sm-choke text { font-size: 14px; font-weight: 800; fill: var(--risa-st-ink); }
+.sm-labels text { paint-order: stroke; stroke: #fff; stroke-width: 3.5px; stroke-linejoin: round; fill: var(--map-ink); }
+.sitemap:not(.sitemap--map) .sm-labels text { stroke: rgb(0 0 0 / .55); fill: #fff; }
+.sm-block-label { font-size: 22px; font-weight: 600; text-anchor: middle; opacity: .8; }
+.sm-road-label { font-size: 13px; font-weight: 600; }
+.sm-place { font-size: 12px; text-anchor: middle; }
+.sm-water { font-size: 13px; font-style: italic; fill: #2F5F8C !important; }
+.sm-hazard-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; fill: var(--hz-flood) !important; }
+.sm-furniture text { font-size: 11px; fill: var(--map-ink); paint-order: stroke; stroke: #fff; stroke-width: 3px; }
+.sm-north { fill: var(--map-ink); stroke: #fff; stroke-width: 1.5; }
+.sm-scale-a { fill: var(--map-ink); stroke: var(--map-ink); }
+.sm-scale-b { fill: #fff; stroke: var(--map-ink); }
+

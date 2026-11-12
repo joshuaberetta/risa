@@ -1,0 +1,121 @@
+.header {
+  position: relative;
+  z-index: 10;
+  border-block-end: 1px solid var(--risa-line);
+  background: var(--risa-paper);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem 2rem;
+  min-block-size: var(--risa-header-height);
+  padding-block: 0.6rem;
+}
+
+.brand {
+  flex: none;
+  font-size: 14px;
+  text-decoration: none;
+
+  /* On narrow phones the two-line name doesn't fit beside the menu button. */
+  @media (max-width: 30em) {
+    & small {
+      display: none;
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.desktop {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-inline-start: auto;
+
+  @media (max-width: $mantine-breakpoint-md) {
+    display: none;
+  }
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.3rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  & a {
+    color: var(--risa-ink);
+    font-size: 1rem;
+    text-decoration: none;
+
+    &:hover,
+    &[aria-current='page'] {
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 0.3em;
+    }
+  }
+}
+
+.mobile {
+  display: none;
+  margin-inline-start: auto;
+
+  @media (max-width: $mantine-breakpoint-md) {
+    display: block;
+  }
+
+  & summary {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    border: 2px solid var(--risa-ink);
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+
+  &[open] summary {
+    background: var(--risa-ink);
+    color: var(--risa-paper);
+  }
+}
+
+.panel {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 100%;
+  padding: 0.6rem 1rem 1.2rem;
+  background: var(--risa-paper);
+  border-block-end: 4px solid var(--risa-ink);
+}
+
+.mobileLinks {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+
+  & a {
+    display: block;
+    padding: 0.7rem 0;
+    border-block-end: 1px solid var(--risa-line);
+    color: var(--risa-ink);
+    font-size: 1.1rem;
+    text-decoration: none;
+
+    &[aria-current='page'] {
+      font-weight: 700;
+    }
+  }
+}

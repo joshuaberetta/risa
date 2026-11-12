@@ -1,0 +1,95 @@
+.wrap {
+  margin: 0;
+
+  & > svg {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+    background: var(--risa-surface);
+    border: 1px solid var(--risa-line);
+  }
+}
+
+.countries path {
+  fill: var(--risa-line-soft);
+  stroke: var(--risa-surface);
+  stroke-width: 0.5;
+
+  &[data-hot] {
+    fill: var(--risa-line);
+  }
+}
+
+/* Responses in blue, everything else in ink; planned ones are a dashed outline. */
+.core {
+  fill: var(--risa-ink);
+  stroke: var(--risa-paper);
+  stroke-width: 2.4;
+}
+
+.pin {
+  cursor: pointer;
+
+  &[data-response] .core {
+    fill: var(--risa-link);
+  }
+
+  &[data-status='planned'] .core {
+    fill: var(--risa-paper);
+    stroke: var(--risa-ink);
+    stroke-dasharray: 3 2;
+  }
+
+  &[data-response][data-status='planned'] .core {
+    stroke: var(--risa-link);
+  }
+
+  &:hover .core,
+  &:focus-visible .core {
+    stroke: var(--risa-ink);
+    stroke-width: 3.5;
+    stroke-dasharray: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  margin-block-start: 0.8rem;
+  font-size: 0.95rem;
+  color: var(--risa-ink-2);
+
+  & span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  & svg {
+    inline-size: 16px;
+    block-size: 16px;
+    overflow: visible;
+  }
+
+  & span:first-child .core {
+    fill: var(--risa-link);
+  }
+}
+
+.planned {
+  inline-size: 14px;
+  block-size: 14px;
+  border-radius: 50%;
+  border: 2px dashed var(--risa-ink);
+}
+
+.hot {
+  inline-size: 14px;
+  block-size: 14px;
+  background: var(--risa-line);
+}

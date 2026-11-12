@@ -1,106 +1,94 @@
-# RISA: design options
+# RISA website
 
-A static review site for the RISA (Rapid Infrastructure and Service Assessment) brand identity, live at **https://risa.kobolabs.dev**. It compares several design directions across a website, a style guide, the three-page RISA product and collateral, and lets the consortium rank favourites by link. It is modelled on the HDA review site (`~/Desktop/work/repos/hda-website`) and reuses its review bar, rank-by-link results page and token system.
+The website for RISA (Rapid Infrastructures & Services Assessment, name pending sign-off), at **https://risa.kobolabs.dev**. It's the RISA handbook online: the method, the product, the toolbox, a data collection guide with the form template downloads, the deployments, and the Adopt RISA and feedback forms.
 
-The plan, decisions and open questions are in [`plans/risa-design-site.md`](plans/risa-design-site.md).
+It uses React 19, Mantine 9, React Router 8 and Vite 8, prerendered to static HTML, the same stack as hda-website and kobo.ngo. The design is Theme G, Handbook, with logo 10b, as chosen in the design review ([`DESIGN.md`](DESIGN.md)). The build plan and its progress are in [`plans/website-build.md`](plans/website-build.md).
 
-No build step and no dependencies. Plain HTML, CSS and JS in `site/`.
+The design review that came before it is kept, unchanged, at **[/designs/](https://risa.kobolabs.dev/designs/)** (see [below](#the-design-review-designs)).
 
-## Preview locally
+## Run it
+
+Node 22.
 
 ```sh
-cd site
-python3 -m http.server 8787
-# open http://localhost:8787
+npm install
+npm run dev            # http://localhost:5173, with hot reload
+npm run lint:content   # check everything in content/
+npm run build          # type-check, build and prerender to dist/
+npm run preview        # serve dist/ at http://localhost:4173, as the host will
 ```
 
-Any static server works. Pages use relative paths.
+`npm run build` writes one HTML file per page (29 at the moment), a `404.html` that forwards old review-site links, `sitemap.xml` and `robots.txt`. Set `NOINDEX=true` to keep search engines out (the live draft does) and `SITE_URL` for canonical links.
 
-## What's in it
+Screenshots: `scripts/shot.sh <path> <out.png> [width] [height]` renders a page from `npm run preview` with headless Chrome. Phone widths (under 500px) are rendered in an iframe, because Chrome won't make a window that narrow.
 
-| Path | What |
+## What's where
+
+```
+content/            every word on the site (format: content/README.md)
+  pages/            home, method, product, toolbox, deployments, about, adopt, feedback
+  deployments/      one file per deployment: /deployments/<id>
+  resources/        one file per toolbox item
+  guide/            the data collection guide: /guide, /guide/<slug>
+  settings/         site.yml (name, contact, partners, nav), downloads.yml (written by the sync)
+src/
+  components/       layout, sections (one per section type), brand (logo, status, maps, product), guide, library
+  lib/              content loading, types, status, logo, site map, world map, QR codes, formatting
+  theme/            Mantine theme and global CSS
+  pages/            page templates: content pages, deployment profiles, guide pages, not found
+public/
+  designs/          the design review site (plain HTML, no build), served at /designs/
+  files/            downloads, copied from risa-dashboard: never edit them here
+  favicon.svg       generated from the logo (node scripts/favicon.mjs)
+scripts/
+  markdown.mjs      Markdown and front matter to data, at build time (used by Vite and the validator)
+  validate-content.mjs, prerender.mjs, credentials.mjs, sync-downloads.sh, favicon.mjs, shot.sh
+  build-pages.py    for the review site at public/designs/ only
+.do/app.yaml        the DigitalOcean App Platform spec
+```
+
+Copy lives only in `content/`. Pages are YAML front matter drawn by a section renderer. Guide and deployment pages also have Markdown bodies, which are rendered at build time, so the browser never parses Markdown. The format, including callouts, tabs, AI prompts and TBC markers, is in [`content/README.md`](content/README.md).
+
+## The form template downloads
+
+The XLSForm template, its codebook and the legacy code mapping live in the risa-dashboard repo (`templates/xlsform/`). This site serves copies:
+
+```sh
+npm run sync:downloads                              # from ../risa-dashboard
+DASHBOARD=~/code/risa-dashboard npm run sync:downloads
+```
+
+The sync copies the newest `RISA_template_<version>.xlsx`, `codebook.md` and `legacy_codes.csv` into `public/files/`, removes older templates, and writes `content/settings/downloads.yml` (the version, the file names and sizes, and the date). The download card and the searchable codebook on `/guide/template` read from those. Commit the result.
+
+The template is offered on the guide as a **test version**, until the `xlsform` resource is marked `available` (`content/resources/xlsform.md`). Then the toolbox shows its download buttons too.
+
+**Keeping the guide in step.** The guide's text is written from Annex A and Annex F (`risa-dashboard/ref/`) but lives here. When the annexes change, update `content/guide/` and each page's `lastChecked` date.
+
+## Deploy
+
+The site is the DigitalOcean App Platform app `risa-website` (region `fra`), on `risa.kobolabs.dev`. Every push to `main` deploys, so work on a branch.
+
+The spec in `.do/app.yaml` builds with `npm run lint:content && npm run build` and serves `dist/`, with `404.html` as the error page. **Changing the file does nothing on its own: it has to be applied, and applying it replaces the live spec**:
+
+```sh
+doctl apps spec get e7104cd6-e15f-4f06-8ce5-afd75e5afd64   # compare with .do/app.yaml first
+doctl apps update e7104cd6-e15f-4f06-8ce5-afd75e5afd64 --spec .do/app.yaml
+```
+
+**The first deploy of this site needs the spec and the merge together.** The live spec still serves `source_dir: site` with no build. That folder is now `public/designs/`, so merging `website-build` without applying the new spec breaks the deploy, and applying it before the merge breaks the old site. Apply it right after the merge.
+
+## Old links
+
+Reviewers pasted links such as `risa.kobolabs.dev/themes/handbook/index.html?logo=gridtrack-layers` into the voting doc. The 404 page sends them on before anything loads (`legacyRedirect()` in `src/lib/url.ts`, inlined by `scripts/prerender.mjs`; `NotFound` does the same on the dev server):
+
+| Old | New |
 |---|---|
-| `site/index.html` | Review hub: brief, how to review, direction cards, logo overview, design principles |
-| `site/themes/<id>/index.html` | Home page: the RISA methodology site, in nine directions: `briefing` (A), `groundtruth` (B), `overhead` (C), `streams` (D), `sharedground` (E), `first72` (F), and three deliberately plain ones, `handbook` (G), `report` (H) and `noticeboard` (I) |
-| `site/themes/<id>/style-guide.html` | Logo use (incl. co-branding with a national authority), colour, **reserved status colours**, type, components, **map symbology**, graphics, voice |
-| `site/themes/<id>/about.html` | What RISA is and its layers of governance: founding members, collaborators, partners and funders |
-| `site/themes/<id>/toolbox.html` | The toolbox: SOP, annexes A–E, forms, map templates, training material and the brief, with version, status, owner and a download or request link |
-| `site/themes/<id>/deployments.html` | World map of every response, training, workshop and event, with filters and the matching list |
-| `site/themes/<id>/deployment.html?d=<id>` | One profile per deployment: key facts, locator map, story, lessons, products, toolbox items used |
-| `site/themes/<id>/product.html` | The three-page RISA product (map, key findings, hotspot) and a working mock of the interactive viewer |
-| `site/themes/<id>/collateral.html` | RISA in Brief (A4 two-pager), ToT/SIMEX slides, workshop stand, field kit (ADAK case label, ID card, hi-vis tabard, KoboCollect form), badge, social posts, ToT certificate, email signature |
-| `site/logos/studio.html` | Studio for the chosen logo, 10b Grid track, layered: presets from the three sketches and the November road mock-up (10c), then angle, tilt, mirror, grid, flight-path position and size, leg shape (S-bend, straight, road), drone as dot or map pin, layers (brackets or stacked plates, offset, connectors, dashes) and colours. Apply across the site, share as a link (`?gt=<code>`), copy the settings or download the SVG |
-| `site/logos/index.html` | Eight logo concepts with rationale, greyscale and one-colour tests, imagery, and co-branding |
-| `site/palettes/index.html` | The reserved status set with greyscale and colour-vision simulations, partner colours, theme palettes with WCAG contrast |
-| `site/results/index.html` | Organisers only (not linked from the hub): paste the review doc to tally everyone's top three picks |
+| `/themes/…`, `/logos/…`, `/palettes/…`, `/results/…`, `/assets/…`, `/downloads/…` | the same path under `/designs/`, with the query string and hash |
+| `/downloads/RISA_template.xlsx`, `/downloads/RISA_codebook.md` | the current files in `/files/` |
+| `/deployment.html?d=<id>` | `/deployments/<id>` |
 
-### Review bar
+## The design review (`/designs/`)
 
-Every themed page has a toolbar that switches **theme**, **page (Home / Style guide / Product / About / Toolbox / Deployments / Collateral)** and **logo (1–8)**. On a deployment profile, **Copy link** keeps `?d=<id>`. Only themes marked `ready: true` in `assets/themes.js` appear in it.
+`public/designs/` is the review site, moved here with `git mv` from `site/`, history kept. It's the record of the review (nine directions, eleven logo concepts, the logo studio, the results tally), so don't edit it for website work. Vite copies it to `dist/designs/` unchanged. Every page carries `noindex`, and `robots.txt` disallows `/designs/`.
 
-- The logo choice is remembered across pages.
-- Share a combination with `?logo=<id>`. **Copy link** always writes the explicit logo id.
-- `?logo=default` resets to the theme's paired logo.
-- On collateral pages, `?slides=all` shows every slide in a grid.
-- `?clean` starts with the bar collapsed; `?shot` hides it completely.
-
-### Running a review round
-
-Same as HDA. Reviewers paste their top three **Copy link** URLs under their name in a shared doc:
-
-```
-Name — Organisation
-1. https://risa.kobolabs.dev/themes/briefing/product.html?logo=route
-2. …
-3. …
-Comments: optional
-```
-
-Then paste the doc into `results/index.html` (`?example` shows the format). It tallies themes, logos, combinations and theme × logo pairings, scores rank 1/2/3 as 3/2/1 by default, and can weight organisations equally. **Download recipes.json** exports everything.
-
-### How it's built
-
-- **Status colours:** `assets/base.css` defines `--st-ok`, `--st-partial`, `--st-no`, `--st-unknown` and the hazard colours once, for every theme. Brands must not use red, amber or green. Status is always shown twice, by colour and by line style or symbol shape.
-- **Sample site:** `assets/sitemap.js` draws one fictional displacement site as inline SVG (`data-graphic="site"`), in map, drone (`data-mode="ortho"`) or blurred satellite (`sat`) style, before or after the flood (`data-time`), full or zoomed on the hotspot (`data-view`), with switchable layers (`data-layers`). `RISASite.summary()` gives the counts the product page uses, so numbers always match the map.
-- **Tokens:** `themes/<id>/tokens.css` defines colours, fonts and radius scoped to `[data-theme="<id>"]`. `.inverse` holds the dark-section overrides.
-- **Theme styles:** `themes/<id>/theme.css` contains the page layout and the shared component classes (`.btn`, `.tag`, `.card`, `.input`, `.link-arrow`, `.eyebrow`).
-- **Logos:** `assets/logos.js` draws each mark as inline SVG coloured by `--logo-a` to `--logo-d`, `--logo-ink` and `--logo-bg`. Add `data-risa-logo="horizontal|stacked|mark"` to an element to render one.
-- **Product:** `assets/product.js` and `product.css` render the three pages at A3 landscape proportions, scaled in container units, plus the interactive mock.
-- **Collateral:** `assets/collateral.js` renders every collateral piece from one template; a `FLAVOUR` entry per theme picks the cover style, artwork and texture.
-- **Theme metadata:** `assets/themes.js` holds names, rationale, swatches and the `ready` flag.
-- **Toolbox and deployments content:** `assets/content.js` holds every deployment and resource, the same in all themes. Edit it there; anything unconfirmed carries `tbc: true` or a `note`. `assets/library.js` renders the three pages; `assets/world.js` is the Natural Earth world outline, pre-projected to Equal Earth (copied from the kobo.ngo site), and pins use the same projection.
-- **Generated pages:** `scripts/build-pages.py` writes each theme's `toolbox.html`, `deployments.html` and `deployment.html` from its home page's head, header and footer, points the nav at them and adds links under the home page's toolbox and deployments sections. It also puts the shared “Who it’s for” section straight after each home page’s hero and moves the owners strip to the bottom, so audiences come first and owners second. Re-run it after changing a theme's header or footer.
-
-### Adding a direction
-
-1. Copy `site/themes/briefing/` to `site/themes/<id>/` and change `data-theme`, `data-theme-id` and the titles.
-2. Write its `tokens.css` and `theme.css`.
-3. Add a `FLAVOUR` entry in `assets/collateral.js`, fill `swatches` and set `ready: true` in `assets/themes.js`, and add its tokens to `palettes/index.html`.
-4. Regenerate its hub thumbnail (below).
-
-### Regenerating hub thumbnails
-
-With the local server running (needs Google Chrome):
-
-```sh
-for id in briefing groundtruth overhead streams sharedground first72 handbook report noticeboard; do
-  scripts/shot.sh "themes/$id/index.html?shot&logo=default" /tmp/$id.png 1440 900
-  sips -Z 960 -s format jpeg -s formatOptions 78 /tmp/$id.png --out site/assets/thumbs/$id.jpg
-done
-```
-
-## Deployment
-
-The site is hosted on DigitalOcean App Platform as a static site (app `risa-website`, region `fra`, source directory `site`, no build command), the same setup as HDA. It is live at **https://risa.kobolabs.dev**. The DNS record lives in the `kobolabs.dev` zone on DigitalOcean.
-
-**Every push to `main` deploys automatically.**
-
-Pages carry `<meta name="robots" content="noindex">`. Keep that while the site is a review site.
-
-## Content notes
-
-- Copy follows RISA SOP v2 and RISA in Brief v2 (observation-only field data, six steps), from the Notion workstream page.
-- Governance (About page): founding members Kobo, MapAction and HI/Atlas Logistique; an advisory board (members to be confirmed); collaborators HOT and HeiGIT; humanitarian partners OCHA, UNDAC, IOM and UNHCR; national and local partners such as INGD (Mozambique), SADC SHOC, the Bahamas disaster management authority and Flying Labs; funded by Luxembourg and ECHO. Roles not described in the consortium documents are marked TBC.
-- All maps and figures use a fictional sample site and are marked as such. Dates and figures marked **TBC** are placeholders.
-- Partner names appear as text; official logos would be swapped in once a direction is chosen.
-- Partner colours were sampled in October 2026: HI/Atlas Logistique from hi.org, MapAction from its site stylesheet and logo, Kobo from its `colors.scss`. Themes use the shared cool families (navy, blue, teal, indigo) and HI sand. HI orange and yellow and MapAction red are held back because they read as status. None of this is an official brand specification.
+To preview it on its own: `cd public/designs && python3 -m http.server 8787`. All of its paths are relative. `scripts/build-pages.py` regenerates its toolbox and deployment pages, and is for the review site only. The logo studio (`/designs/logos/studio.html`) still makes `?gt=` codes. If the team sends one, put its values into `LOGO_GEOMETRY` in `src/lib/logo.ts`, then run `node scripts/favicon.mjs`.

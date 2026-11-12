@@ -1,0 +1,250 @@
+/* The reading column's typography, for Markdown rendered at build time. */
+.prose {
+  & > :first-child > :first-child {
+    margin-block-start: 0;
+  }
+}
+
+.html,
+.callout,
+.panel {
+  & p,
+  & ul,
+  & ol {
+    margin-block: 0 1rem;
+  }
+
+  & ul,
+  & ol {
+    padding-inline-start: 1.4em;
+  }
+
+  & li + li {
+    margin-block-start: 0.35rem;
+  }
+
+  & h2 {
+    font-size: 1.75rem;
+    margin-block: 2.6rem 1rem;
+  }
+
+  & h3 {
+    font-size: 1.3rem;
+    margin-block: 2rem 0.7rem;
+  }
+
+  & h4 {
+    font-size: 1.1rem;
+    margin-block: 1.4rem 0.5rem;
+  }
+
+  & code {
+    font-family: var(--risa-font-mono);
+    font-size: 0.88em;
+    padding: 0 0.2em;
+    background: var(--risa-surface);
+    overflow-wrap: anywhere;
+  }
+
+  & pre {
+    margin-block: 0 1rem;
+    padding: 1rem;
+    background: var(--risa-surface);
+    overflow-x: auto;
+    font-size: 0.9rem;
+
+    & code {
+      padding: 0;
+      background: none;
+    }
+  }
+
+  & blockquote {
+    margin: 0 0 1rem;
+    padding-inline-start: 1rem;
+    border-inline-start: var(--risa-rule);
+    color: var(--risa-ink-2);
+  }
+
+  & hr {
+    border: 0;
+    border-block-start: 1px solid var(--risa-line);
+    margin-block: 2rem;
+  }
+
+  & strong {
+    font-weight: 700;
+  }
+}
+
+/* Tables: plain rules, a heavier rule under the head, and sideways scroll on small screens. */
+.prose :global(.md-table) {
+  overflow-x: auto;
+  margin-block: 0.6rem 1.4rem;
+}
+
+.prose table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+
+  & th,
+  & td {
+    text-align: start;
+    vertical-align: top;
+    padding: 0.6rem 1rem 0.6rem 0;
+    border-block-end: 1px solid var(--risa-line);
+  }
+
+  & thead th {
+    font-weight: 700;
+    border-block-end: 2px solid var(--risa-ink);
+  }
+}
+
+/* Callouts: a grey panel with Handbook's 4px rule at the start. */
+.callout {
+  margin-block: 1.6rem;
+  padding: 1rem 1.2rem;
+  background: var(--risa-surface);
+  border-inline-start: var(--risa-rule);
+
+  & > :last-child > :last-child,
+  & > :last-child {
+    margin-block-end: 0;
+  }
+
+  &[data-tone='failure'] {
+    border-inline-start-color: var(--risa-ink);
+  }
+
+  &[data-tone='kobo-mcp'] {
+    border-inline-start-color: var(--risa-link);
+  }
+}
+
+.calloutLabel {
+  margin-block: 0 0.4rem;
+  font-weight: 700;
+  color: var(--risa-ink);
+}
+
+/* Tabs: underlined labels, as in Handbook's segmented filters. */
+.tabs {
+  margin-block: 1.6rem;
+}
+
+.tablist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.6rem;
+  border-block-end: 1px solid var(--risa-line);
+  margin-block-end: 1.4rem;
+
+  & button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0;
+    margin-block-end: -1px;
+    border: 0;
+    border-block-end: 4px solid transparent;
+    background: none;
+    font: inherit;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--risa-link);
+    cursor: pointer;
+
+    &[aria-selected='true'] {
+      color: var(--risa-ink);
+      border-block-end-color: var(--risa-ink);
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.panelTitle {
+  display: none;
+}
+
+/* Without JavaScript, every panel shows under its own heading. */
+:global(html:not(.js)) {
+  & .tablist {
+    display: none;
+  }
+
+  & .panel[hidden] {
+    display: block;
+  }
+
+  & .panelTitle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-block: 2rem 0.8rem;
+  }
+}
+
+.badge {
+  padding: 0 0.4em;
+  border: 1px solid currentColor;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Prompts for an AI assistant: the words to type, then the tool they call. */
+.prompt {
+  margin: 0 0 1.1rem;
+  border: 2px solid var(--risa-ink);
+
+  & blockquote {
+    margin: 0;
+    padding: 0.8rem 1rem;
+    border: 0;
+    color: var(--risa-ink);
+    font-size: 1.05rem;
+    white-space: pre-wrap;
+  }
+
+  & figcaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.35rem 0.4rem 0.35rem 1rem;
+    background: var(--risa-surface);
+    border-block-start: 1px solid var(--risa-line);
+    font-size: 0.9rem;
+    color: var(--risa-ink-2);
+  }
+
+  & code {
+    font-family: var(--risa-font-mono);
+    color: var(--risa-ink);
+  }
+}
+
+.copy {
+  padding: 0.2rem 0.7rem;
+  border: 2px solid var(--risa-ink);
+  background: var(--risa-paper);
+  color: var(--risa-ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--risa-surface);
+  }
+}
+
+:global(html:not(.js)) .copy {
+  display: none;
+}

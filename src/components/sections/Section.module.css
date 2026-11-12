@@ -1,0 +1,15 @@
+.section {
+  margin-block-end: 3.2rem;
+  scroll-margin-block-start: 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin: 0 0 1rem;
+}
+
+.intro {
+  font-size: 1.2rem;
+  margin: 0 0 1.2rem;
+  max-inline-size: 40em;
+}

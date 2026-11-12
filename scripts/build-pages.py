@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+For the review site at public/designs/ only (not the website).
 Generate each theme's toolbox, deployments and deployment-profile pages from
 its home page, so they share the theme's own <head>, header and footer.
 The page content itself is rendered by assets/library.js.
@@ -12,7 +13,7 @@ under the home page's toolbox and deployments sections. Safe to re-run.
 """
 import pathlib, re, sys
 
-SITE = pathlib.Path(__file__).resolve().parent.parent / 'site'
+SITE = pathlib.Path(__file__).resolve().parent.parent / 'public' / 'designs'
 THEMES = ['briefing', 'groundtruth', 'overhead', 'streams', 'sharedground', 'first72', 'handbook', 'report', 'noticeboard']
 PAGES = {
     'about': ('about.html', 'About', []),

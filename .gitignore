@@ -1,4 +1,11 @@
 docs/
 examples/
 org-websites/
+node_modules/
+dist/
+dist-ssr/
+*.tsbuildinfo
 .DS_Store
+.claude/settings.local.json
+.env
+.env.*

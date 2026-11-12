@@ -1,0 +1,49 @@
+.card {
+  margin-block: 1.6rem;
+  padding: 1.2rem 1.4rem 1.3rem;
+  border: 2px solid var(--risa-ink);
+}
+
+.title {
+  margin: 0 0 0.3rem;
+  font-size: 1.3rem;
+}
+
+.meta {
+  margin: 0 0 0.8rem;
+  color: var(--risa-ink-2);
+  font-size: 1rem;
+}
+
+.status {
+  margin: 0 0 1rem;
+  padding-inline-start: 0.8rem;
+  border-inline-start: var(--risa-rule);
+  font-weight: 600;
+}
+
+.files {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.4rem;
+
+  & li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+}
+
+.size {
+  font-family: var(--risa-font-mono);
+  font-size: 0.85rem;
+  color: var(--risa-ink-2);
+}
+
+.more {
+  margin: 0;
+  font-size: 1rem;
+}

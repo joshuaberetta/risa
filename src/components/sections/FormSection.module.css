@@ -1,0 +1,27 @@
+.form {
+  display: grid;
+  gap: 1.1rem;
+  max-inline-size: 30rem;
+  margin-block-start: 1.2rem;
+}
+
+.field label {
+  font-weight: 600;
+}
+
+.submit {
+  justify-self: start;
+}
+
+.how {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--risa-ink-2);
+}
+
+.sent {
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  border-inline-start: var(--risa-rule);
+  background: var(--risa-surface);
+}
