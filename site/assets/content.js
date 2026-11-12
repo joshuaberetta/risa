@@ -15,6 +15,11 @@
  *   category sop | forms | gis | training | comms
  *   status   available | draft | in-progress | planned
  *   build    for 'available' items generated in the browser (see library.js)
+ *   file     a static file in site/downloads/, as a path from the site root,
+ *            e.g. 'downloads/RISA_template.xlsx'. Shown as "Download <format>"
+ *            only when status is 'available': a static site can't check that
+ *            the file exists, so the status is the switch.
+ *   files    [{ label, file }] instead of file, for items with several files
  */
 window.RISAContent = {
   contact: 'contact@risa-method.org',
@@ -237,10 +242,15 @@ window.RISAContent = {
   resources: [
     { id: 'sop', category: 'sop', code: 'SOP', title: 'Standard operating procedure', version: 'v2', status: 'draft', owner: 'HI/Atlas Logistique · MapAction · Kobo', format: 'PDF', updated: '2026-10-06', languages: ['English'],
       summary: 'The six-step workflow, roles, deployment scenarios and quality checks.',
-      details: ['Steps: mission preparation, field data collection, data processing, GIS integration, dissemination, updating.', 'Principles: rapid, accurate, standardised, operational, scalable and collaborative.', 'Still to complete: section 2.1 (Kobo) and section 2.4 (GIS).'] },
+      details: ['Steps: mission preparation, field data collection, data processing, GIS integration, dissemination, updating.', 'Principles: rapid, accurate, standardised, operational, scalable and collaborative.', 'Section 2.1 (Kobo) is drafted in SOP v3; section 2.4 (GIS) is still to complete.', 'The data collection annex (Annex F, KoboToolbox) replaces the old Kobo guide.'] },
     { id: 'xlsform', category: 'forms', code: 'Annex A', title: 'Master XLSForm', version: 'draft', status: 'in-progress', owner: 'Kobo', format: 'XLSX (XLSForm)', languages: ['English'],
-      summary: 'The KoboCollect site observation survey, recorded by direct observation rather than interviews.',
-      details: ['Covers access constraints, water, sanitation, health, protection, storage and logistics.', 'Works offline and syncs when there’s a connection.', 'Status choices match the map: working, partly working, not working, not assessed.'] },
+      file: 'downloads/RISA_template.xlsx',
+      summary: 'The RISA site observation form: one observed feature per submission, recorded by direct observation rather than interviews.',
+      details: ['Each submission is one feature: pick the sector, then the feature type, then give its map ID, status, count, location and up to three photos.', 'Sectors: WASH, shelter, health, protection, food, logistics, access, energy, environment, commerce and other.', 'Status choices match the reserved map colours: Working, Partly working, Not working, Can’t see. Partly and not working ask why.', 'Works offline in KoboCollect or in the browser with Enketo, and syncs when there’s a connection.', 'Feeds the RISA dashboard with no setup: the field names are the data contract.', 'English base form; countries add their own languages.'] },
+    { id: 'codebook', category: 'forms', code: 'Annex A', title: 'Codebook (data dictionary)', version: 'draft', status: 'in-progress', owner: 'Kobo', format: 'Markdown', languages: ['English'],
+      file: 'downloads/RISA_codebook.md',
+      summary: 'Every field in the master XLSForm: its name, type, choices and what the dashboard does with it.',
+      details: ['The sector to feature type list, with the RISA map type codes.', 'Status codes ok, partial, no and unknown, as used by the map symbols.', 'Also included as a sheet in the template.'] },
     { id: 'gis-standards', category: 'gis', code: 'Annex B', title: 'GIS standards and symbology', version: 'draft', status: 'in-progress', owner: 'MapAction', format: 'PDF · QML styles', languages: ['English'],
       summary: 'Data model, naming, metadata and the shared map symbology.',
       details: ['Uses the reserved status colours and the line-style and symbol rules from the style guide.', 'Follows OCHA humanitarian icon conventions.'] },

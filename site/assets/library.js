@@ -309,6 +309,10 @@
   // ---- toolbox ----------------------------------------------------------------
   function action(r) {
     if (r.build) return `<button class="btn btn--primary btn--sm" type="button" data-build="${r.build}">${icon('i-download')} Download ${r.format}</button>`;
+    // Static files in site/downloads/. A static site can't tell whether a file
+    // exists, so the link only shows once the item is marked available.
+    const files = r.status === 'available' ? (r.files || (r.file ? [{ label: `Download ${r.format}`, file: r.file }] : [])) : [];
+    if (files.length) return files.map((f, i) => `<a class="btn ${i ? 'btn--secondary' : 'btn--primary'} btn--sm" href="${root}${f.file}" download>${icon('i-download')} ${esc(f.label)}</a>`).join(' ');
     if (r.status === 'available' && r.preview) return `<a class="btn btn--primary btn--sm" href="${r.preview}">${icon('i-eye')} Open</a>`;
     // Drafts aren't public yet; the consortium shares them directly for now.
     const ask = `<span class="lib-ask">${r.status === 'planned' ? 'Planned' : 'Draft, not yet shared'}</span>`;

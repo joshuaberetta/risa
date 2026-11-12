@@ -311,7 +311,7 @@
     const phone = doc('phone', `<div class="cl-phone">
         <header class="cl-phone-top">${logo('mark', 'cl-phone-mark')}<div><b>RISA site observation</b><span>v2 · Sample site 07</span></div></header>
         <div class="cl-phone-body">
-          <p class="cl-phone-step">Group 4 of 9 · Water points</p>
+          <p class="cl-phone-step">WASH · Water point</p>
           <label><b>Facility ID</b><span class="cl-phone-input">WP-03</span></label>
           <label><b>Is it working?</b><small>Observe. Don’t ask.</small></label>
           <div class="cl-phone-opts">${pill('ok', 'Working')}${pill('partial', 'Partly')}<span class="st-pill st-pill--no is-on">Not working</span>${pill('unknown', 'Can’t see')}</div>
