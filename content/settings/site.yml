@@ -11,6 +11,11 @@ description: An open method for assessing infrastructure and services in the fir
 contact: contact@risa-method.org
 contactTbc: true
 
+# Where the Adopt RISA and Feedback forms send their answers: the contact-form
+# function, which stores them in KoboToolbox (contact-form/README.md). Leave it
+# empty and the forms open an email to `contact` instead.
+formEndpoint: ''
+
 # The RISA dashboard (MVP). Who runs it for responses is still to be confirmed.
 dashboardUrl: https://risa-dash.kobolabs.dev
 

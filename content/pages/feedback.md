@@ -12,7 +12,7 @@ sections:
     title: Your feedback
     kind: feedback
     subject: RISA feedback
-    submit: Write the email
+    submit: Send
     body: |
       If you came from a map's QR code, the site, product and version are already filled in. Kobo is building a dedicated feedback form for the end of 2026 {tbc}; this page will link to it then.
     fields:

@@ -358,6 +358,12 @@ static_sites:
    - update `plans/risa-design-site.md` status to "superseded by website-build.md" and record the vote (Handbook, 10b) in its decisions.
    - Then open a PR. Don't merge; the user pushes.
 
+**Forms through KoboToolbox (12 Nov 2026).**
+- Adopt RISA and Feedback post to a DigitalOcean Function (`contact-form/`). It stores each message as a submission to a Kobo form built from the site's fields (`build_xlsform.py`), and Kobo's REST services send the notifications.
+- There's an email fallback when `formEndpoint` is empty, when sending fails, and without JavaScript.
+- Tested against a mock Kobo (`npm run test:contact`), and end to end in headless Chrome: prefill, send, the XML Kobo receives, and the fallback.
+- Not yet deployed: it needs the Kobo form, a dedicated submit-only account and its token, and the function deploy (`contact-form/README.md`).
+
 ## Content needed from the team
 
 - [ ] Final 10b geometry: a `?gt=` code from `designs/logos/studio.html`, or confirmation that `GT_DEFAULTS` is final.
@@ -366,7 +372,8 @@ static_sites:
 - [x] Partner names: "Atlas Logistique", a core partner (confirmed 12 Nov 2026). Logos still to come.
 - [ ] Partner logos as they should appear.
 - [ ] Which governance layers and members are confirmed.
-- [ ] Contact address (today `contact@risa-method.org`: confirm it exists).
+- [ ] Contact address (today `contact@risa-method.org`: confirm it exists). It's now only the forms' fallback.
+- [ ] The forms' Kobo project: which organisation account owns it, which server (global or EU), and where the notifications go.
 - [ ] Whether the template download goes live now as a test version, or waits for review of the detail questions by Michael or the Kobo focal point.
 - [ ] A public "RISA template" project on an organisation Kobo account, so `clone_project` can start from it. Who owns it?
 - [ ] Who runs the RISA dashboard for responses, and whether to link it publicly.
@@ -415,7 +422,7 @@ static_sites:
 - **The credential pattern** is narrowed to `password\s*[:=]` (the bare word appears in the guide's explanations). `prerender.mjs` also scans every page it writes.
 - **Checks:**
   - `lint:content` and `build` pass, and 29 pages and the 404 page are prerendered.
-  - No route has a hydration error. `npm run preview` now serves `dist/` like the host (`appType: 'mpa'`). In SPA mode it served the home page's HTML for every path, which looked like a hydration bug.
+  - No route has a hydration error. Each page was checked through a preview server that serves `dist/` the way App Platform does: `/method` is `method/index.html`, and anything missing gets `404.html` (the `staticHost` plugin in `vite.config.ts`). Vite's own preview served the home page's HTML or a 404 for every path, which first looked like a hydration bug and then hid the result of the first check.
   - Screenshots of every route at 1440 and 390 wide are fine. `shot.sh` renders phone widths in an iframe, because Chrome's windows can't go below about 500px.
   - The redirects were tested in the built 404 page and on the dev server.
   - The downloads are byte-identical to risa-dashboard's.

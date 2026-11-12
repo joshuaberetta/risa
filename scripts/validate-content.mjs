@@ -138,6 +138,7 @@ check(sitePath, 'site.yml', site, {
   contact: req((v) => /^[^@\s]+@[^@\s]+$/.test(v), 'an email address'),
   contactTbc: opt((v) => typeof v === 'boolean'),
   dashboardUrl: req((v) => /^https:\/\//.test(v), 'an https URL'),
+  formEndpoint: opt((v) => v === '' || /^https:\/\//.test(v), "an https URL, or '' for email"),
   partners: req(items(), 'a list'),
   endorsers: req(Array.isArray, 'a list'),
   nav: req(isLinks, 'a list of links'),
@@ -200,6 +201,8 @@ for (const p of pages) {
         check(file, `${where}, item ${j + 1}`, item, itemShape);
         if (s.type === 'governance') (item.members ?? []).forEach((m, k) => check(file, `${where}, layer ${item.id}, member ${k + 1}`, m, ITEMS.members));
         if (s.type === 'form' && item.type === 'select' && !item.options?.length) fail(file, `${where}, field ${item.name}: a select needs options`);
+        // Set by the contact form itself (contact-form/): a field can't use these names.
+        if (s.type === 'form' && ['kind', 'page', 'website'].includes(item.name)) fail(file, `${where}: "${item.name}" is reserved by the contact form; rename the field`);
         if (item.link) links.push([file, item.link.href]);
       });
     }

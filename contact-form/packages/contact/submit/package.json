@@ -1,0 +1,6 @@
+{
+  "name": "risa-contact-submit",
+  "private": true,
+  "type": "commonjs",
+  "main": "index.js"
+}

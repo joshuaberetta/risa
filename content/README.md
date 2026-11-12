@@ -55,7 +55,8 @@ Links inside the site start with `/` (`/guide/adapt`). Downloads are `/files/...
 | `nameStatus` | `pending` shows "name pending sign-off" beside it; `agreed` hides that |
 | `shortName` | RISA |
 | `description` | The default page description |
-| `contact`, `contactTbc` | The forms' email address, and whether it's still to be confirmed |
+| `contact`, `contactTbc` | The forms' email address (their fallback), and whether it's still to be confirmed |
+| `formEndpoint` | The contact-form function's URL; empty means the forms open an email |
 | `dashboardUrl` | The RISA dashboard |
 | `partners[]`, `endorsers[]` | `id`, `name`, `role`, `note`, `tbc` |
 | `nav[]`, `cta` | The header links and the header button (`label`, `href`) |
@@ -104,7 +105,7 @@ Every section takes `id`, `title`, `short`, `intro` (a plain paragraph under the
 | `deployments` | `map` (world map), `limit`, `body`, `links[]` |
 | `governance` | `layers[]`: `id`, `name`, `short`, `text`, `hidden`, `tbc`, `members[]` (`name`, `full`, `role`, `tbc`); then `body` |
 | `partners` | the partners and endorsers from site.yml; `body` |
-| `form` | `kind` (`adopt`, `feedback`), `subject`, `fields[]` (`name`, `label`, `type`: text/email/textarea/select, `options[]`, `required`, `hint`, `param`), `submit`, `body`. Submitting opens an email to `contact`. `param` prefills a field from the link's query string |
+| `form` | `kind` (`adopt`, `feedback`), `subject` (for the email fallback), `fields[]` (`name`, `label`, `type`: text/email/textarea/select, `options[]`, `required`, `hint`, `param`), `submit`, `body`. Answers go to the KoboToolbox form through the contact-form function when `formEndpoint` is set, otherwise to an email to `contact`. `param` prefills a field from the link's query string. **After changing fields, rebuild the Kobo form** (`contact-form/README.md`); `kind`, `page` and `website` are reserved |
 | `guide-pages` | the guide's pages, in order; `body` |
 | `callout` | `tone`, `body` |
 

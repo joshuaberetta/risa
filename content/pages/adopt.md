@@ -21,7 +21,7 @@ sections:
     title: Tell us what you need
     kind: adopt
     subject: RISA adoption request
-    submit: Write the email
+    submit: Send
     fields:
       - { name: name, label: Your name, type: text, required: true }
       - { name: organisation, label: Organisation, type: text, required: true }

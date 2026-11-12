@@ -41,6 +41,8 @@ export interface SiteSettings {
   contact: string;
   contactTbc?: boolean;
   dashboardUrl: string;
+  /** The contact-form function. Empty: the forms open an email instead. */
+  formEndpoint?: string;
   partners: Partner[];
   endorsers: Partner[];
   nav: LinkItem[];

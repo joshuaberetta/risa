@@ -43,6 +43,7 @@ public/
 scripts/
   markdown.mjs      Markdown and front matter to data, at build time (used by Vite and the validator)
   validate-content.mjs, prerender.mjs, credentials.mjs, sync-downloads.sh, favicon.mjs, shot.sh
+contact-form/       the forms' DigitalOcean Function, and the Kobo form it writes to
   build-pages.py    for the review site at public/designs/ only
 .do/app.yaml        the DigitalOcean App Platform spec
 ```
@@ -63,6 +64,10 @@ The sync copies the newest `RISA_template_<version>.xlsx`, `codebook.md` and `le
 The template is offered on the guide as a **test version**, until the `xlsform` resource is marked `available` (`content/resources/xlsform.md`). Then the toolbox shows its download buttons too.
 
 **Keeping the guide in step.** The guide's text is written from Annex A and Annex F (`risa-dashboard/ref/`) but lives here. When the annexes change, update `content/guide/` and each page's `lastChecked` date.
+
+## The forms
+
+Adopt RISA and Feedback store their answers in a KoboToolbox form, through a small DigitalOcean Function in [`contact-form/`](contact-form/README.md). Kobo's webhooks then send notifications. Until the function is deployed and `formEndpoint` is set in `content/settings/site.yml`, the forms open an email instead. The Kobo form is generated from the site's form fields (`python3 contact-form/build_xlsform.py`), and the function has its own tests (`npm run test:contact`).
 
 ## Deploy
 

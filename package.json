@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "lint:content": "node scripts/validate-content.mjs",
-    "sync:downloads": "sh scripts/sync-downloads.sh"
+    "sync:downloads": "sh scripts/sync-downloads.sh",
+    "test:contact": "node contact-form/test.mjs"
   },
   "engines": {
     "node": "22.x"

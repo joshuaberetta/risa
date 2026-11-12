@@ -25,3 +25,12 @@
   border-inline-start: var(--risa-rule);
   background: var(--risa-surface);
 }
+
+/* The honeypot: off screen, not display: none (some bots skip hidden fields). */
+.trap {
+  position: absolute;
+  inset-inline-start: -10000px;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+}
