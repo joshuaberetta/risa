@@ -14,7 +14,7 @@ contactTbc: true
 # Where the Adopt RISA and Feedback forms send their answers: the contact-form
 # function, which stores them in KoboToolbox (contact-form/README.md). Leave it
 # empty and the forms open an email to `contact` instead.
-formEndpoint: ''
+formEndpoint: 'https://faas-fra1-afec6ce7.doserverless.co/api/v1/web/fn-ca8f08f4-450c-4cb8-aaae-9cf4d0f506bf/contact/submit'
 
 # The RISA dashboard (MVP). Who runs it for responses is still to be confirmed.
 dashboardUrl: https://risa-dash.kobolabs.dev

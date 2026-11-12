@@ -364,7 +364,8 @@ static_sites:
 - Tested against a mock Kobo (`npm run test:contact`), and end to end in headless Chrome: prefill, send, the XML Kobo receives, and the fallback.
 - Set up in Kobo with kobo-mcp (as bob_kobo): the project `aoJVGiaU2BHwRjtwv68VjZ` takes anonymous submissions, so the function holds no credentials, and a REST service emails joshua@kobotoolbox.org on each new message.
 - Tested end to end against the real form: browser → function → Kobo → email (delivered, HTTP 200). The two test messages are marked Not Approved.
-- The DigitalOcean Function isn't deployed yet, so `formEndpoint` stays empty and the forms still open an email.
+- The function is deployed (namespace `risa-website-forms`, fra1), and `formEndpoint` points at it. It was tested from the browser through the deployed function: stored, and emailed.
+- One fix from that test: DigitalOcean adds its own CORS header, so the function must not add one. Two values made browsers reject a response for a message that had already been stored.
 
 ## Content needed from the team
 

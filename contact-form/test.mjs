@@ -39,7 +39,8 @@ const call = (body, origin = 'https://risa.kobolabs.dev', method = 'post') =>
 // A good submission: stored, with only the form's fields, escaped.
 let r = await call({ kind: 'feedback', page: '/feedback', name: ' Ana <b> ', useful: 'very_useful', message: 'Map & QR worked', extra: 'x', website: '' });
 assert.equal(r.statusCode, 200, JSON.stringify(r.body));
-assert.equal(r.headers['Access-Control-Allow-Origin'], 'https://risa.kobolabs.dev');
+// CORS headers come from the platform, never the function (two values break browsers).
+assert.equal(r.headers['Access-Control-Allow-Origin'], undefined);
 assert.equal(received.length, 1);
 const xml = received[0];
 assert.match(xml, new RegExp(`<${UID} id="${UID}"><kind>feedback</kind><page>/feedback</page>`));
@@ -60,10 +61,6 @@ assert.equal((await call({}, 'https://risa.kobolabs.dev', 'get')).statusCode, 40
 r = await call({ kind: 'adopt', message: 'buy now', website: 'http://spam' });
 assert.equal(r.statusCode, 200);
 assert.equal(received.length, 1);
-
-// Preflight from the site gets CORS headers; from elsewhere it gets none.
-assert.equal((await call({}, 'http://localhost:5173', 'options')).headers['Access-Control-Allow-Origin'], 'http://localhost:5173');
-assert.equal((await call({}, 'https://evil.example', 'options')).headers['Access-Control-Allow-Origin'], undefined);
 
 // Long values are capped.
 await call({ kind: 'adopt', message: 'x'.repeat(9000) });

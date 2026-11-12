@@ -6,7 +6,7 @@ The site's Adopt RISA (`/adopt`) and Feedback (`/feedback`) forms send their ans
 browser ──POST JSON──▶ contact/submit (DO Function) ──OpenRosa, anonymous──▶ Kobo form ──REST service──▶ email
 ```
 
-Until the function is deployed, `formEndpoint` in `content/settings/site.yml` is empty, and the forms open an email to the contact address instead. They also do that if sending fails, and without JavaScript.
+If `formEndpoint` in `content/settings/site.yml` is empty, the forms open an email to the contact address instead. They also do that if sending fails, and without JavaScript.
 
 ## What's set up (12 Nov 2026)
 
@@ -16,8 +16,8 @@ Until the function is deployed, `formEndpoint` in `content/settings/site.yml` is
 | Anonymous submissions | On: AnonymousUser has **Add submissions** only. Nobody can view the data without an account |
 | Submission URL | `https://kc.kobotoolbox.org/bob_kobo/submission` |
 | Email notification | REST service `hWxR2ivxCu2dQWSico4UNG`: every new message goes to joshua@kobotoolbox.org. The subject is "RISA website: new Adopt/Feedback message", and the body lists all the answers and links the data table. It's sent by kobo-mcp's email relay; delivery logs are under the project's REST services |
-| Test messages | Two: `913334962` (an endpoint probe) and `913337991` (the end-to-end test). Both marked *Not Approved* |
-| Function | Not deployed yet: see [Deploy](#deploy-the-function) |
+| Test messages | Four, all marked *Not Approved*: `913334962` (an endpoint probe), `913337991` (the local end-to-end test), and `913342134` and `913343773` (through the deployed function) |
+| Function | Deployed to the DigitalOcean Functions namespace `risa-website-forms` (fra1). The URL is `formEndpoint` in `content/settings/site.yml`: `https://faas-fra1-afec6ce7.doserverless.co/api/v1/web/fn-ca8f08f4-450c-4cb8-aaae-9cf4d0f506bf/contact/submit` |
 
 All of this was set up with kobo-mcp, signed in as `bob_kobo`. Move the project to the partners' organisation account when there is one (SOP §3.7).
 
@@ -35,7 +35,7 @@ All of this was set up with kobo-mcp, signed in as `bob_kobo`. Move the project 
 
 ## How it works
 
-1. The site sends `{ kind, page, …fields, website }` as JSON. It uses `text/plain`, so the browser sends the request straight away, without a CORS preflight.
+1. The site sends `{ kind, page, …fields, website }` as JSON. **CORS is the platform's**: DigitalOcean adds `Access-Control-Allow-Origin: *` to every response and answers preflights. The function must not add its own: browsers reject a response with two values, even though the message has already been stored. It uses `text/plain`, so the browser sends the request straight away, without a CORS preflight.
 2. The function only accepts requests from `ALLOWED_ORIGINS`. That stops other sites' pages using it, but it isn't authentication.
    - If the hidden `website` field (a honeypot) has anything in it, the function answers "ok" and stores nothing.
 3. It keeps only the fields in `form.json`.
