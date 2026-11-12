@@ -9,13 +9,14 @@ a select's options become a choice list, coded as slugs of their labels
 (the same rule as src/lib/forms.ts). Fields with the same name on both pages
 (name, email, message) share a question.
 
-  python3 contact-form/build_xlsform.py           # write contact-form/RISA_website_messages.xlsx
+  python3 contact-form/build_xlsform.py           # write the xlsx and the function's form.json
   python3 contact-form/build_xlsform.py --check   # fail if the xlsx is out of date
 
 After changing a form's fields in content/, run this, then replace the form
 in Kobo with the new file and redeploy it (contact-form/README.md).
 """
 import datetime
+import json
 import pathlib
 import re
 import sys
@@ -25,6 +26,8 @@ import yaml
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / 'contact-form' / 'RISA_website_messages.xlsx'
+# The questions and choice codes, for the function: it accepts nothing else.
+SPEC = ROOT / 'contact-form' / 'packages' / 'contact' / 'submit' / 'form.json'
 FORM_ID = 'risa_website_messages'
 TITLE = 'RISA website messages'
 # Filled in by the function, not by the visitor.
@@ -92,7 +95,16 @@ def rows(survey, choices):
     )
 
 
+def spec(survey, choices):
+    lists = {}
+    for c in choices:
+        lists.setdefault(c['list_name'], []).append(c['name'])
+    questions = {r['name']: (r['type'].split(' ', 1)[1] if r['type'].startswith('select_one ') else None) for r in survey}
+    return json.dumps({'form_id': FORM_ID, 'questions': questions, 'choices': lists}, indent=2) + '\n'
+
+
 def write(survey, choices):
+    SPEC.write_text(spec(survey, choices))
     s_rows, c_rows = rows(survey, choices)
     wb = openpyxl.Workbook()
     ws = wb.active
@@ -116,14 +128,15 @@ def check(survey, choices):
         return False
     wb = openpyxl.load_workbook(OUT)
     read = lambda ws: [[c if c is not None else '' for c in r] for r in ws.iter_rows(min_row=2, values_only=True)]
-    return (read(wb['survey']), read(wb['choices'])) == rows(survey, choices)
+    same_spec = SPEC.exists() and SPEC.read_text() == spec(survey, choices)
+    return same_spec and (read(wb['survey']), read(wb['choices'])) == rows(survey, choices)
 
 
 if __name__ == '__main__':
     survey, choices = build()
     if '--check' in sys.argv:
         if not check(survey, choices):
-            sys.exit(f'{OUT.relative_to(ROOT)} is out of date: run python3 contact-form/build_xlsform.py')
+            sys.exit('The Kobo form or the function\'s form.json is out of date: run python3 contact-form/build_xlsform.py')
         print(f'{OUT.relative_to(ROOT)} matches the site forms.')
     else:
         write(survey, choices)

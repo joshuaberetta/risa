@@ -9,47 +9,16 @@ const fn = require('./packages/contact/submit/index.js');
 
 const UID = 'aTestFormUid0000000000';
 const received = [];
+// Kobo's anonymous OpenRosa endpoint: no credentials, ever.
 const mock = http.createServer((req, res) => {
-  assert.equal(req.headers.authorization, 'Token test-token');
-  if (req.url.startsWith(`/api/v2/assets/${UID}/versions/`)) {
-    return res.end(
-      JSON.stringify({
-        content: {
-          survey: [
-            { type: 'select_one kind', name: 'kind' },
-            { type: 'text', name: 'page' },
-            { type: 'text', name: 'name' },
-            { type: 'text', name: 'email' },
-            { type: 'select_one useful', name: 'useful' },
-            { type: 'text', name: 'message' },
-          ],
-          choices: [
-            { list_name: 'kind', name: 'adopt' },
-            { list_name: 'kind', name: 'feedback' },
-            { list_name: 'useful', name: 'very_useful' },
-          ],
-        },
-      }),
-    );
-  }
-  if (req.url.startsWith(`/api/v2/assets/${UID}/`)) {
-    return res.end(
-      JSON.stringify({
-        has_deployment: true,
-        deployment__active: true,
-        deployment__uuid: 'formhub-uuid',
-        deployed_version_id: 'vDeployed',
-        deployed_versions: { count: 3, results: [{ uid: 'vDeployed', date_deployed: '2026-11-12T10:00:00Z' }] },
-      }),
-    );
-  }
-  if (req.url === '/submission' && req.method === 'POST') {
+  assert.equal(req.headers.authorization, undefined, 'the function must not send credentials');
+  if (req.url === '/bob/submission' && req.method === 'POST') {
     let body = '';
     req.on('data', (c) => (body += c));
     req.on('end', () => {
       received.push(body);
       res.statusCode = 201;
-      res.end('{"message":"Successful submission."}');
+      res.end('<OpenRosaResponse><message>Successful submission.</message></OpenRosaResponse>');
     });
     return;
   }
@@ -59,8 +28,7 @@ const mock = http.createServer((req, res) => {
 await new Promise((r) => mock.listen(0, r));
 
 Object.assign(process.env, {
-  KOBO_SERVER: `http://localhost:${mock.address().port}`,
-  KOBO_TOKEN: 'test-token',
+  KOBO_SUBMISSION_URL: `http://localhost:${mock.address().port}/bob/submission`,
   KOBO_ASSET_UID: UID,
   ALLOWED_ORIGINS: 'https://risa.kobolabs.dev,http://localhost:5173',
 });
@@ -74,11 +42,9 @@ assert.equal(r.statusCode, 200, JSON.stringify(r.body));
 assert.equal(r.headers['Access-Control-Allow-Origin'], 'https://risa.kobolabs.dev');
 assert.equal(received.length, 1);
 const xml = received[0];
-assert.match(xml, new RegExp(`<${UID} id="${UID}" version="3 \\(2026-11-12 10:00:00\\)">`));
-assert.match(xml, /<formhub><uuid>formhub-uuid<\/uuid><\/formhub>/);
+assert.match(xml, new RegExp(`<${UID} id="${UID}"><kind>feedback</kind><page>/feedback</page>`));
 assert.match(xml, /<name>Ana &lt;b&gt;<\/name>/);
 assert.match(xml, /<message>Map &amp; QR worked<\/message>/);
-assert.match(xml, /<__version__>vDeployed<\/__version__>/);
 assert.match(xml, /<meta><instanceID>uuid:[0-9a-f-]{36}<\/instanceID><\/meta>/);
 assert.doesNotMatch(xml, /extra|website/);
 

@@ -1,0 +1,46 @@
+{
+  "form_id": "risa_website_messages",
+  "questions": {
+    "kind": "kind",
+    "page": null,
+    "name": null,
+    "organisation": null,
+    "email": null,
+    "country": null,
+    "interest": "interest",
+    "message": null,
+    "site": null,
+    "product": null,
+    "version": null,
+    "response": null,
+    "role": "role",
+    "useful": "useful"
+  },
+  "choices": {
+    "kind": [
+      "adopt",
+      "feedback"
+    ],
+    "interest": [
+      "running_risa_in_a_response",
+      "adding_risa_to_a_simulation_exercise",
+      "training_a_national_team",
+      "using_the_form_template_or_the_dashboard",
+      "something_else"
+    ],
+    "role": [
+      "national_authority",
+      "coordination_undac_osocc_cluster",
+      "site_or_camp_management",
+      "logistics",
+      "field_or_data_team",
+      "other"
+    ],
+    "useful": [
+      "very_useful",
+      "useful",
+      "a_little",
+      "not_useful"
+    ]
+  }
+}

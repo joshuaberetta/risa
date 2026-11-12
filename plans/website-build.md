@@ -362,7 +362,9 @@ static_sites:
 - Adopt RISA and Feedback post to a DigitalOcean Function (`contact-form/`). It stores each message as a submission to a Kobo form built from the site's fields (`build_xlsform.py`), and Kobo's REST services send the notifications.
 - There's an email fallback when `formEndpoint` is empty, when sending fails, and without JavaScript.
 - Tested against a mock Kobo (`npm run test:contact`), and end to end in headless Chrome: prefill, send, the XML Kobo receives, and the fallback.
-- Not yet deployed: it needs the Kobo form, a dedicated submit-only account and its token, and the function deploy (`contact-form/README.md`).
+- Set up in Kobo with kobo-mcp (as bob_kobo): the project `aoJVGiaU2BHwRjtwv68VjZ` takes anonymous submissions, so the function holds no credentials, and a REST service emails joshua@kobotoolbox.org on each new message.
+- Tested end to end against the real form: browser → function → Kobo → email (delivered, HTTP 200). The two test messages are marked Not Approved.
+- The DigitalOcean Function isn't deployed yet, so `formEndpoint` stays empty and the forms still open an email.
 
 ## Content needed from the team
 
@@ -373,7 +375,7 @@ static_sites:
 - [ ] Partner logos as they should appear.
 - [ ] Which governance layers and members are confirmed.
 - [ ] Contact address (today `contact@risa-method.org`: confirm it exists). It's now only the forms' fallback.
-- [ ] The forms' Kobo project: which organisation account owns it, which server (global or EU), and where the notifications go.
+- [ ] The forms' Kobo project is on bob_kobo (global server), with notifications to joshua@kobotoolbox.org. Move it to an organisation account when there is one.
 - [ ] Whether the template download goes live now as a test version, or waits for review of the detail questions by Michael or the Kobo focal point.
 - [ ] A public "RISA template" project on an organisation Kobo account, so `clone_project` can start from it. Who owns it?
 - [ ] Who runs the RISA dashboard for responses, and whether to link it publicly.

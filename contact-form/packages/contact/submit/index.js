@@ -1,36 +1,32 @@
 // The RISA website's Adopt RISA and Feedback forms, as a DigitalOcean Function.
 //
 // The site POSTs a form's fields here; this sends them to a KoboToolbox form
-// as one submission (OpenRosa, as kobo-mcp's create_submissions does). Kobo
-// stores every message, and its REST services (webhooks) can send email
-// notifications or anything else. The Kobo form is built from the site's own
-// form fields by contact-form/build_xlsform.py.
+// as one submission (OpenRosa, as Enketo and Collect do). Kobo stores every
+// message, and its REST services send the email notifications. The Kobo form
+// takes anonymous submissions, so this holds no Kobo credentials at all.
 //
-// Only fields that exist in the *deployed* Kobo form are kept, select answers
-// must be one of its choice codes, and values are trimmed and capped, so the
-// site can't put anything into Kobo the form doesn't define.
+// form.json (written by contact-form/build_xlsform.py, from the site's own form
+// fields) lists the form's questions and choice codes. Only those are sent,
+// select answers must be one of the codes, and values are trimmed and capped.
 //
 // Environment (contact-form/.env, see README):
-//   KOBO_SERVER      https://kf.kobotoolbox.org (or https://eu.kobotoolbox.org)
-//   KOBO_TOKEN       API token of a dedicated account with only "Add submissions"
-//                    on the one form: never a person's token
-//   KOBO_ASSET_UID   the form's uid (aXXXXXXXXXXXXXXXXXXXXX)
-//   ALLOWED_ORIGINS  comma-separated origins: https://risa.kobolabs.dev,http://localhost:5173
+//   KOBO_SUBMISSION_URL  the form owner's OpenRosa endpoint, which takes anonymous
+//                        submissions: https://kc.kobotoolbox.org/<owner>/submission
+//                        (EU: https://kc-eu.kobotoolbox.org/<owner>/submission)
+//   KOBO_ASSET_UID       the form's uid (aXXXXXXXXXXXXXXXXXXXXX)
+//   ALLOWED_ORIGINS      comma-separated: https://risa.kobolabs.dev,http://localhost:5173
 
 const crypto = require('node:crypto');
+const FORM = require('./form.json');
 
 const MAX_FIELD = 5000;
 const MAX_FIELDS = 40;
-// Filled in by the function or the site, never by the visitor.
+// Filled in by the site, not typed by the visitor.
 const SYSTEM = new Set(['kind', 'page']);
 // A field real visitors never see: anything in it is a bot.
 const HONEYPOT = 'website';
 
-const CACHE_MS = 5 * 60 * 1000;
-let cache = null;
-
 const env = (k) => (process.env[k] || '').trim();
-const server = () => env('KOBO_SERVER').replace(/\/+$/, '');
 
 function respond(statusCode, body, origin) {
   return {
@@ -44,90 +40,35 @@ function respond(statusCode, body, origin) {
   };
 }
 
-async function kobo(path, init = {}) {
-  const res = await fetch(`${server()}${path}`, {
-    ...init,
-    headers: { Authorization: `Token ${env('KOBO_TOKEN')}`, Accept: 'application/json', ...(init.headers || {}) },
-  });
-  return res;
-}
-
-/** The deployed form: its questions, choice codes and the values the XML must carry. Cached. */
-async function deployedForm() {
-  if (cache && Date.now() - cache.at < CACHE_MS) return cache.form;
-  const uid = env('KOBO_ASSET_UID');
-  const res = await kobo(`/api/v2/assets/${uid}/?format=json`);
-  if (!res.ok) throw new Error(`Kobo returned ${res.status} for the form`);
-  const asset = await res.json();
-  if (!asset.has_deployment || asset.deployment__active === false) throw new Error('The Kobo form is not deployed');
-  const versionUid = asset.deployed_version_id;
-  // The asset's own content may be a newer, undeployed draft: read the deployed version.
-  const vres = await kobo(`/api/v2/assets/${uid}/versions/${versionUid}/?format=json`);
-  if (!vres.ok) throw new Error(`Kobo returned ${vres.status} for the deployed version`);
-  const content = (await vres.json()).content || {};
-  const questions = new Map();
-  for (const row of content.survey || []) {
-    const name = row.name || row.$autoname;
-    if (!name || /^(begin|end)_/.test(row.type) || ['start', 'end', 'today', 'deviceid', 'calculate', 'note'].includes(row.type)) continue;
-    const select = /^select_one\s+(\S+)/.exec(row.type) || (row.select_from_list_name && row.type === 'select_one' ? [0, row.select_from_list_name] : null);
-    questions.set(name, { list: select ? select[1] : null });
-  }
-  const choices = new Map();
-  for (const c of content.choices || []) {
-    const name = c.name || c.$autovalue;
-    if (!choices.has(c.list_name)) choices.set(c.list_name, new Set());
-    choices.get(c.list_name).add(name);
-  }
-  const results = (asset.deployed_versions && asset.deployed_versions.results) || [];
-  const latest = results.find((v) => v.uid === versionUid) || {};
-  const deployed = String(latest.date_deployed || '').slice(0, 19).replace('T', ' ');
-  const form = {
-    uid,
-    questions,
-    choices,
-    formhubUuid: asset.deployment__uuid,
-    versionUid,
-    // Collect's version label: "<deployed count> (<date deployed>)". Optional for Kobo.
-    version: deployed ? `${(asset.deployed_versions && asset.deployed_versions.count) || results.length} (${deployed})` : null,
-  };
-  cache = { at: Date.now(), form };
-  return form;
-}
-
 const escapeXml = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[c]);
 
-/** The submission XML, shaped like a Collect/Enketo instance (kobo-mcp's build_xml). The form is flat. */
-function buildXml(form, answers, instanceId) {
+/**
+ * The submission XML, shaped like an Enketo instance: root tag and id are the
+ * form's uid, one element per answer (the form is flat), and an instanceID.
+ * Kobo accepts it without formhub/uuid or __version__ (checked on kf, 2026-11-12).
+ */
+function buildXml(uid, answers, instanceId) {
   const fields = Object.entries(answers)
     .map(([k, v]) => `<${k}>${escapeXml(v)}</${k}>`)
     .join('');
-  const version = form.version ? ` version="${escapeXml(form.version)}"` : '';
-  return (
-    `<?xml version="1.0" encoding="utf-8"?>` +
-    `<${form.uid} id="${form.uid}"${version}>` +
-    `<formhub><uuid>${escapeXml(form.formhubUuid)}</uuid></formhub>` +
-    fields +
-    `<__version__>${escapeXml(form.versionUid)}</__version__>` +
-    `<meta><instanceID>${instanceId}</instanceID></meta>` +
-    `</${form.uid}>`
-  );
+  return `<?xml version="1.0" encoding="utf-8"?><${uid} id="${uid}">${fields}<meta><instanceID>${instanceId}</instanceID></meta></${uid}>`;
 }
 
-/** The visitor's answers, kept only where the deployed form has the question. */
-function clean(form, input) {
+/** The visitor's answers, kept only where the form has the question. */
+function clean(input, form = FORM) {
   const answers = {};
   const dropped = [];
   for (const [key, raw] of Object.entries(input).slice(0, MAX_FIELDS)) {
     if (key === HONEYPOT) continue;
-    const q = form.questions.get(key);
-    const value = typeof raw === 'string' ? raw.trim().slice(0, MAX_FIELD) : '';
-    if (!q) {
+    if (!Object.prototype.hasOwnProperty.call(form.questions, key)) {
       dropped.push(key);
       continue;
     }
+    const value = typeof raw === 'string' ? raw.trim().slice(0, MAX_FIELD) : '';
     if (!value) continue;
-    if (q.list && !(form.choices.get(q.list) || new Set()).has(value)) return { error: `"${key}" isn't one of the choices` };
+    const list = form.questions[key];
+    if (list && !(form.choices[list] || []).includes(value)) return { error: `"${key}" isn't one of the choices` };
     answers[key] = value;
   }
   return { answers, dropped };
@@ -170,25 +111,18 @@ async function main(args) {
   if (typeof input[HONEYPOT] === 'string' && input[HONEYPOT].trim()) return respond(200, { ok: true }, okOrigin);
   if (!['adopt', 'feedback'].includes(input.kind)) return respond(400, { ok: false, error: 'Unknown form' }, okOrigin);
 
-  let form;
-  try {
-    form = await deployedForm();
-  } catch (e) {
-    console.error('form', e.message);
-    return respond(502, { ok: false, error: "Couldn't reach the form store" }, okOrigin);
-  }
-  const { answers, dropped, error } = clean(form, input);
+  const { answers, dropped, error } = clean(input);
   if (error) return respond(400, { ok: false, error }, okOrigin);
-  if (dropped.length) console.warn('fields not in the Kobo form, dropped:', dropped.join(', '));
+  if (dropped.length) console.warn('fields not in form.json, dropped:', dropped.join(', '));
   if (Object.keys(answers).filter((k) => !SYSTEM.has(k)).length === 0) return respond(400, { ok: false, error: 'The form is empty' }, okOrigin);
 
   const instance = crypto.randomUUID();
-  const xml = buildXml(form, answers, `uuid:${instance}`);
   const body = new FormData();
+  const xml = buildXml(env('KOBO_ASSET_UID'), answers, `uuid:${instance}`);
   body.append('xml_submission_file', new Blob([xml], { type: 'text/xml' }), `${instance}.xml`);
   let res;
   try {
-    res = await kobo('/submission', { method: 'POST', body, headers: { 'X-OpenRosa-Version': '1.0' } });
+    res = await fetch(env('KOBO_SUBMISSION_URL'), { method: 'POST', body, headers: { 'X-OpenRosa-Version': '1.0' } });
   } catch (e) {
     console.error('submit', e.message);
     return respond(502, { ok: false, error: "Couldn't reach the form store" }, okOrigin);
@@ -196,9 +130,7 @@ async function main(args) {
   // 201 created; 202 a duplicate instanceID (a retry that was already stored).
   if (res.status === 201 || res.status === 202) return respond(200, { ok: true }, okOrigin);
   console.error('submit', res.status, (await res.text()).slice(0, 300));
-  // A changed form: read it again next time.
-  cache = null;
   return respond(502, { ok: false, error: "The message wasn't stored" }, okOrigin);
 }
 
-module.exports = { main, buildXml, clean, _reset: () => (cache = null) };
+module.exports = { main, buildXml, clean };

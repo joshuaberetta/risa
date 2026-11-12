@@ -1,7 +1,7 @@
 # DigitalOcean Functions project: the website's Adopt RISA and Feedback forms,
-# stored as submissions to a KoboToolbox form.
+# stored as anonymous submissions to a KoboToolbox form. No Kobo credentials.
 # Deploy with:  doctl serverless deploy contact-form
-# Placeholder values come from contact-form/.env (not committed; see contact-form/README.md).
+# Values come from contact-form/.env (not committed; see contact-form/README.md).
 packages:
   - name: contact
     functions:
@@ -12,7 +12,6 @@ packages:
           timeout: 15000
           memory: 128
         environment:
-          KOBO_SERVER: ${KOBO_SERVER}
-          KOBO_TOKEN: ${KOBO_TOKEN}
+          KOBO_SUBMISSION_URL: ${KOBO_SUBMISSION_URL}
           KOBO_ASSET_UID: ${KOBO_ASSET_UID}
           ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
