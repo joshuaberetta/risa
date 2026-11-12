@@ -21,7 +21,7 @@ sections:
     title: The partners
     intro: Three core partners with an equal share, and UNDAC/OCHA as endorsers. No new legal entity, because mixing three legal statuses was judged too complex.
     body: |
-      Partner and endorser logos will appear here once their use is agreed; the UNDAC/OCHA logo needs clearance first {tbc}. The exact form of Atlas Logistique's name on RISA materials is also to be confirmed {tbc}.
+      Partner and endorser logos will appear here once their use is agreed; the UNDAC/OCHA logo needs clearance first {tbc}.
 
   - type: prose
     id: mira
@@ -59,7 +59,7 @@ sections:
         members:
           - { name: Kobo, role: "Data collection: the XLSForm template, the data collection annex and the guide." }
           - { name: MapAction, role: "GIS and maps: standards, map layouts and satellite imagery." }
-          - { name: Atlas Logistique, role: "Drone imagery: UAV operations, checklists and kit.", tbc: true }
+          - { name: Atlas Logistique, role: "Drone imagery: UAV operations, checklists and kit." }
       - id: endorsers
         name: Endorsed by
         short: Endorsement and coordination links

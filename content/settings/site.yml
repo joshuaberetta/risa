@@ -21,11 +21,9 @@ partners:
   - id: mapaction
     name: MapAction
     role: GIS and maps
-  # SOP v3 says "Atlas Logistique"; the exact form is to be checked with the team.
   - id: atlas
     name: Atlas Logistique
     role: Drone imagery
-    tbc: true
 
 endorsers:
   - id: undac

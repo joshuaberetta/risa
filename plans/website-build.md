@@ -363,7 +363,8 @@ static_sites:
 - [ ] Final 10b geometry: a `?gt=` code from `designs/logos/studio.html`, or confirmation that `GT_DEFAULTS` is final.
 - [ ] Name sign-off: "Rapid Infrastructures & Services Assessment".
 - [ ] UNDAC/OCHA endorsement clearance, and whether their logo may be shown.
-- [ ] Partner names and logos as they should appear (Atlas Logistique or HI/Atlas Logistique?).
+- [x] Partner names: "Atlas Logistique", a core partner (confirmed 12 Nov 2026). Logos still to come.
+- [ ] Partner logos as they should appear.
 - [ ] Which governance layers and members are confirmed.
 - [ ] Contact address (today `contact@risa-method.org`: confirm it exists).
 - [ ] Whether the template download goes live now as a test version, or waits for review of the detail questions by Michael or the Kobo focal point.
