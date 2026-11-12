@@ -1,6 +1,6 @@
 # contact-form: the website's forms, stored in KoboToolbox
 
-The site's Adopt RISA (`/adopt`) and Feedback (`/feedback`) forms send their answers to a small DigitalOcean Function. The function stores each one as an anonymous submission to the KoboToolbox form "RISA website messages". A Kobo REST service then emails each new message.
+The site's Adopt RISA (`/adopt`) and Feedback (`/feedback`) forms send their answers to a small DigitalOcean Function. The function stores each one as an anonymous submission to the KoboToolbox form "RISA website messages". Two Kobo REST services then email it: one notifies the team, and one thanks the sender.
 
 ```
 browser ──POST JSON──▶ contact/submit (DO Function) ──OpenRosa, anonymous──▶ Kobo form ──REST service──▶ email
@@ -16,7 +16,8 @@ If `formEndpoint` in `content/settings/site.yml` is empty, the forms open an ema
 | Anonymous submissions | On: AnonymousUser has **Add submissions** only. Nobody can view the data without an account |
 | Submission URL | `https://kc.kobotoolbox.org/bob_kobo/submission` |
 | Email notification | REST service `hWxR2ivxCu2dQWSico4UNG`: every new message goes to joshua@kobotoolbox.org. The subject is "RISA website: new Adopt/Feedback message", and the body lists all the answers and links the data table. It's sent by kobo-mcp's email relay; delivery logs are under the project's REST services |
-| Test messages | Four, all marked *Not Approved*: `913334962` (an endpoint probe), `913337991` (the local end-to-end test), and `913342134` and `913343773` (through the deployed function) |
+| Receipt to the sender | REST service `hf5t5sHMQJkwUiGLDt6Cec`: when the form has an email address, it sends "Thank you for your message to RISA", saying the team will be in touch soon, with thanks from the RISA team. Replies go to joshua@kobotoolbox.org. The text is fixed, with nothing from the submission (not even the name). Because the form is anonymous, anyone could have it send this to any address they type in (kobo-mcp's "public recipients", agreed 12 Nov 2026). Fixed text keeps that useless for spam |
+| Test messages | Five, all marked *Not Approved*: `913334962` (an endpoint probe), `913337991` (the local end-to-end test), `913342134` and `913343773` (through the deployed function), and `913354495` (from the live site, testing both emails) |
 | Function | Deployed to the DigitalOcean Functions namespace `risa-website-forms` (fra1). The URL is `formEndpoint` in `content/settings/site.yml`: `https://faas-fra1-afec6ce7.doserverless.co/api/v1/web/fn-ca8f08f4-450c-4cb8-aaae-9cf4d0f506bf/contact/submit` |
 
 All of this was set up with kobo-mcp, signed in as `bob_kobo`. Move the project to the partners' organisation account when there is one (SOP §3.7).
